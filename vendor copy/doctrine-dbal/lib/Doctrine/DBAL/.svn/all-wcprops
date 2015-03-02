@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL
+END
+Configuration.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Configuration.php
+END
+DBALException.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/DBALException.php
+END
+Driver.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Driver.php
+END
+Version.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Version.php
+END
+Events.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Events.php
+END
+Connection.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Connection.php
+END
+LockMode.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/LockMode.php
+END
+Statement.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Statement.php
+END
+ConnectionException.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/ConnectionException.php
+END
+SQLParserUtils.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/SQLParserUtils.php
+END
+DriverManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/DriverManager.php
+END
+README.markdown
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/README.markdown
+END

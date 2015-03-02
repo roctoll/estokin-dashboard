@@ -1,0 +1,207 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+	
+{% endblock %}
+
+{% block headbar %}
+
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-pencil"></i>
+			To do
+		</li>
+	</ul>
+		{{ parent() }}
+		
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="title">Items para subir</h4>
+	
+	<div class="squiggly-border"></div>
+
+	<table class="table table-striped table-bordered table-radmin tablesorter">
+		<thead>
+	    	<tr>
+	            <th>Producto</th>
+	            <th>Estado</th>
+	            <th>Tienda</th>
+	            <th>Atributos</th>
+	            <th>Categoria</th>
+	            <th>Referencia</th>
+	            <th>Precio</th>
+	            <th>Stock</th>
+	            <th>Fecha creación</th>
+	            <th>Id PS</th>
+	            <th>Acciones</th>
+	    	</tr>
+		</thead>
+		<tbody>	    	
+	    	{% for entity in items %}	    	
+	        <tr>
+	            <td>
+	            	<a href="{{ path('item_show', { 'id': entity.id }) }}">
+	            		{{ entity.product.bigname }}			            		
+	            	</a>
+	            </td>
+	            <td {{ entity.product.state == 'STATE_ONLINE' ? 'style="color:green;"' : 'style="color:red;"' }} >{{ entity.product.state }}</td>
+	            <td>{{ entity.shop }}</td>
+	            <td>({% for a in entity.attr %}
+	            			{{ a.attrset.name }} {{ a.value }}
+	            			{{ loop.last ? '' : ',' }}
+	            		{% endfor %})
+	            </td>
+	            <td>{{ entity.product.category }}</td>
+	            <td>{{ entity.reference }}</td>
+	            <td>{{ entity.price }} &#128;</td>
+	            <td class="td-fix-psid">{{ entity.stock }}</td>	
+	            <td>{% if entity.dateadd %}{{ entity.dateadd|date('d-m-Y') }}{% endif%}</td>
+	            
+	            <form action="{{ path('item_upload', { 'id': entity.id }) }}" method="post">
+
+	            <td class="td-fix-psid"><input type="number" required="required" name="psid"></input></td>
+	            <td class="table-actions">
+	            	{% if entity.product.state == 'STATE_ONLINE' %}
+		            	<button id={{ entity.id }} class="edit_but btn btn-mini btn-info" title="Editar item">Subido</button> 
+		            	</form>
+		            {% else %}
+		            	</form>
+		            	<button class="btn btn-mini btn-info disabled" title="Producto no subido" data-toggle="popover" data-placement="left" 
+		            			data-content="El item no se puede subir hasta que el producto asociado esté subido" 
+		            			title="" data-original-title="Producto no subido">Subido</button>	            	
+		            {% endif %}
+	            </td>	            
+	        </tr>			        
+		    	
+    	{% endfor %}
+    	</tbody>
+	</table>
+	<br>
+	<h4 class="title">Productos para subir</h4>
+	
+	<div class="squiggly-border"></div>
+
+	<table class="table table-striped table-bordered table-radmin tablesorter">
+		<thead>
+	    	<tr>
+	            <th>Producto</th>
+	            <th>Estado</th>
+	            <th>Categoria</th>
+	            <th>Referencia</th>
+	            <th>Fecha creación</th>
+	            <th title="Id referencia a Prestashop">Id PS</th>
+	            <th>Acciones</th>
+	    	</tr>
+		</thead>
+		<tbody>	    	
+	    	{% for entity in products %}	    	
+	        <tr>
+	            <td>
+	            	<a href="{{ path('product_show', { 'id': entity.id }) }}">
+	            		{{ entity.bigname }}			            		
+	            	</a>
+	            </td>
+	            <td class="td-state" {{ entity.state == 'STATE_VALID' ? 'style="color:green;"' : 'style="color:red;"' }} >{{ entity.state }}</td>
+	            <td>{{ entity.category }}</td>
+	            <td>{{ entity.code }}</td>
+	            <td>{% if entity.dateadd %}{{ entity.dateadd|date('d-m-Y') }}{% endif%}</td>
+	            <form action="{{ path('product_upload', { 'id': entity.id }) }}" method="post">
+	            <td class="td-fix-psid"><input type="number" required="required" name="psid"></input></td>
+	            <td class="table-actions">
+	            	{% if entity.state == 'STATE_RAW' %}
+		            	<button id={{ entity.id }} class="btn-edit-val btn btn-mini btn-success" onClick="validateProduct( $(this),'{{ path('product_validate') }}', '{{ entity.getId }}', 1)" title="Validar item">Validar</button> 
+		            {% elseif entity.state == 'STATE_VALID' %}
+		            	<button class="btn-edit-val btn btn-mini btn-danger" onClick="validateProduct( $(this),'{{ path('product_validate') }}', '{{ entity.getId }}', 0)" title="Volver a estado no validado">Invalidar</button>	            	
+		            {% endif %}
+	            	<button class="delete_but btn btn-mini btn-info" title="Producto subido" type="submit">Subido</button>
+	            </td>
+	            </form>
+	        </tr>			        
+		    	
+    	{% endfor %}
+    	</tbody>
+	</table>
+			 
+	</div>
+
+{% endblock %}
+
+{% block javascript_code %}
+
+		//Toggle menu 
+		$(function() {
+			$("#navigation-products").attr('class', 'active');
+			$("#navigation-products .accordion-body").attr('class', 'in')
+		});
+
+		//sort table
+		$(document).ready(function() 
+	    { 
+	        $(".tablesorter").tablesorter(); 
+	    }); 
+
+		//Search feature
+		var api;
+		$(document).ready(function() {		  
+		  api = new $.Search('#search', {
+		    list: 'tbody tr.t_content'
+		  });
+		});
+				
+		$(function() {  
+			$(".edit_but").click(function(e){
+				console.log(e.currentTarget.id);
+			});
+						
+			$(".disabled").popover();
+		});			
+
+		//Ajax for validate
+	    function validateProduct(el,path,id,action){ 
+		         dataContent = {product: id, action: action};
+		         var parent = el.closest('tr'); 
+		         $.ajax({
+		 	        type: "POST",
+		 	        url: path,
+		 	        data: dataContent ,
+		 	        dataType: "json",
+
+		           	success: function() {
+		               location.reload();
+		           	}
+		 		}); 
+	 	};
+	 	
+{% endblock %}
+
+
+
+
+
+
+
+
+

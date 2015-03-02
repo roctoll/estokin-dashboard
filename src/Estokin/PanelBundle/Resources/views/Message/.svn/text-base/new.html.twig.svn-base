@@ -1,0 +1,84 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<h1>Mensaje nuevo</h1>
+	<h2>Comunícate con Estokin</h2>
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+			<h2>Crear mensaje</h2>
+	</div>
+
+	<div id="content_box">
+	
+	{% if errors is defined%}
+		<div class="formee-msg-error">
+	    	Can you fix please?
+	        <ul>
+	        	{% for er in errors %}
+	        		<li>error {{ er }}</li>
+	        	{% endfor %}
+	        </ul>
+	    </div>
+	{% endif %}
+
+	<form action="{{ path('message_create') }}" method="post" class ="formee" {{ form_enctype(form) }}>
+	    {% if not user.isShop() %}			
+			<div class="grid-6-12">
+	    		<label>Remitente</label>
+    			<div>{{ form_widget(form.shop) }}</div>
+			</div>
+			<div class="grid-3-12">
+	    		<label>Tipo</label>
+    			<div>{{ form_widget(form.type) }}</div>
+			</div>
+		<div class="grid-2-12"></div>
+		{% endif %}
+    	<div class="grid-1-12">
+	    	<label>Prioridad</label>
+    		<div>{{ form_widget(form.priority) }}</div>
+	    	{{ form_errors(form.priority) }}
+    	</div>
+	    
+	    <div class="grid-6-12">
+	    	<label>Asunto</label>
+    		<div>{{ form_widget(form.subject) }}</div>
+	    	{{ form_errors(form.subject) }}
+		</div>
+
+
+		<div class="grid-12-12">
+	    	<label>Mensaje</label>
+    		<div>{{ form_widget(form.content) }}</div>
+	    	{{ form_errors(form.content) }}
+    	</div>
+	    <div class="grid-9-12">
+			<input type="submit"></input>
+		</div>
+	</form>
+</div>
+
+{% endblock %}
+{% block javascript_code %}
+<script>
+		$(function() {
+		$("#nav2").attr('class', 'selected');
+		$("#nav22").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(1)').show();	
+	});
+</script>
+{% endblock %}

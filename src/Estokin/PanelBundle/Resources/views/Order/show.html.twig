@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-cube"></i>
+				Pedidos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-cube-2"></i>
+			Detalle
+		</li>
+	</ul>
+	
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<h4 class="title">Detalle del pedido</h4>
+	<div class="squiggly-border"></div>
+	
+		<h3>Referencia: {{ entity.shop.id }} - {{ entity.id }} - {{ entity.item.id }}</h3>
+		
+		<div class="row">
+		
+			<div class="span4">
+				<table class="table table-bordered">
+			    <tbody>
+			        <tr>
+			            <th>Producto:</th>
+			            <td>{{ entity.item.product.bigname }}</td>
+			        </tr>
+			        <tr>
+			            <th>Categoría:</th>
+			            <td>{{ entity.item.product.category }}</td>
+			        </tr>
+			    	<tr>
+			            <th>Id:</th>
+			            <td>{{ entity.id }}</td>
+			        </tr>
+			        {%  if 'ROLE_ADMIN' in app.user.getRoles() %}
+			        <tr>
+			            <th>Ps_id:</th>
+			            <td>{{ entity.item.PSid }}</td>
+			        </tr>
+			        {% endif %}
+			        <tr>
+			            <th>Reference:</th>
+			            <td>{{ entity.item.reference }}</td>
+			        </tr>
+			        <tr>
+			            <th>Unidades:</th>
+			            <td>{{ entity.quantity }}</td>
+			        </tr>
+			        {% for attr in entity.item.attr %}
+			        <tr>
+			            <th>{{ attr.attrSet }}:</th>
+			            <td>{{ attr }}</td>
+			        </tr>
+			        {% endfor %}
+			        <tr>
+			            <th>Fecha creación:</th>
+			            <td>{{ entity.datesold|date('Y-m-d H:i:s') }}</td>
+			        </tr>
+			        {% if entity.state != 'STATE_SOLD' %}
+			        <tr>
+			            <th>Última modificación:</th>
+			            <td>{{ entity.state }}</td>
+			        </tr>
+			        <tr>
+			            <th>Fecha última modificación:</th>
+			            <td>{{ entity.dateupd|date('Y-m-d H:i:s') }}</td>
+			        </tr>
+			        {% endif %}
+			
+			    </tbody>
+				</table>
+			</div>
+			
+		</div>
+		
+		<br>
+		<div class="row">
+			<div class="span12">
+			<a href="{{ path('order_pending') }}"><button class="btn btn-info">Atrás</button></a>
+			</div>
+		</div>
+{% endblock %}

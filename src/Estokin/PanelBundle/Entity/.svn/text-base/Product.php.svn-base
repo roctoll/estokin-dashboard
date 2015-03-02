@@ -1,0 +1,787 @@
+<?php
+
+namespace Estokin\PanelBundle\Entity;
+
+use Symfony\Component\Validator\Constraints\Date;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Estokin\PanelBundle\Entity\Category;
+use Estokin\PanelBundle\Entity\Tag;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * Estokin\PanelBundle\Entity\Product
+ *
+ * @ORM\Entity(repositoryClass="Estokin\PanelBundle\Repository\ProductRepository")
+ */
+class Product
+{
+	 /**
+     * Product states.
+     */
+    const
+        STATE_RAW		= 0,
+        STATE_VALID		= 1,
+        STATE_ONLINE	= 2,
+        STATE_UNAV		= 3,
+        STATE_BLOCK		= 4;
+        
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var integer $PS_id
+     *
+     * @ORM\Column(name="PS_id", type="integer", nullable="true")
+     */
+    private $PS_id;
+
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string $reference
+     *
+     * @ORM\Column(name="code", type="string", length=255)
+     */
+    private $code;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop", inversedBy="products")
+     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id")
+     */
+    protected $shop;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Brand", inversedBy="products")
+     * @ORM\JoinColumn(name="brand_id", referencedColumnName="id")
+     */
+    protected $brand;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="product")
+     */
+    protected $items;
+
+    /**
+     * @var boolean $available
+     *
+     * @ORM\Column(name="available", type="boolean")
+     */
+    private $available;
+
+    /**
+     * @var string $state
+     *
+     * @ORM\Column(name="state", type="string", length=32)
+     * @Assert\NotBlank()
+     */
+    private $state;
+
+    /**
+     * @var float $price
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+    
+    /**
+     * @var float $pvp
+     *
+     * @ORM\Column(name="pvp", type="float")
+     */
+    private $pvp;
+
+    /**
+     * @var text $description
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var array $tags
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="products")
+     * @ORM\JoinTable(
+     *    name="product_tags", 
+     *    joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *    inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
+     * )
+     */
+    private $tags;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="product")
+     */
+    protected $orders;
+    
+    /**
+     * @var boolean $sold
+     *
+     * @ORM\Column(name="sold", type="boolean")
+     */
+    private $sold;
+
+//     /**
+//      * @var array $complements
+//      *
+//      * @ORM\Column(name="complements", type="array")
+//      */
+//     private $complements;
+
+    /**
+     * @var date $date_add
+     *
+     * @ORM\Column(name="date_add", type="datetime")
+     */
+    private $date_add;
+
+    /**
+     * @var date $date_upd
+     *
+     * @ORM\Column(name="date_upd", type="datetime")
+     */
+    private $date_upd;
+
+    /**
+     * @var date $date_sold
+     *
+     * @ORM\Column(name="date_sold", type="datetime", nullable=true)
+     */
+    private $date_sold;
+    
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+        //@TODO Available is not working
+        $this->setAvailable(false);        
+        $this->setState('STATE_RAW');
+        $this->setSold(false);        
+        $this->setDateAdd(new \DateTime());
+        $this->setDateUpd(new \DateTime('now'));
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set PS_id
+     *
+     * @param string $PS_id
+     */
+    public function setPSId($PS_id)
+    {
+    	$this->PS_id = $PS_id;
+    }
+    /**
+     * Get PS_id
+     *
+     * @return integer
+     */
+    public function getPSId()
+    {
+    	return $this->PS_id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * Get bigname
+     *
+     * @return string
+     */
+    public function getBigName()
+    {
+    	return $this->brand." - ".$this->name;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    
+    /**
+     * Add items
+     *
+     * @param Estokin\PanelBundle\Item $items
+     */
+    public function addItems($items)
+    {
+    	$this->prodcuts[] = $items;
+    }
+    
+    /**
+     * Get items
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getItems()
+    {
+    	return $this->items;
+    }
+    
+//     /**
+//      * Set status
+//      *
+//      * @param boolean $status
+//      */
+//     public function setStatus($status)
+//     {
+//         $this->status = $status;
+//     }
+
+//     /**
+//      * Get status
+//      *
+//      * @return boolean 
+//      */
+//     public function getStatus()
+//     {
+//         return $this->status;
+//     }
+
+    /**
+     * Set available
+     *
+     * @param bool $available
+     */
+    public function setAvailable($available)
+    {  
+        $this->available = $available;
+    }
+
+    /**
+     * Get available
+     *
+     * @return boolean 
+     */
+    public function getAvailable()
+    {
+        return $this->available;
+    }
+    
+    /**
+     * Set sold
+     *
+     * @param bool $sold
+     */
+    public function setSold()
+    {
+    	if($this->state == 'STATE_RAW' || $this->state == 'STATE_VALID' || $this->state == 'STATE_ONLINE' || $this->state == 'STATE_UNAV' || $this->state == 'STATE_BLOCK'){
+    		$this->sold = false;
+    	}
+    	else if($this->state == 'STATE_SOLD' || $this->state == 'STATE_SENT' || $this->state == 'STATE_DONE'){
+    		$this->sold = true;
+    	}
+    	else $this->sold = null;
+    }
+    
+    /**
+     * Get sold
+     *
+     * @return boolean
+     */
+    public function getSold()
+    {
+    	if($this->state == 'STATE_RAW' || $this->state == 'STATE_VALID' || $this->state == 'STATE_ONLINE' || $this->state == 'STATE_UNAV' || $this->state == 'STATE_BLOCK'){
+    		return false;
+    	}
+    	else if($this->state == 'STATE_SOLD' || $this->state == 'STATE_SENT' || $this->state == 'STATE_DONE'){
+    		return true;
+    	}
+    	else return null;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string 
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float 
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+    
+    /**
+     * Set pvp
+     *
+     * @param float $pvp
+     */
+    public function setPvp($pvp)
+    {
+    	$this->pvp = $pvp;
+    }
+    
+    /**
+     * Get pvp
+     *
+     * @return float
+     */
+    public function getPvp()
+    {
+    	return $this->pvp;
+    }
+
+//     /**
+//      * Set stock
+//      *
+//      * @param integer $stock
+//      */
+//     public function setStock($stock)
+//     {
+//         $this->stock = $stock;
+//     }
+
+//     /**
+//      * Get stock
+//      *
+//      * @return integer 
+//      */
+//     public function getStock()
+//     {
+//         return $this->stock;
+//     }
+
+    /**
+     * Set excerpt
+     *
+     * @param text $excerpt
+     */
+    public function setExcerpt($excerpt)
+    {
+        $this->excerpt = $excerpt;
+    }
+
+    /**
+     * Get excerpt
+     *
+     * @return text 
+     */
+    public function getExcerpt()
+    {
+        return $this->excerpt;
+    }
+
+    /**
+     * Set description
+     *
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return text 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param array $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return array 
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+//     /**
+//      * Set shop
+//      *
+//      * @param Estokin\PanelBundle\Shop $shop
+//      */
+//     public function setShop ($shop)
+//     {
+//         $this->shop = $shop;
+//     }
+
+//     /**
+//      * Get shop
+//      *
+//      * @return Estokin\PanelBundle\Shop 
+//      */
+//     public function getShop()
+//     {
+//         return $this->shop;
+//     }
+    
+    /**
+     * Set brand
+     *
+     * @param Estokin\PanelBundle\Brand $brand
+     */
+    public function setBrand ($brand)
+    {
+    	$this->brand = $brand;
+    }
+    
+    /**
+     * Get brand
+     *
+     * @return Estokin\PanelBundle\Brand
+     */
+    public function getBrand()
+    {
+    	return $this->brand;
+    }
+    
+    /**
+     * Add orders
+     *
+     * @param Estokin\PanelBundle\Order $orders
+     */
+    public function addOrders($orders)
+    {
+    	$this->prodcuts[] = $orders;
+    }
+    
+    /**
+     * Get orders
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+    	return $this->orders;
+    }
+    
+    
+     /**
+     * Set category
+     *
+     * @param Estokin\PanelBundle\Category $category
+     */
+    public function setCategory ($category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Estokin\PanelBundle\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set date_add
+     *
+     * @param date $dateAdd
+     */
+    public function setDateAdd($dateAdd)
+    {
+        $this->date_add = $dateAdd;
+    }
+
+    /**
+     * Get date_add
+     *
+     * @return date 
+     */
+    public function getDateAdd()
+    {
+        return $this->date_add;
+    }
+
+    /**
+     * Set date_upd
+     *
+     * @param date $dateUpd
+     */
+    public function setDateUpd($dateUpd)
+    {
+        $this->date_upd = $dateUpd;
+    }
+
+    /**
+     * Get date_upd
+     *
+     * @return date 
+     */
+    public function getDateUpd()
+    {
+        return $this->date_upd;
+    }
+    
+    /**
+     * Set date_sold
+     *
+     * @param date $dateSold
+     */
+    public function setDateSold($dateSold)
+    {
+    	$this->date_sold = $dateSold;
+    }
+    
+    /**
+     * Get date_sold
+     *
+     * @return date
+     */
+    public function getDateSold()
+    {
+    	return $this->date_sold;
+    }
+
+    /**
+     * 
+     * Methods to handle the product state
+     */
+    
+    public function validateProduct(){
+    	if($this->state == "STATE_RAW" || $this->state == "STATE_VALID"){
+	    	$this->state = "STATE_VALID"; 
+	    	return true;   	    		
+    	}
+    	return false;
+    }
+    public function editProduct(){
+    	if($this->state == "STATE_VALID" || $this->state == "STATE_RAW"){
+    		$this->state = "STATE_RAW";
+    		$this->date_upd = new \DateTime(); 
+    		return true; 
+    	}
+    	return false;
+    }
+    public function uploadProduct($psid){
+
+    		$this->state = "STATE_ONLINE";
+    		$this->PS_id = $psid;
+	    	$this->date_upd = new \DateTime();
+			return true;
+    }
+    public function unavProduct(){
+    	if($this->state == "STATE_ONLINE"){
+	    	$this->state = "STATE_UNAV";
+	    	$this->date_upd = new \DateTime();
+	    	return true;   	    		
+    	}
+    	return false;
+    }
+    public function avProduct(){
+    	if($this->state == "STATE_UNAV"){
+    		$this->state = "STATE_ONLINE";
+    		$this->date_upd = new \DateTime();
+    		return true;
+    	}
+    	return false;
+    }
+	public function blockProduct(){
+    	if($this->state == "STATE_ONLINE" || $this->state == "STATE_UNAV"){
+	    	$this->state = "STATE_BLOCK"; 
+	    	$this->date_upd = new \DateTime();
+	    	return true;   	    		
+    	}
+    	return false;
+    }
+    public function unblockProduct(){
+    	if($this->state == "STATE_BLOCK" || $this->state == "STATE_UNAV"){
+    		$this->state = "STATE_ONLINE";
+    		$this->date_upd = new \DateTime();
+    		return true;
+    	}
+    	return false;
+    }
+//     public function sellProduct($quantity){
+//      	//if there is no stock, return false
+//     	if($this->stock < $quantity){
+//      		return false;
+//      	}
+// 		//else, subtract 1 from stock 
+//      	$this->stock = $this->stock - $quantity;
+//      	//if now stock is empty, change state to "valid" in order not to see in "online table"
+//      	if($this->stock < 1){
+//      		//$this->state = "STATE_VALID";
+//      	}
+//     	return true;
+
+//     }
+//     public function sendProduct(){
+// //     	if($this->state == "STATE_SOLD"){
+// //     		$this->state = "STATE_SENT";
+// //     		$this->date_upd = new \DateTime();
+// //     		return true;
+// //     	}
+// //     	return false;
+//     	$this->state = "STATE_SENT";
+//     	$this->date_upd = new \DateTime();
+//     	return true;
+//     }
+//     public function endProduct(){
+// //     	if($this->state == "STATE_SENT"){
+// //     		$this->state = "STATE_DONE";
+// //     		$this->date_upd = new \DateTime();
+// //     		return true;
+// //     	}
+// //     	return false;
+//     	$this->state = "STATE_DONE";
+//     	$this->date_upd = new \DateTime();
+//     	return true;
+//     }
+//     public function returnProduct(){
+//     	if($this->state == "STATE_DONE"){
+//     		$this->state = "STATE_ONLINE";
+//     		$this->setSold();
+//     		$this->date_upd = new \DateTime();
+//     		return true;
+//     	}
+//     	return false;
+//     }
+    
+    public function __toString(){
+    	return $this->name;
+    }
+    
+    public function toArray() {
+    	return Array(
+    			'id' => $this->id,
+    			'name' => $this->name,
+    			'reference' => $this->reference,
+    			'category' => $this->category->getName(),
+    			'shop' => $this->shop->getName(),
+    			'available' => $this->available,
+    			'state' => $this->state,
+    			'price' => $this->price,
+    			//'stock' => $this->stock,
+    			'description' => $this->description,
+    			//'tags'
+    			'sold' => $this->sold,
+    			'date_add' => $this->date_add,
+    			'date_upd' => $this->date_upd,
+				'date_sold'=> $this->date_sold,    	
+    			);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}

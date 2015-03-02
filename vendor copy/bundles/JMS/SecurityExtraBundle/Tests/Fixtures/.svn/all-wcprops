@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/JMS/SecurityExtraBundle/Tests/Fixtures
+END
+MainService.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/JMS/SecurityExtraBundle/Tests/Fixtures/MainService.php
+END
+CorrectSubService.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/JMS/SecurityExtraBundle/Tests/Fixtures/CorrectSubService.php
+END
+AbstractMethodNotDirectlyOverwrittenInDirectChildService.php
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/JMS/SecurityExtraBundle/Tests/Fixtures/AbstractMethodNotDirectlyOverwrittenInDirectChildService.php
+END
+ComplexService.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/JMS/SecurityExtraBundle/Tests/Fixtures/ComplexService.php
+END
+SubService.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/JMS/SecurityExtraBundle/Tests/Fixtures/SubService.php
+END

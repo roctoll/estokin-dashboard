@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />{% endblock %}
+
+{% block headbar %}
+
+		<h1>Tiendas</h1>
+		<h2>&rarr; Editar</h2>
+
+{% endblock %}
+
+{% block body %}
+
+<div id = "content_header">
+	<h2>Editar tienda</h2>
+</div>
+	
+<div id = "content_box">
+	
+	<div class="grid-10-12">
+	<form action="{{ path('shop_update', { 'id': entity.id }) }}" method="post" class="formee" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit">Edit</button>
+    </p>
+    
+	</form>
+	</div>
+	<div class="grid-2-12">
+		<table class="message_toolbar">
+        <tr>
+			<th><a href="{{ path('shop') }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-back.png') }}"></img></a></th>
+			<th>
+				<form action="{{ path('shop_delete', { 'id': entity.id }) }}" method="post">
+	            {{ form_widget(delete_form) }}
+	            <input type="image" class="sel" src="{{ asset('bundles/estokinpanel/images/icon-delete2.png') }}" alt="Submit button"></input>
+	        	</form>
+			</th>
+        </tr>
+        <tr>
+        	<td><label>atras</label></td>
+        	<td><label>borrar</label></td>
+        </tr>
+    </table>
+	</div>
+	<div class="clear"></div>
+</div>
+
+{% endblock %}
+{% block javascript_code %}
+	<script type="text/javascript">
+	$(function() {
+		$("#nav6").attr('class', 'selected');
+		$("#nav61").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(4)').show();	
+	});
+	</script>
+{% endblock %}    

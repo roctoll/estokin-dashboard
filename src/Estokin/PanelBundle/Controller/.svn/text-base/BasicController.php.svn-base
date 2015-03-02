@@ -1,0 +1,82 @@
+<?php
+namespace Estokin\PanelBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+/**
+ * Basic controller.
+ *
+ * @Route("")
+ */
+class BasicController extends Controller
+{
+	/**
+	 * (Home)
+	 *
+	 * @Route("/public", name="public")
+	 * @Template()
+	 */
+	public function indexAction()
+	{
+		return $this->render('EstokinPanelBundle:Static:public.html.twig');
+	}
+	/**
+	 * (Home2)
+	 *
+	 * @Route("/splash", name="splash")
+	 * @Template()
+	 */
+	public function splashAction()
+	{
+		return $this->render('EstokinPanelBundle:Static:splash.html.twig');
+	}
+	
+	/**
+	 * (Info request)
+	 *
+	 * @Route("/public/inforeq", name="info_req")
+	 * @Template()
+	 */
+	public function inforeqAction()
+	{
+		$request = $this->getRequest();
+		
+		mail( "roc@estokin.com", "Solicitud información", $request->get('_mail'), "From: web@estokin.com" );
+		//print "Congratulations your email has been sent";
+		return $this->redirect($this->generateUrl('splash'));
+	}
+	
+	/**
+	 * (Contact)
+	 *
+	 * @Route("/public/contact", name="contact")
+	 * @Template()
+	 */
+	public function contactAction()
+	{
+		return $this->render('EstokinPanelBundle:Static:contact.html.twig');
+	}
+	/**
+	 * (Help) Static helpful info.
+	 *
+	 * @Route("/help", name="help")
+	 * @Template()
+	 */
+	public function helpAction()
+	{
+		return $this->render('EstokinPanelBundle:Static:help.html.twig');
+	}
+	/**
+	 * (Faq) Static helpful info.
+	 *
+	 * @Route("/faq", name="faq")
+	 * @Template()
+	 */
+	public function faqAction()
+	{
+		return $this->render('EstokinPanelBundle:Static:faq.html.twig');
+	}
+}

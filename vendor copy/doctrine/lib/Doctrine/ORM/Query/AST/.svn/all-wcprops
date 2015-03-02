@@ -1,0 +1,311 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST
+END
+PartialObjectExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/PartialObjectExpression.php
+END
+UpdateClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/UpdateClause.php
+END
+ArithmeticFactor.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ArithmeticFactor.php
+END
+ConditionalPrimary.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ConditionalPrimary.php
+END
+InExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/InExpression.php
+END
+PathExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/PathExpression.php
+END
+SimpleSelectClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/SimpleSelectClause.php
+END
+CoalesceExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/CoalesceExpression.php
+END
+QuantifiedExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/QuantifiedExpression.php
+END
+RangeVariableDeclaration.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/RangeVariableDeclaration.php
+END
+ArithmeticExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ArithmeticExpression.php
+END
+UpdateStatement.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/UpdateStatement.php
+END
+NullComparisonExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/NullComparisonExpression.php
+END
+Join.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/Join.php
+END
+EmptyCollectionComparisonExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/EmptyCollectionComparisonExpression.php
+END
+ASTException.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ASTException.php
+END
+Literal.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/Literal.php
+END
+HavingClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/HavingClause.php
+END
+JoinAssociationPathExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/JoinAssociationPathExpression.php
+END
+SelectExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/SelectExpression.php
+END
+SimpleArithmeticExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/SimpleArithmeticExpression.php
+END
+ConditionalFactor.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ConditionalFactor.php
+END
+ArithmeticTerm.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ArithmeticTerm.php
+END
+WhereClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/WhereClause.php
+END
+AggregateExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/AggregateExpression.php
+END
+OrderByItem.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/OrderByItem.php
+END
+FromClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/FromClause.php
+END
+DeleteClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/DeleteClause.php
+END
+NullIfExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/NullIfExpression.php
+END
+Subselect.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/Subselect.php
+END
+UpdateItem.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/UpdateItem.php
+END
+ConditionalExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ConditionalExpression.php
+END
+InputParameter.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/InputParameter.php
+END
+BetweenExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/BetweenExpression.php
+END
+ComparisonExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ComparisonExpression.php
+END
+Node.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/Node.php
+END
+DeleteStatement.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/DeleteStatement.php
+END
+InstanceOfExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/InstanceOfExpression.php
+END
+GroupByClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/GroupByClause.php
+END
+SimpleSelectExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/SimpleSelectExpression.php
+END
+IndexBy.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/IndexBy.php
+END
+SelectClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/SelectClause.php
+END
+LikeExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/LikeExpression.php
+END
+CollectionMemberExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/CollectionMemberExpression.php
+END
+IdentificationVariableDeclaration.php
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/IdentificationVariableDeclaration.php
+END
+ConditionalTerm.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ConditionalTerm.php
+END
+SelectStatement.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/SelectStatement.php
+END
+ExistsExpression.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/ExistsExpression.php
+END
+JoinVariableDeclaration.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/JoinVariableDeclaration.php
+END
+OrderByClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/OrderByClause.php
+END
+SubselectFromClause.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/AST/SubselectFromClause.php
+END

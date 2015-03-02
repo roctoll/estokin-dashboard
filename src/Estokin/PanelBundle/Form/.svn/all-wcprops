@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Form
+END
+ShopType.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Form/ShopType.php
+END
+AttrType.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Form/AttrType.php
+END
+FeatureType.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Form/FeatureType.php
+END
+TagType.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Form/TagType.php
+END
+CategoryType.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Form/CategoryType.php
+END
+ItemType.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Form/ItemType.php
+END
+UserType.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Form/UserType.php
+END
+ProductType.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Form/ProductType.php
+END
+MessageType.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Form/MessageType.php
+END
+AttrSetType.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/Estokin/EstokinPanel/svn/!svn/ver/4/trunk/src/Estokin/PanelBundle/Form/AttrSetType.php
+END

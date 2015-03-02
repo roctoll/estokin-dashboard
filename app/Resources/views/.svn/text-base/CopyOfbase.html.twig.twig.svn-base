@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block javascripts %}
+        	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-1.6.4.min.js') }}"></script>
+        {% endblock %}
+        {% block stylesheets %}
+        	<link href="{{ asset('layout.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    	<div id="content">
+        	{% block body %}{% endblock %}
+    	</div>
+    </body>
+</html>

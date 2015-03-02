@@ -1,0 +1,171 @@
+
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<h1>Creación de producto</h1>
+	<h2>Añade o crea un nuevo producto</h2>
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+			<h2>Producto nuevo</h2>
+	</div>
+
+	<div id="content_box">
+	
+	
+	<form action="{{ path('item_create') }}" method="post" class="formee" {{ form_enctype(formP) }}>
+	<div class="grid-6-12">
+		
+				<div class="grid-9-12">
+			    	<label>Marca</label>
+		    		<div>{{ form_widget(formP.brand) }}</div>
+			    	{{ form_errors(formP.brand) }}
+				</div>
+	
+				<div class="grid-9-12">
+			    	<label>Modelo</label>
+		    		<div>{{ form_widget(formP.name) }}</div>
+			    	{{ form_errors(formP.name) }}
+				</div>
+				
+				<div class="grid-9-12">
+			    	<label>Código EAN/UPC</label>
+		    		<div>{{ form_widget(formP.code) }}</div>
+			    	{{ form_errors(formP.code) }}
+	    		</div>
+	    		<div class="grid-9-12">
+			    	<label>Categoría</label>
+		    		{{ form_widget(formP.category) }}
+			    	{{ form_errors(formP.category) }}
+	    		</div>
+				
+	    		<div class="grid-12-12">
+			    	<label>Descripción</label>
+		    		{{ form_widget(formP.description) }}
+			    	{{ form_errors(formP.description) }}
+		    	</div>	
+	
+			    <div class="grid-12-12">
+			    	<label>Precio outlet</label>
+		    		<div class="small">{{ form_widget(formP.price) }}</div><p class="form-helper">(Precio rebajado para la venta final)</p>
+			    	{{ form_errors(formP.price) }}
+		    	</div>
+		    	
+		    	<div class="grid-12-12">
+			    	<label>PVP recomendado</label>
+		    		<div class="small">{{ form_widget(formP.pvp) }}</div><p class="form-helper">(Precio de venta normal)</p>
+			    	{{ form_errors(formP.pvp) }}
+		    	</div>
+	    				    	
+	    		
+		    	<div class="grid-12-12">
+		        	<input type="submit"></input>
+		    	</div>	
+	</div>		
+	
+	<div class="grid-6-12">
+		<div class="grid-12-12">
+			<label>Producto existente</label> 
+			<select name="plist" size=5 id="plist">
+				<option selected="selected">[NUEVO]</option>
+					{% for p in plist %}
+						<option value="{{ p.id }}">{{ p.bname }} - {{ p.name }}</option>
+					{% endfor %}
+			</select>
+		</div>
+		
+    		{% for aset in attrSets %}
+    			<div class="grid-3-12">
+		    	<label>{{ aset.name }}</label>
+	    		<select name={{ aset.name }}>
+				  	<option selected="selected"></option>
+					{% for attr in aset.attr %}
+						<option>{{ attr.value }}</option>							
+					{% endfor %}
+				</select>					
+				</div>
+    		{% endfor %}
+	    		
+	    		<div class="grid-12-12">
+			    	<label>Unidades</label>
+		    		<div class="small"><input type="number" name="stock" required="required"/></div>
+	    		</div>
+
+    		<div {{ user.isShop() ? 'style="display:none;"' : '' }} class="grid-7-12">
+			    	<label>Tienda</label>
+		    		<select name="shop" id="slist">
+							{% for s in slist %}
+								<option>{{ s.name }}</option>							
+							{% endfor %}
+					</select>
+    				{{ form_rest(formP) }}
+	    	</div>
+    		
+    </div>
+
+ 	</form>
+    
+    <div class="clear"></div>
+</div>
+
+	</div>
+{% endblock %}
+{%  block javascript_code %}
+<script>
+$(function() {
+	$("#nav1").attr('class', 'selected');
+	$("#nav10").attr('class', 'current');
+	$('div.sidebar_nav:eq(0) > div:eq(0)').show();	
+});
+
+
+//Ajax for make available
+$('select[name="plist"]').live('change', function(e) {
+	e.preventDefault(); 
+    var s = $(e.target);
+    if(s.val() == "[NUEVO]") {
+        $("#estokin_panelbundle_producttype_name").val("");
+	    $("#estokin_panelbundle_producttype_code").val("");
+		$("#estokin_panelbundle_producttype_brand").val(0);
+	    $("#estokin_panelbundle_producttype_category").val(1);
+		$("#estokin_panelbundle_producttype_description").val("");
+		$("#estokin_panelbundle_producttype_price").val("");
+	}
+    else{
+     dataContent = {action: "info",
+         			//option: s.val(),
+	          		product: s.find(':selected')[0].value};
+     $.ajax({
+        type: "POST",
+        url: "{{ path('product_info') }}",
+        data: dataContent ,
+        dataType: "json",
+        success: function(data) { 
+        	$("#estokin_panelbundle_producttype_name").val(data.name);
+        	$("#estokin_panelbundle_producttype_code").val(data.code);
+        	$("#estokin_panelbundle_producttype_brand").val(data.brand);
+        	$("#estokin_panelbundle_producttype_category").val(data.category);
+        	$("#estokin_panelbundle_producttype_description").val(data.description);
+        	$("#estokin_panelbundle_producttype_price").val(data.price);
+        }
+	}); 
+    }
+	return false;        	 
+});
+
+</script>
+{% endblock %}

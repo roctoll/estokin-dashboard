@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-bell"></i>
+			Notificaciones
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="title">Notificaciones</h4>
+	<div class="squiggly-border"></div>
+
+
+	   	<table class="table">
+        {% for entity in entities_new %} 
+		        <tr class="no_read">
+		            <td>
+		            	<i class="icon-globe"></i>
+		            </td>
+		            <td class="span1">{% if entity.dateadd %}{{ entity.dateadd|date('d-M Y') }}{% endif%}</td>
+		            <td>{{ entity.content }}</td>
+{# 		            <td><button id="{{ entity.id }}" type="image" class="btn btn-icon btn-danger" onclick="del($(this), {{ entity.id }})">Eliminar</button> #}
+		        </tr>
+    	{% endfor %}
+    	{% for entity in entities_old %} 
+		        <tr>
+		            <td class="span1">
+		            	<i class="icon-globe"></i>
+		            </td>
+		            <td class="span2">{% if entity.dateadd %}{{ entity.dateadd|date('d-M Y') }}{% endif%}</td>
+		            <td class="span8">{{ entity.content }}</td>
+{# 		            <td class="span1"><button id="{{ entity.id }}" type="image" class="btn btn-mini btn-danger" onclick="del($(this), {{ entity.id }})">Eliminar</button> #}
+		            </td>
+		        </tr>
+    	{% endfor %}
+    	</table>
+
+{% endblock %}
+{% block javascript_code %}
+		
+		$(function() {
+			$("#navigation-notifications").attr('class', 'active');
+		});
+	
+	function del(el, id){ 
+         dataContent = {id: id}; 
+         var parent = el.closest('tr'); 
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('message_delete') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+
+           	success: function() {
+               parent.slideUp(300,function() {
+                   parent.remove();
+               });
+           	}
+ 		}); 
+ 	};
+
+{% endblock %}

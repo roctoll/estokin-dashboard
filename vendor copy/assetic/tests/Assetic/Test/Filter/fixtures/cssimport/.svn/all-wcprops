@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Filter/fixtures/cssimport
+END
+noncssimport.css
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Filter/fixtures/cssimport/noncssimport.css
+END
+more.sass
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Filter/fixtures/cssimport/more.sass
+END
+import.css
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Filter/fixtures/cssimport/import.css
+END
+main.css
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Filter/fixtures/cssimport/main.css
+END

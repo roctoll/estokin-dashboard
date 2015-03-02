@@ -1,0 +1,98 @@
+10
+
+dir
+2
+https://pl5.projectlocker.com/Estokin/EstokinPanel/svn/trunk/src/Estokin/PanelBundle/Resources/views
+https://pl5.projectlocker.com/Estokin/EstokinPanel/svn
+
+
+
+2012-10-12T16:55:22.377155Z
+2
+roc@estokin.com
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+3a7a367f-f940-4fc8-97d7-51f4a51da6ac
+
+
+
+
+
+
+0
+
+Admin
+dir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+deleted
+
+Attr
+dir
+
+AttrSet
+dir
+
+Category
+dir
+
+Default
+dir
+
+Feature
+dir
+
+Item
+dir
+
+Message
+dir
+
+Order
+dir
+
+Product
+dir
+
+Shop
+dir
+
+Static
+dir
+
+Tag
+dir
+
+User
+dir
+

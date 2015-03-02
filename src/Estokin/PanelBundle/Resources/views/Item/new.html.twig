@@ -1,0 +1,338 @@
+
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+ 	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+ 	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/bootstrap.file-input.js') }}"></script>
+	
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-plus"></i>
+			Añadir
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+	<h4 class="lead text-info"> Paso 1</h4>
+	<div class="squiggly-border"></div>
+	<p class="step-info">En la lista de la izquierda te facilitamos los productos que ya están en nuestra base de datos para que puedas añadirlos de forma más rápida. Si el producto que quieres añadir no se encuentra en la lista, simplemente utiliza el formulario "Nuevo producto" de la derecha.</p>
+	<form action="{{ path('item_create') }}" method="post" {{ form_enctype(formP) }}>
+		<div class="row-fluid">
+		
+			<div class="span6">
+			<h4 class="title">Productos ya existentes</h4><br>
+					<div class="filter-bar row-fluid">
+						<div class="span5"><small>Filtrar por categoría, marca o modelo: </small></div>
+						<div id="search" class="span6"></div>
+					</div>
+					<div class="row-fluid">				
+						<div class="brand-list span11">
+							<ul id="plist">
+								<li><b>[ Nuevo producto ]</b></li>
+									{% for p in plist %}
+										<li id="{{ p.id }}">{{ p.cname }} - {{ p.bname }} - {{ p.name }} {{ p.season != 0 ? '('~p.season~')' : '' }}</li>
+									{% endfor %}
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+		    </div>
+		
+			<div class="span6" id="product-part">
+				<h4 class="title">Nuevo producto</h4><br>
+				
+				<div class="row-fluid">			
+					<div class="span6 thin-form">
+						<div>
+					    	<label>Marca *</label>
+				    		<div>{{ form_widget(formP.brand) }}</div>
+					    	{{ form_errors(formP.brand) }}
+						</div>			
+						<div>
+					    	<label>Modelo *</label>
+				    		<div>{{ form_widget(formP.name) }}</div>
+					    	{{ form_errors(formP.name) }}
+						</div>
+						<div>
+					    	<label>Temporada *</label>
+				    		<div>{{ form_widget(formP.season,{ 'attr': {'required': 'required'} }) }}</div>
+					    	{{ form_errors(formP.season) }}
+						</div>
+			    		<div>
+					    	<label>Indica una categoría *</label>
+					    		<select id="estokin_panelbundle_producttype_category" name="estokin_panelbundle_producttype[category]" required> 
+					    		<option></option>
+					    		{% for cat in ctree %} 
+					    			<option value="{{ cat.id }}">{{ cat.name }}</option> 
+					    			{% for scat in cat.cats %}
+					    				<option value="{{ scat.id }}">&nbsp;&nbsp;{{ scat.name }}</option>	
+					    			{% endfor %}
+					    		{% endfor %}
+					    		</select>
+					    	{{ form_errors(formP.category) }}
+			    		</div>																		
+						<div >
+					    	<label>Código EAN13 o UPC (opcional)<a class="tip" data-toggle="popover" data-placement="right" data-content="Si nos facilitas el código EAN13 o UPC, podremos indexar mejor tu producto en nuestra base de datos. Normalmente lo encontrarás en su etiqueta, debajo del código de barras."> ¿Qué es?</a></label>
+				    		<div>{{ form_widget(formP.code) }}</div>
+					    	{{ form_errors(formP.code) }}
+			    		</div>
+			    		
+			    		<div class="clear"></div>
+					</div>
+					<div class="span6">
+						<div class="thin-form">
+					    	<label><small>Si la marca no está, escríbela aquí</small></label>
+				    		<input type="text" name="newbrand" id="newbrand" >
+						</div>
+						<div class="center">
+							<label>&nbsp;</label>
+							<img id="product_image"></img>
+						</div>
+					</div>
+				</div>
+				
+	    		<div>
+			    	<label>Descripción (opcional)</label>
+		    		{{ form_widget(formP.description, { 'attr': {'class': 'span12', 'rows': '6'} }) }}
+			    	{{ form_errors(formP.description) }}
+		    	</div>	
+		    	<br>
+		    	<div class="row-fluid">
+		    		<i>Para que nos sea más fácil identificar tu producto, si quieres, puedes añadir una imágen orientativa. Te ofrecemos tres alternativas</i><br>
+		    		<ul class="nav nav-tabs" id="myTab">
+					  <li class="active"><a href="#pc">Adjuntar imagen</a></li>
+					  <li><a href="#mobile">Enviar por WhatsApp</a></li>
+					  <li><a href="#web">Imagen de Google</a></li>
+					</ul>
+					 
+					<div class="tab-content">
+					  <div class="tab-pane active" id="pc">
+					  	{{ form_widget(formP.image, { 'attr': {'class': 'no-margin-left', 'title': 'Haz click aquí para adjuntar una imagen'} }) }}
+					  </div>
+					  <div class="tab-pane" id="mobile">
+					  	Si te resulta más fácil, también puedes mandar la foto por <i>WhatsApp</i> al 647 057 479, con el nombre del producto
+					  </div>
+					  <div class="tab-pane" id="web">
+					  	<label>Introduce la URL:</label>
+					  	<input type="text" name="google_image"></input>
+					  </div>
+					</div>
+		    		
+		    		
+		    		{#
+<div class="span4">{{ form_widget(formP.image, { 'attr': {'class': 'no-margin-left', 'title': 'Haz click aquí para adjuntar una imágen'} }) }}<div class="clear"></div></div>
+			    	{{ form_errors(formP.image) }}
+		    		<div class="span8"><i>(Si quieres, puedes añadir una imágen orientativa para que nos sea más fácil identificar tu producto)</i></div>
+		    	</div><br>
+				<div class="row-fluid">
+					<p class="text-info">Ahora, si quieres, puedes mandar la foto con <i>Whatsapp</i>, al 647057479 con el nombre del producto</p>
+				</div>	
+#}			    	    				    		
+			</div>	
+		</div>	
+
+	<br>
+
+		<h4 class="lead text-info">Paso 2</h4>
+		<div class="squiggly-border"></div>
+		<p class="step-info">Tanto si has seleccionado un producto ya existente o has introducido uno nuevo, por favor, indica los siguientes atributos de tu producto.</p>
+		<br>
+		<div class="row-fluid" id="item-part">		
+			
+			<div class="span3">
+{#
+				{% for aset in attrSets %}
+	    			<div>
+			    	<label>{{ aset.name }}</label>
+		    		<select name={{ aset.name }} class="4">
+					  	<option selected="selected"></option>
+						{% for attr in aset.attr %}
+							<option>{{ attr.value }}</option>							
+						{% endfor %}
+					</select>					
+					</div>
+	    		{% endfor %} 
+#}  
+	    		
+	    		<div>
+	    			<label>Talla/medida *<small> (Si es talla única, escribe un 0)</small></label>
+	    			<div><input style="margin-bottom: 20px" class="span8" type="string" name="size" placeholder="0, S, M, 135, 140..." required/></div>
+	    		</div>
+	    		<div>
+	    			<label>Color orientativo *</label>
+	    			<div><input style="margin-bottom: 20px" class="span8" type="string" name="color" placeholder="Azul oscuro, rojo..." required/></div>
+	    		</div> 				
+			    		
+	    		<div>
+			    	<label>Unidades *</label>
+		    		<div class="small"><input type="number" name="stock" required="required" value="1" class="span3"/></div>
+	    		</div> 		    	
+			</div>
+						
+			<div class="span3">	
+				<div class="row-fluid">
+					<small class="span11">A continuación indicanos el PVP recomendado del fabricante y el precio al que quieres vender tu producto.</small>
+				</div><br>		    				    	
+		    	<div>
+			    	<label>PVP recomendado *<br></label>
+		    		<div class="small"><input type="number" name="pvp" class="span5" step="0.01" required></input></div>				    
+		    	</div>
+		    	
+			    <div>
+			    	<label><strong>Tu precio *</strong></label>
+		    		<div class="small"><input type="number" name="price" class="span5" step="0.01" required></input></div>
+		    	</div>	
+			</div>
+			
+			<div class="span6">
+				
+	    		<div>
+	    			<label><small><i>(Si te interesa y de manera opcional, puedes adjuntar la referencia del producto que usas en tu tienda para facilitar tu gestión)</i></small></label>
+	    			<div><input type="string" name="shopreference" placeholder="Ref."/></div>
+	    		</div> 				
+
+	    		<div>
+	    			<label><small><i> (Observaciones o cualquier detalle que quieras añadir sobre tu producto)</i></small></label>
+	    			<div><textarea name="comment" rows=5 class="span11"></textarea></div>
+	    		</div> 				
+				
+						    	    
+		    	{% if not user.isShop %}    			    	
+			    	<label>Tienda</label>
+		    		<select name="shop" id="slist" class="4">
+							{% for s in slist %}
+								<option>{{ s.name }}</option>							
+							{% endfor %}
+					</select>
+					<label>Estado</label>
+					{{ form_widget(formP.state) }}
+				{% else %}
+					<input type="hidden" name="estokin_panelbundle_producttype[state]" value="STATE_RAW"></input>
+				{% endif %}
+				
+			</div> 
+   	
+		</div>
+		<br>
+	
+		<div class="squiggly-border"></div>
+
+		<div class="row-fluid">
+	    	<div class="span4"></div>
+	    	<div class="span4">
+	        	<input id="formB" class="btn btn-info btn-large btn-block" type="submit" value="Añadir producto"></input>
+	    	</div>
+	    	</div>
+	    	<div class="span4"></div>
+		</div>
+	
+ 	</form>
+    
+
+{% endblock %}
+{%  block javascript_code %}
+$(function() {
+	$("#navigation-products").attr('class', 'active');
+	$("#navigation-products .accordion-body").attr('class', 'in')
+});
+
+$('.tip').popover();
+
+//Search feature
+var api;
+var listclass = '#plist li';
+$(document).ready(function() {	  
+	  api = new $.Search('#search', {
+	    list: listclass,
+	  });	  
+	});
+	$('#field-select').change(function() {
+		listclass = "."+this.value;
+		  $('#search form').remove();	  
+		  api = new $.Search('#search', {
+		    list: listclass,
+		  });	  
+});
+
+//Ajax for fill the data
+$('#plist li').live('click', function(e) {
+	e.preventDefault(); 
+    var s = $(e.target); 
+    if(s.html() == "[ Nuevo producto ]") {
+    	
+    	$('#product-part input, #product-part textarea').attr('readonly', false);
+    	
+        $("#estokin_panelbundle_producttype_name").val("");
+	    $("#estokin_panelbundle_producttype_code").val("");
+		$("#estokin_panelbundle_producttype_brand").val(0);
+	    $("#estokin_panelbundle_producttype_category").val(1);
+		$("#estokin_panelbundle_producttype_description").val("");
+		$("#estokin_panelbundle_producttype_price").val("");
+       	$("#product_image").attr('src','/app/uploads/images/thumbnail.png');
+	}
+    else{    	
+    	dataContent = {action: "info",
+         			//option: s.val(),
+	          		//product: s.find(':selected')[0].value};
+	          		product: s.attr('id') };
+	     $.ajax({
+	        type: "POST",
+	        url: "{{ path('product_info') }}",
+	        data: dataContent ,
+	        dataType: "json",
+	        success: function(data) { 
+	        	$("#estokin_panelbundle_producttype_name").val(data.name);
+	        	$("#estokin_panelbundle_producttype_code").val(data.code);
+	        	$("#estokin_panelbundle_producttype_brand").val(data.brand);
+	        	$("#estokin_panelbundle_producttype_category").val(data.category);
+	        	$("#estokin_panelbundle_producttype_description").val(data.description);
+	        	$("#product_image").attr('src',data.image);
+	        }
+		}); 
+    	$('#product-part input, #product-part textarea').attr('readonly', true);
+    }
+	return false;        	 
+});
+
+$('#estokin_panelbundle_producttype_brand').change(function() { 
+	var v = $(this).children(":selected").val();	
+
+	if(v == 0)	$('#newbrand').attr('readonly', false); 
+	else 		$('#newbrand').attr('readonly', true);
+});
+
+$('#myTab a').click(function (e) {
+   e.preventDefault();
+   $(this).tab('show');
+})
+
+{% endblock %}

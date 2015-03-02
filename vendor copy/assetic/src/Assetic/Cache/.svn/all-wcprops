@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Cache
+END
+ExpiringCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Cache/ExpiringCache.php
+END
+CacheInterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Cache/CacheInterface.php
+END
+FilesystemCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Cache/FilesystemCache.php
+END
+ConfigCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Cache/ConfigCache.php
+END

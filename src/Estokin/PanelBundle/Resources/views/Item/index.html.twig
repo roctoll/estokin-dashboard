@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.flot.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.flot.resize.js') }}"></script>
+	
+{% endblock %}
+
+{% block headbar %}
+
+
+		<div class="row-fluid">
+			<h3>¡Enorabuena! Estás conectado al portal de venta <a href="http://www.esrider.com">www.esrider.com</a></h3>
+		</div>
+    	<div class="row-fluid">
+			<div class="span12">
+			<div class="hero-unit">
+				<h1 class="welcome">
+					Hola {{ user.name }},
+				</h1>
+				<p>Este es el panel de control dónde podrás gestionar todos tus productos. Si tienes cualquier problema no dudes en contactar con nosotros, estaremos encantados de ayudarte. Para comenzar, haz click en el siguiente botón.</p>
+				<p class="hidden-phone">
+					<a href="{{ path('item_new') }}" class="btn btn-info btn-large">Añadir un producto ahora »</a>
+				</p>
+			</div>
+			</div>
+		</div>
+
+{% endblock %}
+
+{% block body %}
+	<div class="row-fluid">
+
+		<div class="span7">
+
+			<h4 class="title">Siguientes pasos</h4>
+			<div class="squiggly-border"></div>
+			<blockquote><small>Añadir productos</small><p>Para comenzar a añadir tus productos al portal de venta puedes acceder mediantes el acceso directo que se encuentra en la parte superior de la pantalla o utilizar las pestañas de la izquierda: <span class="but">Productos</span> » <span class="but"><a href="{{ path('item_new') }}">Añadir producto</a></span></p></blockquote> 
+
+			<blockquote><small>Preparar un pedido</small><p>Cuando un producto tuyo sea vendido, te avisaremos mediante una notificación y éste aparecerá en la pestaña <span class="but">Pedidos</span> » <span class="but"><a href="{{ path('order_pending') }}">Pendientes</a></span>. Deberás entonces proceder a dejarlo listo para su envío ya que posteriormente pasaremos a recogerlo por tu tienda.</p></blockquote>
+
+			<blockquote><small>Retirar un producto</small><p>Si has vendido en tu tienda un producto que previamente habías añadido aquí, por favor, índicalo retirándolo de nuestra plataforma desde <span class="but">Productos</span> » <span class="but"><a href="{{ path('item_list') }}">Tus productos</a></span></p></blockquote>
+
+		</div>
+
+		<div class="span5">
+			<h4 class="title">Tu estado actual</h4>
+			<div class="squiggly-border"></div>
+			
+			<ul class="site-stats">
+				<a href="{{ path('transaction_history') }}"><li class="bluecash"><i class="icon-signal"></i> <strong>{{ cash_total }} €</strong> <small>Facturación total</small></li></a>
+				<a href="{{ path('transaction_pending') }}"><li class="{{ cash_pendent >= 0 ? 'greencash' : 'redcash' }}"><i class="icon-repeat"></i> <strong>{{ cash_pendent }} €</strong> <small>Facturación pendiente</small></li>
+				<li class="divider"></li>
+				<a href="{{ path('item_list') }}"><li class="bluecash"><i class="icon-shopping-cart"></i> <strong>{{ items_total }}</strong> <small>Productos totales</small></li>
+				<a href="{{ path('order_history') }}"><li class="bluecash"><i class="icon-tag"></i> <strong>{{ orders_total }}</strong> <small>Pedidos totales</small></li>
+				<a href="{{ path('order_pending') }}"><li class="redcash"><i class="icon-repeat"></i> <strong>{{ orders_pendent }}</strong> <small>Pedidos pendientes</small></li>
+			</ul>
+
+		</div>
+	</div>
+	
+{% endblock %}
+

@@ -1,0 +1,6 @@
+_welcome:
+    pattern:  /
+    defaults: { _controller: EstokinPanelBundle:User:login }
+
+_main:
+    resource: routing.yml

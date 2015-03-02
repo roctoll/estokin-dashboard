@@ -1,0 +1,632 @@
+<?php
+
+namespace Estokin\PanelBundle\Controller;
+
+use Estokin\PanelBundle\EstokinPanelBundle;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Estokin\PanelBundle\Entity\Item;
+use Estokin\PanelBundle\Entity\Message;
+use Estokin\PanelBundle\Entity\Order;
+use Estokin\PanelBundle\Entity\Product;
+use Estokin\PanelBundle\Entity\AttrSet;
+use Estokin\PanelBundle\Entity\Attr;
+use Estokin\PanelBundle\Form\ItemType;
+use Estokin\PanelBundle\Form\ProductType;
+
+
+/**
+ * Item controller.
+ *
+ * @Route("/item")
+ */
+class ItemController extends Controller
+{
+    /**
+     * Lists all Item entities.
+     *
+     * @Route("/", name="item")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get("security.context")->getToken()->getUser();
+        if(!$user->isShop()) {
+        	return $this->redirect($this->generateUrl('admin_index'));
+        }
+        $entities = $em->getRepository('EstokinPanelBundle:Item')->getForFront($user->getId());
+        $orders = $em->getRepository('EstokinPanelBundle:Order')->findBy(array(
+        		'shop' => $user->getId(),
+        		'state' => 'STATE_SOLD'
+        		));
+        //$orders_sold = $em->getRepository('EstokinPanelBundle:Order')->getNumSold($user->getId());
+        $entities = $this->classItems($entities);
+        
+        $not = $em->getRepository('EstokinPanelBundle:Message')->getNumNewNotifications($user->getId());
+        
+        return array('entities' => $entities, 'orders' => $orders, 'user' => $user, 'num_not' => $not, 'num_pedidos' => count($orders));
+    }
+    /**
+     * (Admin Home) Lists all Item entities.
+     *
+     * @Route("/admin", name="admin_index")
+     * @Template()
+     */
+    public function indexAdminAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$user = $this->get("security.context")->getToken()->getUser();
+    	if($user->isShop()) {
+    		return $this->redirect($this->generateUrl('item'));
+    	}
+    	$entities = $em->getRepository('EstokinPanelBundle:Item')->getforFrontA();
+    	$orders = $em->getRepository('EstokinPanelBundle:Order')->findByState('STATE_SOLD');
+    	$entities = $this->classItems($entities);
+    	$not = $em->getRepository('EstokinPanelBundle:Message')->findBy(
+    			array('type' => 'NOTIFICATION', 'is_read' => 0));
+    	return $this->render('EstokinPanelBundle:Item:index-a.html.twig', array('entities' => $entities, 'num_not' => count($not), 'orders' => $orders, 'user' => $user));
+    }
+
+    /**
+     * Finds and displays a Item entity.
+     *
+     * @Route("/{id}/show", name="item_show")
+     * @Template()
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('EstokinPanelBundle:Item')->find($id);
+        
+        //restricted access to other user's items
+        $user = $this->get("security.context")->getToken()->getUser();
+        
+        if($user->isShop() && $entity->getShop() != $user){
+        	throw $this->createNotFoundException('No acces to this item.'); 
+        }
+
+        $pslink = $this->container->getParameter('PS_PROD_LINK');
+        $pslink = substr_replace($pslink, $entity->getProduct()->getPSId(), 75, 2);
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Item entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+        	'pslink'	=> $pslink,
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),        );
+    }
+
+    /**
+     * Displays a form to create a new Item entity.
+     *
+     * @Route("/new", name="item_new")
+     * @Template()
+     */
+    public function newAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	
+    	$attrSets = $em->getRepository('EstokinPanelBundle:AttrSet')->findAll();    	
+        $plist = $em->getRepository('EstokinPanelBundle:Product')->getProductNames();
+        $slist = $em->getRepository('EstokinPanelBundle:Shop')->findAll();
+
+        $product = new Product();
+        $formP   = $this->createForm(new ProductType(), $product);        
+        $user = $this->get("security.context")->getToken()->getUser();
+
+        return array(
+        	'attrSets' => $attrSets,	
+            'plist' => $plist,
+        	'slist' => $slist,
+        	'user'	 => $user,
+        	'formP'	 => $formP->createview(),
+        );
+    }
+
+    /**
+     * Creates a new Item entity.
+     *
+     * @Route("/create", name="item_create")
+     * @Method("post")
+     * @Template("EstokinPanelBundle:Item:new.html.twig")
+     */
+    public function createAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();    	 
+        $request = $this->getRequest(); 
+
+        $name = $request->get('estokin_panelbundle_producttype'); 
+        $name = $name['name'];
+    	$product = $em->getRepository('EstokinPanelBundle:Product')->findOneByName($name);
+    	$attrSets = $em->getRepository('EstokinPanelBundle:AttrSet')->findAll();
+    	
+    	//1. If product doesn't exist, it is created. 
+    	//2. The item is created.
+    	//3. If the product is online, item is uploaded.
+    	
+    	//case it's a new product
+    	if(!$product){
+    		
+	    	$product = new Product();
+	    	$errors = array();
+	    	$user = $this->get("security.context")->getToken()->getUser();
+	    	$form = $this->createForm(new ProductType(), $product);
+	        $form->bindRequest($request);
+	
+	        if ($form->isValid()) {
+	            $em->persist($product);
+	            $this->get('session')->setFlash('good',"El producto ".$product->getBigName()." ha sido creado con éxito.");
+	             
+	        }
+	        else{
+	        	
+	        	foreach($form->getErrors() as $error)
+		        {	
+		             $errors[] = strtr($error->getMessageTemplate(), $error->getMessageParameters());
+		        }
+		        $attrSets = $em->getRepository('EstokinPanelBundle:AttrSet')->findAll();
+		        $plist = $em->getRepository('EstokinPanelBundle:Product')->getProductNames();
+		        	
+		        return array(
+	        		'attrSets' => $attrSets,
+	        		'plist' => $plist,
+		        	'errors' => $errors,
+		        	'user' 	 => $user,
+		            'formP'   => $form->createView()
+		        );
+	        }
+    	} 
+    	    	
+        $entity  = new Item();
+    	$entity->setProduct($product);
+    	$shop = $this->get("security.context")->getToken()->getUser(); 
+    	
+    	//is the user is a shop, the item is associated to him, if not (user=admin) the shop is retrieved from the form
+    	if($shop->isShop()) $entity->setShop($shop);
+    	else{ 
+    		$shop = $em->getRepository('EstokinPanelBundle:Shop')->findOneByName($request->get('shop'));
+    		$entity->setShop($shop);
+    	}
+    	
+    	//Should check the params!
+    	$stock = $request->get('stock');
+    	$entity->setStock($stock);
+    	$entity->setReference($product->getCategory().$product->getName().$entity->getId());
+    		
+    	//set all the attributes of the item
+    	foreach($attrSets as $aset){ 
+    		$attr = $request->get($aset->getName());
+    		if($attr){
+    			$entity->addAttr($em->getRepository('EstokinPanelBundle:Attr')->findOneByValue($attr));
+    		}
+    	}
+    	$this->get('session')->setFlash('good',"El item de ".$product->getBigName(). "ha sido creado con éxito.");
+    	 
+    	//If the product is online, the item is uploaded too
+    	if($product->getPSId()){
+    		$psid = $this->PS_upload_item($entity);
+    		$entity->uploadItem($psid);
+    		
+    		$em->persist($entity);
+    		$em->flush();
+    		return $this->redirect($this->generateUrl('item_stock'));
+    	}
+    	
+	    $em->persist($entity);	    
+	    $em->flush();
+	    return $this->redirect($this->generateUrl('item_local'));
+
+    }
+
+    /**
+     * Displays a form to edit an existing Item entity.
+     *
+     * @Route("/{id}/edit", name="item_edit")
+     * @Template()
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('EstokinPanelBundle:Item')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Item entity.');
+        }
+
+        $editForm = $this->createForm(new ItemType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Edits an existing Item entity.
+     *
+     * @Route("/{id}/update", name="item_update")
+     * @Method("post")
+     * @Template("EstokinPanelBundle:Item:edit.html.twig")
+     */
+    public function updateAction($id)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('EstokinPanelBundle:Item')->find($id);
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Item entity.');
+        }
+        
+        $editForm   = $this->createForm(new ItemType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        $request = $this->getRequest();
+
+        $editForm->bindRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('item_edit', array('id' => $id)));
+        }
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Deletes a Item entity.
+     *
+     * @Route("/{id}/delete", name="item_delete")
+     * @Method("post")
+     */
+    public function deleteAction($id)
+    {
+        $form = $this->createDeleteForm($id);
+        $request = $this->getRequest();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get("security.context")->getToken()->getUser();
+        $entity = $em->getRepository('EstokinPanelBundle:Item')->find($id);
+        if (!$entity) {
+        	throw $this->createNotFoundException('Unable to find Item entity.');
+        }
+        if($user->isShop() && $entity->getShop()->getId() != $user->getId()){
+        	//@TODO exception correcte
+        	throw $this->createNotFoundException('No acces to this item');
+        }
+                                
+        
+        if ($request->isXmlHttpRequest()){
+        
+        	try{
+        		//If the item is online, first remove it from PRESTASHOP
+        		if($entity->getPSId()) $this->PS_remove_item($entity->getPSId());
+        		
+        		$em->remove($entity);
+        		$em->flush();
+        		return $this->returnJSON(array(
+        				'success' => true,
+        				'id' => $id,
+        				'product' => $entity->getName(),
+        		), 200);
+        	}catch (Exception $e){
+        		return $this->returnJSON(array(
+        				'success' => false,
+        				'id' => $id,
+        				'product' => $entity->getName(),
+        				'exception => $e',
+        		), 500);
+        	}
+        }
+
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+        	
+        	//If the item is online, first remove it from PRESTASHOP
+        	if($entity->getPSId()) {
+        		$this->PS_remove_item($entity->getPSId());
+        		$this->get('session')->setFlash('good',"El item de ".$entity->getProduct()->getBigName(). "ha sido eliminado de PS con éxito.");
+        	}
+        	 
+            $em->remove($entity);
+            $em->flush();
+	        return $this->redirect($this->generateUrl('item_stock'));
+        }
+        else{
+        
+        	foreach($form->getErrors() as $error)
+        	{
+        		$errors[] = strtr($error->getMessageTemplate(), $error->getMessageParameters());
+        	}
+        	 
+        	$deleteForm = $this->createDeleteForm($id);
+        	
+        	return $this->redirect($this->generateUrl('item_show', array('id' => $id)), array(
+        			'entity'      => $entity,
+        			'delete_form' => $deleteForm->createView(),
+        	));
+        }
+    }
+
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder(array('id' => $id))
+            ->add('id', 'hidden')
+            ->getForm()
+        ;
+    }
+    
+    /**
+     * Lists local Product entities.
+     *
+     * @Route("/local", name="item_local")
+     * @Template()
+     */
+    public function localProductsAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$user = $this->get("security.context")->getToken()->getUser();
+    	if(!$user->isShop()) {
+    		$entities = $em->getRepository('EstokinPanelBundle:Item')->getForLocalA();
+    		return $this->render('EstokinPanelBundle:Item:local-a.html.twig', array('entities' => $entities, 'user' => $user));
+    	}
+    	$entities = $em->getRepository('EstokinPanelBundle:Item')->getForLocal($user->getId());
+    	return $this->render('EstokinPanelBundle:Item:local.html.twig', array('entities' => $entities, 'user' => $user));
+    }
+    
+    /**
+     * Lists stock Items entities.
+     *
+     * @Route("/stock", name="item_stock")
+     * @Template()
+     */
+    public function stockItemsAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$user = $this->get("security.context")->getToken()->getUser();
+    	$attrset = $em->getRepository('EstokinPanelBundle:AttrSet')->FindAll();
+    	if(!$user->isShop()) {
+    		$entities = $em->getRepository('EstokinPanelBundle:Item')->getForStockA();
+    		return $this->render('EstokinPanelBundle:Item:stock-a.html.twig', array('entities' => $entities, 'attrset' => $attrset));
+    	}
+    	$entities = $em->getRepository('EstokinPanelBundle:Item')->getForStock($user->getId());
+
+    	return $this->render('EstokinPanelBundle:Item:stock.html.twig', array('entities' => $entities, 'user' => $user, 'attrset' => $attrset));
+    }
+    
+    /**
+     * Sell an existing Item entity.
+     *
+     * @Route("/sell", name="item_sell")
+     * @Method("post")
+     */
+    public function sellAction(){
+    
+    	$request = $this->getRequest();
+    
+    	$id = $request->get('product');
+    	$quantity = $request->get('quantity');
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$entity = $em->getRepository('EstokinPanelBundle:Item')->find($id);
+    
+    	if (!$entity) {
+    		throw $this->createNotFoundException('Unable to find Item entity.');
+    	}
+    
+    	//No AJAX case (des de online, index tab-2, online product)
+    	else{
+    
+    		if($entity->sellItem($quantity)){
+				if($entity->getStock() < 1) $em->remove($entity);
+    			else $em->persist($entity);
+    			$order = new Order($entity,$quantity);
+    
+    			$em->persist($order);
+    			$em->flush();
+    
+    			$msg = "Le notificamos que se ha vendido el producto '".$entity->getProduct()->getName()."' con referencia '".$entity->getReference()."'.\nEn breves se procederá a la recogida del producto.\nGracias";
+    			$this->notifier($entity, $msg, true, $em);
+    			$this->get('session')->setFlash('good','Se ha creado el pedido'.$entity->getProduct()->getName());
+    			 
+    			return $this->redirect($this->generateUrl('order_pending'));
+    		}
+    		else {
+    			$errors[] = "No se ha podido vender el producto";
+    			$entities = $em->getRepository('EstokinPanelBundle:Item')->getForStockA();
+    			$this->get('session')->setFlash('bad','No se ha podido crear el pedido');
+    			return $this->render('EstokinPanelBundle:Item:stock-a.html.twig', array(
+    					'entities' => $entities,
+    					'errors' => $errors
+    			));
+    		}
+    	}
+    }    
+    
+    /**
+     * set stock of existing Item entity.
+     *
+     * @Route("/setstock", name="item_set_stock")
+     * @Method("post")
+     */
+    public function setStockAction(){
+    
+    	$request = $this->getRequest();
+    	$id = $request->get('id');
+    	$stock = $request->get('quantity');
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$entity = $em->getRepository('EstokinPanelBundle:Item')->find($id);
+    	$ps_id = $entity->getPSId();
+    
+    	if (!$entity) {
+    		throw $this->createNotFoundException('Unable to find Product entity.');
+    	}
+    
+    	else{
+    		$uploader = $this->get('uploader');
+    		
+    		if($uploader->PS_setStock_item($ps_id, $stock)){    		
+    			$entity->setStock($stock);
+    			$em->persist($entity);
+    			$msg = "El stock del producto -".$entity->getProduct()->getBigName()."- ha sido incrementado en ".$stock." unidades";
+    			$this->notifier($entity->getShop(), $msg, false, $em);
+    			$this->get('session')->setFlash('good',"Se ha actualizado el stock del producto -".$entity->getProduct()->getBigName()."- a ".$stock." unidades.");
+    			$em->flush();
+    			return $this->redirect($this->generateUrl('item_stock'));
+    		}
+    		else {
+    			$errors[] = "No se ha podido incrementar el stock del producto. Error en la comunicación con Prestashop";
+    			$this->get('session')->setFlash('bad',"No se ha podido incrementar el stock del producto. Error en la comunicación con Prestashop");
+    			return $this->redirect($this->generateUrl('item_stock'));
+    		}
+    	}
+    	 
+    }
+    
+
+    public function upload_item($id){
+    
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$entity = $em->getRepository('EstokinPanelBundle:Item')->find($id);
+    
+    	if (!$entity) {
+    		throw $this->createNotFoundException('Unable to find Item entity.');
+    	}
+
+   		if( ($psid=$this->PS_upload_item($entity)) && $entity->uploadItem($psid)){
+    	       	   
+    		$em->persist($entity);
+    		$em->flush();
+    
+    		return $psid;
+    	}
+    	else return false;
+    }
+    
+    /**
+     * catch the PS hook.
+     *
+     * @Route("/pshook", name="pshook")
+     * @Method("post")
+     */
+    public function psHookAction(){
+    	 
+    	$request = $this->getRequest();
+    	 
+    	$products = json_decode($request->getContent(), true);
+    
+    	$em = $this->getDoctrine()->getEntityManager();
+    
+    	foreach ($products as $id => $quant){
+    
+    		$entity = $em->getRepository('EstokinPanelBundle:Item')->findOneBy(array ('PS_id' => $id));
+    		if($entity && $entity->sellItem($quant)){
+    			    			 
+    			$order = new Order($entity,$quant);
+     
+    			$em->persist($order);
+    			$em->persist($entity);
+    			    			 
+    			$msg = "Le notificamos que se ha vendido el producto '".$entity->getProduct()->getBigName()."' con referencia '".$entity->getReference()."'.\nEn breves se procederá a la recogida del producto.\nGracias";
+    			$this->notifier($entity->getShop(), $msg, true, $em);
+    		}
+    
+    	}
+    	$em->flush();
+    }
+
+
+    
+    /**
+     * Creates a notification.
+     *
+     * @param shop	$shop
+     * @param string	$content
+     * @param boolean 	$admin
+     * @param entityManager $em
+     */
+    private function notifier($shop, $content, $admin, $em){
+    	$msg = new Message('NOTIFICATION');
+    	$msg->setShop($shop);
+    	$msg->setSubject("Notificación de venta");
+    	$msg->setContent($content);
+    	$msg->setPriority(5);
+    	$msg->setAdmin($admin);
+    	 
+    	$em->persist($msg);
+    	//$em->flush();
+    }
+    
+    /**
+     * Returns a JSON response.
+     *
+     * @param array $content
+     * @param integer $code
+     * @return Symfony\Component\HttpFoundation\Response
+     */
+    public function returnJSON($content, $code = 200)
+    {
+    	$response = new Response();
+    
+    	$response->setContent(json_encode($content));
+    	$response->setStatusCode($code);
+    	$response->headers->set('Content-Type', 'application/json');
+    
+    	return $response;
+    }
+    
+    //Classify the products for the front page
+    private function classItems($entities){
+    
+    	$enties['pendents'] = null;
+    	$enties['online'] = null;
+    	foreach($entities as $entity){
+    		switch ($entity->getProduct()->getState()){
+    			case 'STATE_RAW':
+    				$enties['pendents'][] = $entity;
+    				break;
+    			case 'STATE_VALID':
+    				$enties['pendents'][] = $entity;
+    				break;
+    			case 'STATE_ONLINE':
+    				$enties['online'][] = $entity;
+    				break;
+    		}
+    	}
+    	return $enties;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

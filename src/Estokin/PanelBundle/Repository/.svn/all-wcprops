@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Repository
+END
+OrderRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Repository/OrderRepository.php
+END
+ProductRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Repository/ProductRepository.php
+END
+AttrRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Repository/AttrRepository.php
+END
+UserRespository.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Repository/UserRespository.php
+END
+ItemRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Repository/ItemRepository.php
+END
+MessageRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Repository/MessageRepository.php
+END

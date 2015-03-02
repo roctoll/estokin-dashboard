@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-comments-2"></i>
+				Assistencia
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-clipboard-2"></i>
+			Tickets abiertos
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+	<h4 class="title">Conversación</h4>
+	<div class="squiggly-border"></div>
+
+
+		<table class="message_toolbar">
+        <tr>
+			<th><a href="{{ path('message_new') }}"><img src="{{ asset('bundles/estokinpanel/images/icon-compose.png') }}" title="Nuevo mensaje"></img></a></th>
+			<th><a href="{{ path('message_conv') }}"><img src="{{ asset('bundles/estokinpanel/images/icon-refresh.png') }}"></img></a></th>
+			<th><a href="{{ path('message') }}"><img src="{{ asset('bundles/estokinpanel/images/icon-inbox.png') }}"></img></a></th>
+		</tr>
+        <tr>
+        	<th><p>Nuevo</p></th>
+        	<th><p>Actualizar</p></th>
+        	<th><p>Vista</p></th>
+        </tr>
+        </table>
+	
+        {% for entity in entities %}
+        <div class="grid-9-12">
+        <div {{ entity.admin ? 'class="admin_msg"' : 'class="user_msg"' }}>
+            <p>{% if entity.dateadd %}{{ entity.dateadd|date('d-m-Y H:i:s') }}{% endif%}, <strong>{{ entity.subject }}</strong></p>
+			<p>{{ entity.content }}</p>
+        </div>
+        </div>
+    	{% endfor %}
+
+{% endblock %}
+{% block javascript_code %}
+<script>
+	$(function() {
+		$("#nav2").attr('class', 'selected');
+		$("#nav21").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(1)').show();	
+	});
+</script>
+
+{% endblock %}

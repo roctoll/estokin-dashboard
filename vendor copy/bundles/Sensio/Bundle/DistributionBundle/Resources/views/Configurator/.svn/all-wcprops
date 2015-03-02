@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator
+END
+layout.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/layout.html.twig
+END
+form.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/form.html.twig
+END
+final.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/final.html.twig
+END
+steps.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/steps.html.twig
+END
+check.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/check.html.twig
+END

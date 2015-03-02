@@ -1,0 +1,101 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-cube"></i>
+				pagos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-bus"></i>
+			Historial
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	
+	<h4 class="title">Pagos realizados</h4>
+	<div class="squiggly-border"></div>
+
+	    <table id="stable" class="table table-transaction table-bordered">
+<!--
+			<thead>
+	    	<tr>
+	            <th>Concepto</th>
+	            <th>Valor</th>
+	            <th>Pedidos</th>
+	            <th>Tienda</th>
+	            <th>Fecha del pago</th>
+	    	</tr>
+			</thead>
+-->
+			<tbody>
+	    	{% for entity in entities %}    
+	    	
+		        <tr>	
+		            <td class="bigprice">{{ entity.amount }} &#128;</td>
+		            <td> {{ entity.dateupd|date('d/m/y') }}</td>
+		            <td><a href="{{ path('transaction_show', { 'id': entity.id }) }}">{{ entity.comment }}</a></td>
+		            <td>
+		            	
+		            		<div class="accordion-group">
+							    <div class="accordion-heading">
+							      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{entity.id}}">
+							        {{ entity.orders.count + entity.entries.count }} Elementos
+							      </a>
+							    </div>
+							    <div id="collapse{{entity.id}}" class="accordion-body collapse">
+							      <div class="accordion-inner">
+							        {% for order in entity.orders %}
+							        	{{ order.item.product.name }}<br>
+							        {% endfor %}
+							        {% for entry in entity.entries %}
+							        	{{ entry.concept }}<br>
+							        {% endfor %}
+							      </div>
+							    </div>
+							</div>
+		            	
+		            </td>
+		            {% if app.user.getRoles()[0] == 'ROLE_ADMIN' %}
+		            	<td> {{ entity.shop }} </td>
+		            {% endif %}
+		            
+		        </tr>
+	        
+	    	{% endfor %}
+			</tbody>
+		</table>
+{% endblock %}
+{% block javascript_code %}
+	$(function() {
+		$("#navigation-transactions").attr('class', 'active');
+		$("#navigation-transactions .accordion-body").attr('class', 'in')
+	});
+	
+
+	
+{% endblock %}
+

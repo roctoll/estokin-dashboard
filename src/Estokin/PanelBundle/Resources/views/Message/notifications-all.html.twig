@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-bell"></i>
+			Notificaciones
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="title">Notificaciones</h4>
+	<div class="squiggly-border"></div>
+
+	   	<table class="table">
+        {% for entity in entities %} 
+		        <tr {{ entity.isread == 2 ? 'class="no_read"' : '' }}>
+		            <td>
+		            	<i class="icon-globe"></i>
+		            </td>
+		            <td>{{ entity.shop }}</td>
+		            <td>{% if entity.dateadd %}{{ entity.dateadd|date('d-M Y') }}{% endif%}</td>
+		            <td>{{ entity.content }}</td>
+		            <td><button class="btn btn-danger btn-mini" onclick="del($(this), {{ entity.id }})"><i class="radmin-icon radmin-remove-2"></i></button></td>
+		            </tr>
+    	{% endfor %}
+    	</table>
+	</div>
+</div>
+	
+
+{% endblock %}
+{% block javascript_code %}
+		
+		$(function() {
+			$("#navigation-notifications").attr('class', 'active');
+			$("#navigation-notifications .accordion-body").attr('class', 'in')
+		});
+
+	function del(el, id){ 
+         dataContent = {id: id}; 
+         var parent = el.closest('tr'); 
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('message_delete') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+
+           	success: function() {
+               parent.slideUp(300,function() {
+                   parent.remove();
+               });
+           	}
+ 		}); 
+ 	};
+
+{% endblock %}

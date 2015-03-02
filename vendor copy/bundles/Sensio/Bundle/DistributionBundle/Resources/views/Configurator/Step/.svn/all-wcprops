@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/Step
+END
+doctrine.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/Step/doctrine.html.twig
+END
+secret.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Resources/views/Configurator/Step/secret.html.twig
+END

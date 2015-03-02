@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app
+END
+check.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app/check.php
+END
+console
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app/console
+END
+AppKernel.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/app/AppKernel.php
+END
+AppCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app/AppCache.php
+END
+bootstrap.php.cache
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app/bootstrap.php.cache
+END
+.htaccess
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app/.htaccess
+END
+autoload.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app/autoload.php
+END
+phpunit.xml.dist
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/app/phpunit.xml.dist
+END

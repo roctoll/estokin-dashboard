@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Propuestas y promociones de establecimientos y comercios de Barcelona</title>
+<link href="{{ asset('bundles/estokinpanel/css/styleHome.css') }}" type="text/css" rel="stylesheet">
+
+</head>
+<body>
+<table class="dalt" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr height="190">
+    <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td >&nbsp;</td>
+        <td width="189" valign="top">
+        	<div id="main-logo"><a href="{{ path('public') }}"></a></div>
+        </td>        
+        <td>&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+  	<td height="52"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  	  <tr class="naver">
+  	    <td height="52">&nbsp;</td>
+  	    <td width="403">&nbsp;</td>
+  	    <td width="165"></td>
+  	    <td width="108"><div class="dnav"><div class="di-nav"><a class="nav" href="{{ path('public') }}">Que es?</a></div></div></td>
+  	    <td width="108"><div class="dnav"><div class="di-nav"><a class="nav" href="{{ path('contact') }}">Contacta</a></div></div></td>
+  	    <td width="138"><div class="dnav" style="border-right: solid 1px silver;"><div class="di-nav"><a class="nav" href="{{ path('login') }}">Acceso tiendas</a></div></div></td>
+  	    <td>&nbsp;</td>
+	    </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="381" align="center" class="fondoCentro mig"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td height="381">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td height="100" align="center" valign="bottom"><span class="share">Compártela en:<br /></span><a><img name="fb_share" type="icon_link" share_url="http://www.estokin.com" src="{{ asset('bundles/estokinpanel/images/facebook.png') }}" width="55" height="55" alt="Facebook" /></a> <a href="javascript:(function(){window.twttr=window.twttr||{};var D=550,A=450,C=screen.height,B=screen.width,H=Math.round((B/2)-(D/2)),G=0,F=document,E;if(C>A){G=Math.round((C/2)-(A/2))}window.twttr.shareWin=window.open('http://twitter.com/share','','left='+H+',top='+G+',width='+D+',height='+A+',personalbar=0,toolbar=0,scrollbars=1,resizable=1');E=F.createElement('script');E.src='http://platform.twitter.com/bookmarklets/share.js?v=1';F.getElementsByTagName('head')[0].appendChild(E)}());"><img src="{{ asset('bundles/estokinpanel/images/twitter.png') }}" width="55" height="55" alt="twitter" border="0" /></a></td>
+	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> 
+  </tr>
+</table>
+</body>
+</html>

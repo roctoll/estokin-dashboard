@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Resources/views/Order
+END
+pending.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Resources/views/Order/pending.html.twig
+END
+show.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Resources/views/Order/show.html.twig
+END
+history.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Resources/views/Order/history.html.twig
+END
+pending-a.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Resources/views/Order/pending-a.html.twig
+END

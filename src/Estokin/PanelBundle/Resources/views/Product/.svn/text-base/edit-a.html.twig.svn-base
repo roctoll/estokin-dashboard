@@ -1,0 +1,103 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<h1>Editar producto</h1>
+		<h2>Modifica información del producto</h2>
+
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+		<h2>Producto</h2>
+	</div>
+	
+	<div id = "content_box">
+	<div class="grid-11-12">
+		<form class="formee" action="{{ path('product_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+		    
+			{{ form_widget(edit_form) }}
+		    <br><br>
+		    <input type="submit"></input>
+		</form>
+	</div>
+    <div class="grid-1-12"><br>
+	<table class="message_toolbar">
+        <tr>
+			<th><a href="{{ path('item') }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-back.png') }}"></img></a></th>
+        </tr>
+        <tr><td><label>&nbsp; atras</label></td></tr>
+        <tr><td><label>&nbsp;</label></td></tr>
+		<tr>	
+			<th>
+				<form action="{{ path('product_delete', { 'id': entity.id }) }}" method="post">
+	            {{ form_widget(delete_form) }}
+	            <input type="image" class="sel" src="{{ asset('bundles/estokinpanel/images/icon-delete2.png') }}" alt="Submit button"></input>
+	        	</form>
+			</th>
+        </tr>
+        <tr><td><label>&nbsp; Eliminar</label></td></tr>        
+        <tr><td><label>&nbsp;</label></td></tr>
+        <tr>
+			<th><a href="#"><img class="sel validate" src="{{ asset('bundles/estokinpanel/images/icon-validate.png') }}"></img></a></th>
+		</tr>
+        <tr><td><label>&nbsp; Validar</label></td></tr>
+        <tr><td><label>&nbsp;</label></td></tr>
+        <tr>
+			<th><a href="#"><img class="sel upload" src="{{ asset('bundles/estokinpanel/images/icon-upload.png') }}"></img></a></th>
+        </tr>
+        <tr><td><label>&nbsp; Upload</label></td></tr>
+    </table>
+    </div>
+    <div class="clear"></div>
+	</div>
+
+{% endblock %}
+{% block javascript_code %}
+<script>
+	    //Ajax for validate
+    $(".validate").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "validate",
+ 		          	   product: {{ entity.id }}};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('product_validate') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+ 	        	if(data.success == true) alert("{{ entity.name }}"+": ha sido validado con éxito" );
+ 	        	else alert("{{ entity.name }}"+": NO ha sido validado" );
+ 	        	location.reload();
+	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+    //Ajax for upload
+    $(".upload").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "upload",
+ 		          	   product: {{ entity.id }}};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('product_upload') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+	            if(data.success == true) alert("{{ entity.name }}"+": ha sido subido con éxito" );
+	            else alert("{{ entity.name }}"+": no ha podido ser subido" );
+	            $(location).attr('href','{{ path('item_local') }}');
+	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+</script>
+{% endblock %}

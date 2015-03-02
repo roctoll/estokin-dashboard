@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Tests/Command
+END
+GenerateBundleCommandTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Tests/Command/GenerateBundleCommandTest.php
+END
+GenerateCommandTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Tests/Command/GenerateCommandTest.php
+END
+GenerateDoctrineEntityCommandTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Tests/Command/GenerateDoctrineEntityCommandTest.php
+END
+GenerateDoctrineCrudCommandTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Tests/Command/GenerateDoctrineCrudCommandTest.php
+END

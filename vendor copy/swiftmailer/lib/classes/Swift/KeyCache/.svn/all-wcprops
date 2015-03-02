@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/KeyCache
+END
+KeyCacheInputStream.php
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/KeyCache/KeyCacheInputStream.php
+END
+NullKeyCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/KeyCache/NullKeyCache.php
+END
+DummyKeyCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/KeyCache/DummyKeyCache.php
+END
+ArrayKeyCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/KeyCache/ArrayKeyCache.php
+END
+DiskKeyCache.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/KeyCache/DiskKeyCache.php
+END
+SimpleKeyCacheInputStream.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/KeyCache/SimpleKeyCacheInputStream.php
+END

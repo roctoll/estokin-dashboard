@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/Export
+END
+ClassMetadataExporter.php
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/Export/ClassMetadataExporter.php
+END
+ExportException.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/Export/ExportException.php
+END

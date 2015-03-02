@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller
+END
+TagControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/TagControllerTest.php
+END
+UserControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/UserControllerTest.php
+END
+CategoryControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/CategoryControllerTest.php
+END
+ProductControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/ProductControllerTest.php
+END
+DefaultControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/DefaultControllerTest.php
+END
+AttrControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Tests/Controller/AttrControllerTest.php
+END
+AttrSetControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Tests/Controller/AttrSetControllerTest.php
+END
+ItemControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/ItemControllerTest.php
+END
+ShopControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/ShopControllerTest.php
+END
+FeatureControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Tests/Controller/FeatureControllerTest.php
+END
+MessageControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Tests/Controller/MessageControllerTest.php
+END

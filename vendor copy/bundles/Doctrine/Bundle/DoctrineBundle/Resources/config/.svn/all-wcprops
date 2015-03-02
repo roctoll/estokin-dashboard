@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Resources/config
+END
+dbal.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Resources/config/dbal.xml
+END
+orm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Resources/config/orm.xml
+END

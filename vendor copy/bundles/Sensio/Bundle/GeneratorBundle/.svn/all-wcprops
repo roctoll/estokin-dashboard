@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/LICENSE
+END
+SensioGeneratorBundle.php
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/SensioGeneratorBundle.php
+END
+composer.json
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/composer.json
+END

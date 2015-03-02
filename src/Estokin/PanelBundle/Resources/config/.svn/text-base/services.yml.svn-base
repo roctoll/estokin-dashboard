@@ -1,0 +1,13 @@
+parameters:
+#    estokin_panel.example.class: Estokin\PanelBundle\Example
+    uploader.class: Estokin\PanelBundle\Service\Uploader
+    uploader.pspath:  "http://localhost/teststoreddd/"
+    uploader.pskey: "QHZY1HCH3XFA80QVQ3XTA2234WNAUQ8B"
+    
+services:
+#    estokin_panel.example:
+#        class: %estokin_panel.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    uploader:
+        class:  %uploader.class%
+        arguments:  [%uploader.pspath%, %uploader.pskey%]  

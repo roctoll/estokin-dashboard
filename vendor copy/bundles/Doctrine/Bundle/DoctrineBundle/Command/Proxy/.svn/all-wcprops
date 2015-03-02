@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy
+END
+ConvertMappingDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/ConvertMappingDoctrineCommand.php
+END
+EnsureProductionSettingsDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/EnsureProductionSettingsDoctrineCommand.php
+END
+UpdateSchemaDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/UpdateSchemaDoctrineCommand.php
+END
+ClearResultCacheDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/ClearResultCacheDoctrineCommand.php
+END
+ClearQueryCacheDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/ClearQueryCacheDoctrineCommand.php
+END
+ClearMetadataCacheDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/ClearMetadataCacheDoctrineCommand.php
+END
+RunDqlDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/RunDqlDoctrineCommand.php
+END
+RunSqlDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/RunSqlDoctrineCommand.php
+END
+DoctrineCommandHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/DoctrineCommandHelper.php
+END
+DropSchemaDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/DropSchemaDoctrineCommand.php
+END
+CreateSchemaDoctrineCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/CreateSchemaDoctrineCommand.php
+END
+ValidateSchemaCommand.php
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Command/Proxy/ValidateSchemaCommand.php
+END

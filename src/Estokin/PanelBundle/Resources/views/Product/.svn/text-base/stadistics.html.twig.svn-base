@@ -1,0 +1,91 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/visualize.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/visualize-basic.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.visualize.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<h1>Estadísiticas</h1>
+	<h2>Visualiza tu evolución</h2>
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+			<h2>Datos de interés</h2>
+	</div>
+
+	<form class="formee single" action="{{ path('order_stadistics') }}" method="get">
+	
+	<div class="grid-2-12">
+    	<label>Numero de meses</label>
+    	<input type="number" name="num"/>
+	</div>
+	<div class="grid-3-12" style="padding-top:25px;"><input type="submit" value="Actualizar" /></div>
+	</form>
+	
+	<div id="content_box">
+		<table style="display: none">
+			<caption>Ventas en los últimos {{ entities | length }} meses (numero de productos)</caption>
+			<thead>
+				<tr>
+					<td></td>
+					{% for entiMonth in entities  %}
+						<th scope="col">{{ entiMonth.name }}</th>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">{{ user.username }}</th>
+					{% for entiMonth in entities  %}
+						<td scope="col">{{ entiMonth.num }} </td>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</table>
+				<table style="display: none">
+			<caption>Facturación en los últimos {{ entities | length }} meses (en euros)</caption>
+			<thead>
+				<tr>
+					<td></td>
+					{% for entiMonth in entities  %}
+						<th scope="col">{{ entiMonth.name }}</th>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">{{ user.username }}</th>
+					{% for entiMonth in entities  %}
+						<td scope="col">{{ entiMonth.cash }} </td>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}
+{% block javascript_code %}
+<script>
+	$(function() {
+		$("#nav3").attr('class', 'selected');
+		$("#nav31").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(2)').show();	
+	});
+
+	$("table")
+		.visualize({ type: 'line', width: '700px' });
+
+</script>
+{% endblock %}

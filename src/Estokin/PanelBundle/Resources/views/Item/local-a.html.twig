@@ -1,0 +1,130 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-1.7.1.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.confirm.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.color.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-history"></i>
+			Sin revisar
+		</li>
+	</ul>
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="title">Productos en venta</h4>
+	<div class="squiggly-border"></div>
+			
+	    	<table class="data"><br>
+
+	    	<tr>
+	            <th>Producto</th>
+	            <th>Referencia</th>
+	            <th>Atributos</th>
+	            <th>Categoria</th>
+	            <th>Tienda</th>
+	            <th>Precio</th>
+	            <th>Fecha creacion</th>
+	            <th>Acciones</th>
+	    	</tr>
+	    	{% for entity in entities %}    
+
+		        <tr class="t_content {{ loop.index is odd ? '':'alt' }}">
+		            <td>
+		            	<a href="{{ path('item_show', { 'id': entity.id }) }}">
+		            		{{ entity.product.bigname }}			            		
+		            	</a>
+		            </td>
+		            <td>{{ entity.reference }}</td>
+		            <td>({% for a in entity.attr %}
+		            			{{ a.attrset.name }} {{ a.value }}
+		            			{{ loop.last ? '' : ',' }}
+		            		{% endfor %})
+		            </td>
+		            <td>{{ entity.product.category }}</td>
+		            <td>{{ entity.shop }}</td>
+		            <td>{{ entity.product.price }} &#128;</td>
+		            <td>{% if entity.dateadd %}{{ entity.dateadd|date('Y-m-d') }}{% endif%}</td>
+		            <td>
+		            	<a href="{{ path('product_edit', { 'id': entity.product.id }) }}"><button class="btn btn-mini btn-danger">Editar</button></a>
+		            	<a class="delete" href="#" id="{{ entity.id }}"><button class="btn btn-mini btn-info">Eliminar</button></a>
+		            </td>
+		        </tr>
+	        
+	    	{% endfor %}
+		</table>
+		<br>
+		<a href="{{ path('item_new') }}">
+			<button class="btn btn-info" type="button">
+				<i class="icon-plus icon-white"></i>
+				Producto nuevo
+			</button>
+		</a>
+{% endblock %}
+{% block javascript_code %}
+
+	$(function() {
+		$("#navigation-products").attr('class', 'active');
+		$("#navigation-products .accordion-body").attr('class', 'in')
+	});
+	//Search feature
+	var api;
+	$(document).ready(function() {	  
+	  api = new $.Search('#search', {
+	    list: 'tbody tr.t_content'
+	  });	  
+	});
+
+    //Ajax for delete
+    $(".delete").click(function(e){
+        e.preventDefault();
+         dataContent = {action: "delete",
+ 		          	    item: this.id};
+ 	     var parent = $(this).closest('tr');
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "/app_dev.php/item/"+dataContent['item']+"/delete",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	       	beforeSend: function() {
+               parent.animate({'backgroundColor':'#fb6c6c'},300);
+           	},
+           	success: function() {
+               parent.slideUp(300,function() {
+                   parent.remove();
+               });
+           	}
+ 		}); 
+ 	});
+ 	//confirmation of delete
+    $('.delete').confirm({
+        msg:'seguro?',
+        timeout:3000
+    });
+{% endblock %}

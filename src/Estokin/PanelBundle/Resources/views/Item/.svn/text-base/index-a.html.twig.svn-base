@@ -1,0 +1,341 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/tabs.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-ui-1.8.18.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+
+		<h1>Bienvenido {{ user.username | upper }}*</h1>
+		<h2>Tienes <a href="{{ path('notifications') }}">{{ num_not }} </a>notificaciones nuevas</h2>
+
+	<ul class ="shortcut-buttons-set">
+		<li><a class="shortcut-button" href="{{ path('user') }}">
+			<span>
+				<img src="{{ asset('bundles/estokinpanel/images/icon-profile.png') }}" alt="icon"><br>
+				Usuarios
+			</span>
+		</a></li>
+
+		<li><a class="shortcut-button" href="{{ path('shop') }}">
+			<span>
+				<img src="{{ asset('bundles/estokinpanel/images/icon-shop.png') }}" alt="icon"><br>
+				Tiendas
+			</span>
+		</a></li>
+		<li><a class="shortcut-button" href="{{ path('product_new') }}">
+			<span>
+				<img src="{{ asset('bundles/estokinpanel/images/icon-tools.png') }}" alt="icon"><br>
+				Configuración
+			</span>
+		</a></li>
+		<li><a class="shortcut-button" href="{{ path('logout') }}">
+			<span>
+				<img src="{{ asset('bundles/estokinpanel/images/icon-logout.png') }}" alt="icon"><br>
+				Logout
+			</span>
+		</a></li>
+	</ul>
+	<div class="clear"></div>
+	
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+		<div id="tabs">
+		<div id="content_header">
+		<ul>
+			<li><a href="#tabs-1">Productos locales</a></li>
+			<li><a href="#tabs-2">Productos online</a></li>
+			<li><a href="#tabs-3">Pedidos</a></li>
+		</ul>
+		</div>
+		<div id = "content-box">
+	
+			<div id = "tabs-1">
+			    <table class="data">					
+			    	<tr>
+			            <th>Producto</th>
+			            <th>Referencia</th>
+	            		<th>Atributos</th>
+	            		<th>Categoria</th>
+			            <th><strong>Tienda</strong></th>
+			            <th>Precio</th>
+			            <th>Stock</th>
+			            <th>Fecha creación</th>
+			            <th>Estado</th>
+			            <th>Acciones</th>
+			    	</tr>
+			    	{% for entity in entities['pendents'] %}
+				        <tr>
+				            <th><a href="{{ path('item_show', { 'id': entity.id }) }}" title="ver">{{ entity.product.bigname }}</a></th>
+				            <td>{{ entity.reference }}</td>
+				            <td>({% for a in entity.attr %}
+		            			{{ a.attrset.name }} {{ a.value }}
+		            			{{ loop.last ? '' : ',' }}
+		            		{% endfor %})
+		            		</td>
+		            		<td>{{ entity.product.category }}</td>
+				            <td>{{ entity.shop }}</td>
+				            <td>{{ entity.product.price }}</td>
+				            <td>{{ entity.stock }}</td>	
+				            <td>{% if entity.dateadd %}{{ entity.dateadd|date('Y-m-d') }}{% endif%}</td>
+				            <td>{{ entity.product.state }}</td>
+				            <td><a href="{{ path('product_edit', { 'id': entity.product.id }) }}"><img class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-edit.png') }}"  title="editar" alt="Edit"></a>
+				            	<a href="{{ path('item_delete', { 'id': entity.id }) }}"><img class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}"  title="eliminar" alt="Delete"></a>
+				            </td>
+				        </tr>
+			        
+			    	{% endfor %}
+				</table>
+			</div>
+			
+			<div id = "tabs-2">
+				<table class="data">
+			    	<tr>
+			            <th>Producto</th>
+			            <th>Tienda</th>
+			            <th>Precio</th>
+			            <th>Stock</th>
+			            <th>Fecha creación</th>
+			            <th>Estado</th>
+			            <th>Vender</th>
+			            <th>Bloqueo</th>
+			    	</tr>
+			    	{% for entity in entities['online'] %}    		
+				        <tr id="tr{{ entity.id }}">
+				            <th><a href="{{ path('item_show', { 'id': entity.id }) }}">{{ entity.name }}</a></th>
+				            <td>{{ entity.shop }}</td>
+				            <td>{{ entity.product.price }}</td>
+				            <td>{{ entity.stock }}
+				            	<a style="float:right" class="modalInput" rel="#promptS{{ entity.id }}"><img src="{{ asset('bundles/estokinpanel/images/icon-add2.png') }}" alt="Actualizar stock"></a>
+				            </td>	
+				            <td>{% if entity.dateadd %}{{ entity.dateadd|date('Y-m-d') }}{% endif%}</td>
+				            <td id="state">{{ entity.product.state }}</td>
+				            <td>
+				            	<form action="{{ path('item_sell', { 'id': entity.id }) }}" method="post">
+				            		<input type="hidden" id="form_id" name="product" value={{ entity.id }}>
+					            	<input type="image" class="sel" src="{{ asset('bundles/estokinpanel/images/icon-sell.png') }}" title="vender" alt="vender"></input>
+					        	</form>
+				            </td>
+				            <td id="chstate">
+				            	{% if entity.product.state != 'STATE_BLOCK' %}	            	
+				            		<a id="{{ entity.id }}" class="unblock" href="#"><img src="{{ asset('bundles/estokinpanel/images/icon-unblock.png') }}" title="bloquear" alt="block"></a>
+				            	{% else %}
+				            		<a id="{{ entity.id }}" class="block" href="#" ><img src="{{ asset('bundles/estokinpanel/images/icon-block.png') }}" title="desbloquear" alt="unblock"></a>
+				            	{% endif %}
+				            </td>
+				        </tr>
+			        
+			    	{% endfor %}
+				</table>
+				{% for entity in entities['online'] %}
+					<div class="modal" id="promptS{{ entity.id }}">
+					<h2>Actualizar stock</h2>														
+					<p>
+						Por favor, indique el numero de unidades del producto: <br>
+						<strong>- {{ entity.name }} -</strong>							
+					</p>
+					<!-- input form. you can press enter too -->
+					<form id={{ entity.id }} class="prompForm2" action="{{ path('item_set_stock', { 'id': entity.id }) }}" method="post">
+						<label>Introducir nuevo stock</label>
+						<input type="number" name="quantity" value={{ entity.stock }}></input>
+						<br><br>
+						<button type="submit"> Actualizar </button>
+						<button type="button" class="close"> Cancelar </button>
+					</form>
+					<br>							
+					</div>
+				{% endfor %}
+			</div>
+			
+			<div id = "tabs-3">
+				<table class="data">					
+			    	<tr>
+			            <th>Producto</th>
+			            <th>Estado</th>
+			            <th>Tienda</th>
+			            <th>Unidades</th>
+			            <th>Precio total</th>
+			            <th>Fecha venta</th>
+			            <th>Acciones</th>
+			    	</tr>
+			    	{% for entity in orders %}    		
+				        <tr>
+				            <th><a href="{{ path('order_show', { 'id': entity.id }) }}">{{ entity.item.name }}</a></th>
+				            <td>
+								{% if entity.state == 'STATE_SOLD' %}
+				            		<img id="is{{ entity.id }}" src="{{ asset('bundles/estokinpanel/images/icon-sold.png') }}">
+				            	{% elseif entity.state == 'STATE_SENT' %}
+				            		<img id="is{{ entity.id }}" src="{{ asset('bundles/estokinpanel/images/icon-sent.png') }}">
+				            	{% elseif entity.state == 'STATE_DONE' %}
+				            		<img id="is{{ entity.id }}" src="{{ asset('bundles/estokinpanel/images/icon-done.png') }}">
+				            	{% elseif entity.state == 'STATE_CANCELED' %}
+				            		<img id="is{{ entity.id }}" src="{{ asset('bundles/estokinpanel/images/icon-return.png') }}">
+				            	{% endif %}
+				            </td>
+				            <td>{{ entity.shop }}</td>
+				            <td>{{ entity.quantity }}</td>
+				            <td>{{ entity.item.product.price * entity.quantity }} &#128;</td>
+				            <td>{% if entity.dateSold %}{{ entity.dateSold|date('Y-m-d') }}{% endif%}</td>
+				            <td>
+				            	<a id="{{ entity.id }}" class="sell" href="#"><img src="{{ asset('bundles/estokinpanel/images/icon-sold.png') }}" title="producto vendido" alt="vendido">&nbsp;</a>
+				            	<a id="{{ entity.id }}" class="send" href="#"><img src="{{ asset('bundles/estokinpanel/images/icon-sent.png') }}" title="envio producto" alt="envio">&nbsp;</a>
+				            	<a id="{{ entity.id }}" class="done" href="#"><img src="{{ asset('bundles/estokinpanel/images/icon-done.png') }}" title="entrega producto" alt="entrega"></a>
+								<a id="{{ entity.id }}" class="cancel" href="#"><img src="{{ asset('bundles/estokinpanel/images/icon-return.png') }}" title="devolución producto" alt="devolución"></a>
+				            </td>
+				            </tr>
+			        
+			    	{% endfor %}
+				</table>
+			</div>
+		</div>
+</div>
+
+{% endblock %}
+{% block javascript_code %}
+ <script>
+	
+	$(function() {
+		// Interaction for the tabs
+		$( "#tabs" ).tabs();
+		// left navigation
+		$("#nav0").attr('class', 'selected');
+
+		// modal form (overlay)
+		var triggers = $(".modalInput").overlay({
+			// some mask tweaks suitable for modal dialogs
+			mask: {
+				color: '#ebecff',
+				loadSpeed: 200,
+				opacity: 0.9
+			},
+			closeOnClick: true
+		});
+	});
+	
+	//blocking & unblocking stuff
+	$(function(){
+		
+	//Ajax Call for unblock
+    $(".unblock").live("click", function(e){
+       e.preventDefault();
+        dataContent = {action: "blockaw",
+		          	   product: this.id};
+        $.ajax({
+	        type: "POST",
+	        url: "/app_dev.php/product/block",
+	        data: dataContent ,
+	        dataType: "json",
+	        success: function(data) {	 
+	            $("#tr"+data.id+" #state").html(data.state);
+	            $("#"+data.id+" img").attr("src", "/bundles/estokinpanel/images/icon-block.png");
+	            $("#"+data.id).attr("class", "block");
+	        }
+		}); 
+		return false;        	 
+	    });
+    //Ajax for block
+    $(".block").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "blockaw",
+ 		          	   product: this.id};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "/app_dev.php/product/unblock",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+ 	            $("#tr"+data.id+" #state").html(data.state);
+	            $("#"+data.id+" img").attr("src", "/bundles/estokinpanel/images/icon-unblock.png");
+	            $("#"+data.id).attr("class", "unblock");
+	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+	
+    //Ajax for sold
+    $(".sell").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "sell",
+ 		          	   order: this.id};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('order_sell') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+	            $("#is"+data.id).attr("src", "/bundles/estokinpanel/images/icon-sold.png");
+	            msg = "El producto -"+data.order+"- se ha actualizado al estado "+data.state;
+	            $('#main_headbar').append('<div class="flash">'+msg+'</div>');
+	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+    //Ajax for send
+    $(".send").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "send",
+ 		          	   order: this.id};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('order_send') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+	            $("#is"+data.id).attr("src", "/bundles/estokinpanel/images/icon-sent.png");
+ 	        	msg = "El pedido -"+data.order+"- se ha actualizado al estado "+data.state;
+ 	        	$('#main_headbar').append('<div class="flash">'+msg+'</div>');
+ 	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+    //Ajax for finish
+    $(".done").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "done",
+ 		          	   order: this.id};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('order_done') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+	            $("#is"+data.id).attr("src", "/bundles/estokinpanel/images/icon-done.png");
+ 	        	msg = "El producto -"+data.order+"- se ha actualizado al estado "+data.state;
+ 	        	$('#main_headbar').append('<div class="flash">'+msg+'</div>');
+	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+
+    //Ajax for return
+    $(".cancel").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "return",
+ 		          	   order: this.id};
+         $.post("{{ path('order_cancel') }}", dataContent,
+             function(data){
+				if(data.success){
+					$("#is"+data.id).attr("src", "/bundles/estokinpanel/images/icon-return.png");
+	 					msg = "El producto -"+data.product+"- se ha actualizado al estado "+data.state;
+					$('#main_headbar').append('<div class="flash">'+msg+'</div>');
+				}
+				else alert("No se ha podido realizar la actalización del producto "+data.product);
+         	});	    
+	});
+	
+	});
+
+			
+	</script>
+{% endblock %}

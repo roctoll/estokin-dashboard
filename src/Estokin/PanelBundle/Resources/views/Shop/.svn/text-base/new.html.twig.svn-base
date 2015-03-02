@@ -1,0 +1,99 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+	<h1>Tiendas</h1>
+	<h2>&rarr; Nuevo</h2>
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+				<h2>Shop creation</h2>
+		</div>
+	
+		<div id="content_box">
+		
+				{% if errors is defined%}
+				<div class="formee-msg-error">
+			    	Can you fix please?
+			        <ul>
+			        	{% for er in errors %}
+			        		<li>error {{ er }}</li>
+			        	{% endfor %}
+			        </ul>
+			    </div>
+			{% endif %}
+		
+		<div class="grid-10-12">	
+		<form action="{{ path('shop_create') }}" method="post" class="formee" {{ form_enctype(form) }}>
+		    
+				<div class="grid-7-12">
+			    	{{ form_label(form.name) }}
+		    		<div>{{ form_widget(form.name) }}</div>
+			    	{{ form_errors(form.name) }}
+				</div>
+				<div class="grid-7-12">
+			    	{{ form_label(form.username) }}
+		    		<div>{{ form_widget(form.username) }}</div>
+			    	{{ form_errors(form.username) }}
+	    		</div>
+	    		<div class="grid-7-12">
+			    	{{ form_label(form.password) }}
+		    		<div>{{ form_widget(form.password) }}</div>
+			    	{{ form_errors(form.password) }}
+	    		</div>
+	    		<div class="grid-7-12">
+			    	{{ form_label(form.email) }}
+		    		<div>{{ form_widget(form.email) }}</div>
+			    	{{ form_errors(form.email) }}
+	    		</div>
+				<div class="grid-6-12">
+			    	{{ form_label(form.state) }}
+		    		<div>{{ form_widget(form.state) }}</div>
+			    	{{ form_errors(form.state) }}
+				</div>
+	    		<div class="grid-3-12">
+			    	{{ form_label(form.isActive) }}
+		    		<div>{{ form_widget(form.isActive) }}</div>
+			    	{{ form_errors(form.email) }}
+	    		</div>
+	    		<div class="grid-12-12"><h2 style="padding: 20px 0 0 0;">Información de la tienda:</h2></div>
+				<div class="subform grid-12-12">					
+					{{ form_rest(form) }}
+				</div>
+		    	<div class="grid-12-12">
+				</div>
+				<div class="grid-12-12">
+		        	<input type="submit"></input>
+		    	</div>
+		</form>
+		</div>
+		<div class="grid-2-12">
+			<table class="message_toolbar">
+	        <tr>
+				<th><a href="{{ path('shop') }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-back.png') }}"></img></a></th>
+	        </tr>
+	        <tr>
+	        	<td><label>atras</label></td>
+	        </tr>
+	    	</table>
+		</div>
+		<div class="clear"></div>
+	</div>
+{% endblock %}
+{% block javascript_code %}
+	<script type="text/javascript">
+	$(function() {
+		$("#nav6").attr('class', 'selected');
+		$("#nav61").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(4)').show();	
+	});
+	</script>
+{% endblock %}

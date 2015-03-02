@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/LICENSE
+END
+run-all.sh
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/run-all.sh
+END
+.travis.yml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/.travis.yml
+END
+composer.json
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/composer.json
+END
+doctrine-mapping.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/doctrine-mapping.xsd
+END
+README.markdown
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/README.markdown
+END
+phpunit.xml.dist
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/phpunit.xml.dist
+END

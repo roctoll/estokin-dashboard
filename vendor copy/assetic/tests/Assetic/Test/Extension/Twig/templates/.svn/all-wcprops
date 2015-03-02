@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates
+END
+combine.twig
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/combine.twig
+END
+absolute_path.twig
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/absolute_path.twig
+END
+filters.twig
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/filters.twig
+END
+image.twig
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/image.twig
+END
+reference.twig
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/reference.twig
+END
+function.twig
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/function.twig
+END
+glob.twig
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/glob.twig
+END
+optional_filter.twig
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/optional_filter.twig
+END
+debug.twig
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/debug.twig
+END
+output_pattern.twig
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/output_pattern.twig
+END
+output_url.twig
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/output_url.twig
+END
+mixture.twig
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/tests/Assetic/Test/Extension/Twig/templates/mixture.twig
+END

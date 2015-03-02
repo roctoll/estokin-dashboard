@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib
+END
+preferences.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/preferences.php
+END
+swift_required_pear.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/swift_required_pear.php
+END
+swift_required.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/swift_required.php
+END
+swift_init.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/swift_init.php
+END
+mime_types.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/mime_types.php
+END

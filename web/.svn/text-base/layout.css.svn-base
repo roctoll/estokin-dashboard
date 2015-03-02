@@ -1,0 +1,164 @@
+@CHARSET "UTF-8";
+
+/**
+ * CSS reset
+ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin:0; padding:0; border:0; font-size:100%; font:inherit; vertical-align:baseline; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display:block; }
+body { line-height:1; }
+ol, ul { list-style:none; }
+blockquote, q { quotes:none; }
+blockquote:before, blockquote:after, q:before, q:after { content:''; content:none; }
+table { border-collapse:collapse; border-spacing:0; }
+
+.clear { clear:both; }
+
+/**
+ * common - HTML
+ */
+html, body { height:100%; }
+body { background:black; color:black; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; overflow:hidden; margin:0 0;}
+
+/**
+ * common - headings
+ */
+h1, h2, h3, h4, h5, h6 { color:#000; font-weight:bold; line-height:1.25em; margin:10px 0; padding:0 16px; text-align:left; text-shadow:01 px 1px rgba(255,255,255,.75); }
+h1 { font-size:26px; font-weight:600; letter-spacing:-1px; }
+h2 { font-size:16px; }
+h3 { font-size:16px; }
+h4 {}
+h5 {}
+h6 {}
+
+/**
+ * Main logo
+ */
+#main_logo { position: absolute; top: 0; right: 0; padding: 25px;}
+
+/**
+ * common - paragraphs and text
+ */
+p { line-height:1.35em; margin-bottom:1em; }
+em { font-style:italic; } 
+small { font-size:11px; }
+strong { font-weight:bold; }
+sub, sup { font-size:0.9em; padding-left:1px; vertical-align:super; }
+sup { vertical-align:super; }
+
+p.note { border:1em solid #f8f8f8; color:#666; margin-bottom:2.5em; padding:1em; }
+p.note strong { color:#333; font-size:0.9em; font-weight:bold; text-transform:uppercase; }
+
+.counter { background:#eba500; border-radius:9px; color:#f9ffff; display:inline-block; font-size:10px; font-weight:bold; line-height:10px; margin:0 2px; padding:2px 4px; text-shadow:0 0 transparent; }
+
+
+/**
+ * sidebar
+ */
+#sidebar {  background-image:url(bundles/estokinpanel/images/classy_fabric.png);  border-right:1px none #a0a0a0; float:left; height:100%; min-height:100%; min-width:150px; overflow:auto; position:relative; width:17%; z-index:100; -moz-user-select:none; -webkit-user-select:none; user-select:none; }
+#sidebar > * { vertical-align:top; }
+#sidebar > header {border-bottom:1px none #a0a0a0; display:block; margin-bottom:6px; width:100%; padding: 0px;}
+#sidebar > section {}
+#sidebar > footer {}
+#sidebar > section::after { content:''; display:block; }
+#sidebar > section::before { content:''; display:block; }
+
+/**
+ * sidebar > header
+ */
+#sidebar > header hgroup { padding: 50px 0px; font-family: 'Helvetica';}
+#sidebar > header h1 { margin:0; font-weight: normal; color: #E9E9E9; font-size: 40px; font-family: Georgia, serif; font-style: italic; text-shadow:0 3px 3px rgba(0,0,0,0.6);}
+#sidebar > header h2 { font-size:13px; font-weight:normal; color: #C0C0C0; }
+#sidebar > header .header_actions { padding:0 16px 16px; }
+
+
+
+/**
+ * sidebar > section 
+ */
+.sidebar_nav {
+	float: right;
+	width: 200px;
+	padding: 0;
+	margin: 0 0 0 15px;
+	list-style:none;
+	font-family: Lucida sans unicode, Arial, sans-serif;
+}
+
+.sidebar_nav h3 {
+  text-align: right;
+  padding: 8px 15px;
+	font-weight: normal;  
+	font-family: Lucida sans unicode;
+    display: block;
+    color: #DFDFDF;
+    font-size: 13px;
+    line-height: 1.2em;
+    border-top: 1px solid #439ED1;
+	margin-top: 1px;
+	background:-webkit-linear-gradient(#3A76AB,#439ED1);
+	background:linear-gradient(#3A76AB,#439ED1);
+	background:-moz-linear-gradient(#3A76AB,#439ED1);
+	background:-ms-linear-gradient(#3A76AB,#439ED1);
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	cursor: pointer;
+}
+.sidebar_nav h3.selected {
+	background:#FBFBFB;
+	color: #555;
+	border-top: none;
+	padding-left: 20px;
+}
+.sidebar_nav h3:hover {
+	padding: 8px 20px;
+}
+.sidebar_nav div {
+  text-align:right;
+  padding-right: 0px; 
+}
+.sidebar_nav div li.current{ 
+	background: transparent url(bundles/estokinpanel/images/icon-current-nav.gif) right center no-repeat !important;
+}
+.sidebar_nav div li a{
+  color: #bbb;
+  padding-right: 20px; 
+}
+.sidebar_nav div li a:hover{
+  color: #ddd;
+  padding-right: 20px; 
+}
+
+
+
+
+
+#main { overflow: auto; background: #F0F0F0 ;float:left; height:100%; min-height:100%; position:relative; width: 83%; background-image: url(bundles/estokinpanel/images/bg-main.gif); background-attachment: fixed; background-clip: initial; background-origin: initial;  background-repeat: no-repeat; }
+
+/**
+ * main > overlay > messages
+ */
+#main_messages { margin:20px 0; position:relative; text-align:center; }
+
+/**
+ * main headbar
+ */
+#main_headbar { position: relative; padding: 40px 20px 10px 30px; }
+#main_headbar h1 {font-size: 26px; font-style: normal; font-weight: bold; color: #222; padding: 0px;}
+#main_headbar h2 {font-size: 17px; font-style: normal; font-weight: normal; color: #555; padding: 0px;}
+
+
+/**
+ * main > overlay > toolbar
+ */
+#main_toolbar { display:block; left:311px; position:fixed; right:0; text-align:left; top:0; }
+#main_toolbar > * { max-width:25%; position:absolute; top:40px; z-index:999; }
+#main_toolbar .toolbar_left { left:40px; }
+#main_toolbar .toolbar_center { left:25%; max-width:50%; right:25%; text-align:center; }
+#main_toolbar .toolbar_center p { line-height:25px; position:relative; }
+#main_toolbar .toolbar_center p.box { background:rgba(0,0,0,0.35); border:1px solid #666; border-radius:12px; color:white; text-shadow:0 1px 1px rgba(0,0,0,0.6); }
+#main_toolbar .toolbar_center p.box small { line-height:16px; passing:6px 0; }
+#main_toolbar .toolbar_center .flash-close { color:#fff; cursor:pointer; font-family:arial,sans-serif; font-size:20px; font-weight:normal; height:16px; opacity:0.5; position:absolute; right:8px; top:4px; text-shadow:0 1px 0 rgba(0, 0, 0, 0.15); -moz-transition:all .35s linear; -webkit-transition:all .35s linear; transition:all .35s linear; width:16px; }
+#main_toolbar .toolbar_center .flash-close:hover { font-weight:bold; opacity:1; }
+#main_toolbar .toolbar_right { right:40px; }
+
+

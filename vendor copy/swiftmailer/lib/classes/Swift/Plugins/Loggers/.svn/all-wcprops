@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Plugins/Loggers
+END
+ArrayLogger.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Plugins/Loggers/ArrayLogger.php
+END
+EchoLogger.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Plugins/Loggers/EchoLogger.php
+END

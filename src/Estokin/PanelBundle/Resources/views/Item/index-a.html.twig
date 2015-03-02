@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/tabs.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-ui-1.8.18.custom.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}	
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class="row-fluid">
+		<div class="span5">
+			<h4 class="title">Tu estado</h4>
+			<div class="squiggly-border"></div>
+			
+			<ul class="site-stats">
+				<li class="bluecash"><i class="icon-signal"></i> <strong>{{ cash_total }} €</strong> <small>Facturación total</small></li>
+				<li class="{{ cash_pendent >= 0 ? 'greencash' : 'redcash' }}"><i class="icon-repeat"></i> <strong>{{ cash_pendent }} €</strong> <small>Facturación pendiente</small></li>
+				<li class="divider"></li>
+				<li class="bluecash"><i class="icon-shopping-cart"></i> <strong>{{ items_total }}</strong> <small>Productos totales</small></li>
+				<li class="bluecash"><i class="icon-tag"></i> <strong>{{ orders_total }}</strong> <small>Pedidos totales</small></li>
+				<li class="redcash"><i class="icon-repeat"></i> <strong>{{ orders_pendent }}</strong> <small>Pedidos pendientes</small></li>
+			</ul>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascript_code %}
+	$(function() {
+		$("#navigation-home").attr('class', 'active');
+	});
+	
+
+
+{% endblock %}

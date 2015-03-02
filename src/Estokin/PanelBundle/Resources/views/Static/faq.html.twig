@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-help"></i>
+			Preguntas frecuentes
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="title">Preguntas frecuentes</h4>
+	<div class="squiggly-border"></div>
+<p>	
+<b>¿Qué pasa si dos o más tiendas añaden un mismo producto con un precio diferente cada una de ellas?</b><br>
+En www.esrider.com queremos acercar las mejores ofertas a los clientes, es por ello que, ante dos o más productos exactamente iguales y con la misma combianción de talla y color, siempre publicaremos primero el que tenga un precio menor. En cuanto este se venda, automáticamente se publicará el siguiente.
+</p>
+<p>
+<b>¿Qué pasa si dos o más tiendas añaden un mismo producto con el mismo precio?</b><br>
+Ante dos o más productos exactamente iguales, en www.esrider.com publicaremos primero el de la tienda que lo haya añadido antes. Cuando éste se venda, automáticamente se publicará el siguiente.
+</p>
+<p>
+<b>¿Cómo sé que el producto que yo he añadido es el más barato?</b><br>
+En el momento que estés añadiendo un producto, te informaremos si otra tienta ya ha añadido un producto igual y en tal caso, a que precio. 
+
+Además desde el apartado “Tus Productos” siempre podrás consultar si existe algún producto tuyo que no está publicado ya que su precio es más alto que el especificado por otra tienda. Así mismo, siempre te enviaremos una notificación si otra tienda añade el mismo producto a menor precio.
+</p>
+<p>
+<b>¿Puedo modificar el precio de un producto para aparecer antes que el de otra tienda?</b><br>
+Sí, desde el apartado “Tus Productos” siempre tendrás acceso a disminuir o aumentar el precio de todos los productos.
+</p>
+
+{% endblock %}
+{% block javascript_code %}
+	$(function() {
+		$("#navigation-support").attr('class', 'active');
+	});
+{% endblock %}

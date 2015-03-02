@@ -1,0 +1,91 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<h1>Detalle de producto</h1>
+		<h2>Consulta la información del producto</h2>
+		
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div id = "content_header">
+		<h2>Producto</h2>
+	</div>
+	
+	<div id = "content_box">
+	
+	<table class="data">
+	    <tbody>
+	        <tr>
+	            <th>Nombre</th>
+	            <td>{{ entity.name }}</td>
+	        </tr>
+	        <tr>
+	            <th>Código EAN/UPC</th>
+	            <td>{{ entity.code }}</td>
+	        </tr>
+	        <tr>
+	            <th>Tienda</th>
+	            <td>{{ entity.shop }}</td>
+	        </tr>
+	        <tr>
+	            <th>Estado</th>
+	            <td>{{ entity.state }}</td>
+	        </tr>
+	        <tr>
+	            <th>Precio outlet</th>
+	            <td>{{ entity.price }}</td>
+	        </tr>
+	        <tr>
+	            <th>Pvp recomendado</th>
+	            <td>{{ entity.pvp }}</td>
+	        </tr>
+	        <tr>
+	            <th>Stock</th>
+	            <td>{{ entity.stock }}</td>
+	        </tr>
+	{#         <tr>#}
+	{#             <th>Excerpt</th>#}
+	{#             <td>{{ entity.excerpt }}</td>#}
+	{#         </tr>#}
+	        <tr>
+	            <th>Descrición</th>
+	            <td>{{ entity.description }}</td>
+	        </tr>	
+	        <tr>
+	            <th>Fecha creación</th>
+	            <td>{{ entity.dateadd|date('Y-m-d H:i:s') }}</td>
+	        </tr>
+	        <tr>
+	            <th>Fecha última modificación</th>
+	            <td>{{ entity.dateupd|date('Y-m-d H:i:s') }}</td>
+	        </tr>
+	    </tbody>
+	</table>
+	<br>
+	<div class="grid-11-12"><a href="{{ path('product') }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-back.png') }}"></img></a></div>
+    <div class="grid-1-12">
+    	{% if entity.state == 'STATE_RAW' %}
+			<table>
+		        <tr>
+					<th><a href="{{ path('product_edit', { 'id': entity.id }) }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-edit.png') }}"></img></a></th>
+					<th>&nbsp;</th>
+					<th>
+						<form action="{{ path('product_delete', { 'id': entity.id }) }}" method="post">
+			            {{ form_widget(delete_form) }}
+			            <input type="image" class="sel" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" alt="Submit button"></input>
+			        	</form>
+					</th>
+		        </tr>
+	    	</table>
+	    {% endif %}
+    </div>
+    <div class="clear"></div>
+</div>
+{% endblock %}

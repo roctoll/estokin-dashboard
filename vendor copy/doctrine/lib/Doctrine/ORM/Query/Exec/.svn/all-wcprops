@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/Exec
+END
+SingleSelectExecutor.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/Exec/SingleSelectExecutor.php
+END
+SingleTableDeleteUpdateExecutor.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/Exec/SingleTableDeleteUpdateExecutor.php
+END
+AbstractSqlExecutor.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/Exec/AbstractSqlExecutor.php
+END
+MultiTableUpdateExecutor.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/Exec/MultiTableUpdateExecutor.php
+END
+MultiTableDeleteExecutor.php
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Query/Exec/MultiTableDeleteExecutor.php
+END

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Estokin{% endblock %}</title>
+        {% block javascripts %}
+        	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-1.6.4.min.js') }}"></script>
+       		<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/accordion.js') }}"></script> 
+       		<!-- <script type="text/javascript" src="http://use.typekit.com/gea2lfz.js"></script> 
+			<script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->     
+        {% endblock %}
+        {% block stylesheets %}
+        	<link href="{{ asset('layout.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-37093148-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();		
+		</script>
+    </head>
+    
+    <body>
+    	<div id = "sidebar">
+    		<header>
+		  	  	<hgroup>
+		  	    	<a href="{{ path('item') }}"><h1>The Backroom<span style="font-size:13px; font-weight:normal; color: #C0C0C0;">&nbsp;&beta;eta </span></h1></a>
+		  			<h2>{{ "now"|date("l, d M o") }}</h2>
+		  			<a href="{{ path('shop_profile') }}"><h2><strong>{{ app.user.getUserName()|upper }}</strong> ({{ app.user.getRoles()[0]=='ROLE_USER' ? 'Tienda' : 'Administrador' }})</h2></a>
+		  			<h2>{% block personal_msg %}{% endblock %}</h2>
+		  		</hgroup>
+		        <div class="header_actions">
+					{% block header_actions %}{% endblock %}
+		        </div>
+		  	</header>
+		  	<section>
+		  		<div class = "sidebar_nav">
+				{% block nav %}
+					<a href="{{ path('item') }}"><h3 id="nav0">Inicio</h3></a>
+					<h3 id="nav1">Productos</h3>
+					<div>
+						<ul>
+							<li id="nav10"><a href="{{ path('item_new') }}">Añadir producto</a></li><br>
+							<li id="nav11"><a href="{{ path('item_local') }}">Productos sin revisar</a></li><br>
+							<li id="nav12"><a href="{{ path('item_stock') }}">Productos en venta</a></li><br>
+							<li id="nav13"><a href="{{ path('order_pending') }}">Pedidos pendientes</a></li><br>
+							<li id="nav14"><a href="{{ path('order_history') }}">Historial de pedidos</a></li><br>
+						</ul>
+					</div>
+					<a href="{{ path('notifications') }}"><h3 id="nav5">Notificaciones</h3></a>					
+					<h3 id="nav2">Assistencia</h3>
+					<div>	
+						<ul>	
+							<li id="nav22"><a href="{{ path('message_new') }}">Nuevo ticket</a></li><br>
+							<li id="nav21"><a href="{{ path('message_conv') }}">Tickets abiertos</a></li><br>
+							{% if app.user.getRoles()[0] == 'ROLE_ADMIN' %}<li id="nav23"><a href="{{ path('notifications_all') }}">Todas las notificaciones</a></li><br>{% endif %}
+						</ul>
+					</div>
+					<h3 id="nav3">Más</h3>
+					<div>	
+						<ul>	
+							<li id="nav31"><a href="{{ path('order_stadistics', { 'num': 10 }) }}">Estadísticas</a></li><br>
+							<li id="nav32"><a href="{{ path('shop_profile') }}">Mi cuenta</a></li><br>
+						</ul>
+					</div>
+					<h3 id="nav4">Ayuda</h3>
+					<div>	
+						<ul>	
+							<li id="nav41"><a href="{{ path('help') }}">Temas</a></li><br>
+							<li id="nav42"><a href="{{ path('faq') }}">FAQ</a></li><br>
+						</ul>
+					</div>
+					{% if app.user.getRoles()[0] == 'ROLE_ADMIN' %}
+						<h3 id="nav6">Administración</h3>
+						<div>	
+							<ul>	
+								<li id="nav61"><a href="{{ path('shop') }}">Tiendas</a></li><br>
+								<li id="nav62"><a href="{{ path('user') }}">Usuarios</a></li><br>
+							</ul>
+						</div>
+					{% endif %}
+				{% endblock %}
+				</div>
+		  	</section>
+		  	<footer>
+				{% block side_footer %}{% endblock %}
+		  	</footer>
+    	</div>
+    
+    	<div id="main">
+	    		<div id = "main_headbar">
+	    			{% block headbar %}
+
+	    			{% endblock %}
+	    			<div id="main_logo"><a href="http://www.estokin.com"><img src="{{ asset('bundles/estokinpanel/images/logo.png') }}"></a></div>
+	    			{% if app.session.getFlashes() %}
+	    				<div class="flashes">
+		    			{% if app.session.hasFlash('bad') %}
+			    			{% for flash in app.session.getFlashes()['bad'] %}
+		 						    <div class="flash-bad">
+		 						        {{ flash }}
+		 						    </div>
+		 					{% endfor %}
+	 					{% endif %}
+	 					{% if app.session.hasFlash('good') %}
+		 					{% for flash in app.session.getFlashes()['good'] %}
+		 						    <div class="flash-good">
+		 						        {{ flash }}
+		 						    </div>
+		 					{% endfor %}
+	 					{% endif %}
+	    				</div>
+ 					{% endif %}
+ 					
+	    		</div>
+	        	<div id = "content">
+		        	{% block body %}{% endblock %}
+	        	</div>
+	        	<div id = "main_footbar">
+		        	{% block footbar %}{% endblock %}
+	        	</div>
+    	</div
+    	<script type="text/javascript">
+    	{% block javascript_code %}{% endblock %}
+    	</script>
+    </body>
+
+</html>

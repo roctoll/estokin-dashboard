@@ -1,0 +1,136 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-cube"></i>
+				pagos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-bus"></i>
+			Pendientes
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	
+	<h4 class="title">Pagos pendientes</h4>
+	<div class="squiggly-border"></div>
+	<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button>Puedes filtrar las transacciones dinámicamente para encontrar el que buscas. Elige el campo y escrive lo que quieras.</div>
+
+
+	    <table id="stable" class="table table-transaction">
+<!--
+			<thead>
+	    	<tr>
+	            <th>Concepto</th>
+	            <th>Valor</th>
+	            <th>Pedidos</th>
+	            <th>Tienda</th>
+	            <th>Fecha del pago</th>
+	    	</tr>
+			</thead>
+-->
+			<tbody>
+	    	{% for entity in entities %}    
+	    	
+		        <tr>	
+		            <td class="bigprice">{{ entity.amount }} &#128;</td>
+		            <td><a href="{{ path('transaction_show', { 'id': entity.id }) }}">{{ entity.comment }}</a></td>
+		            <td>
+		            	
+		            		<div class="accordion-group">
+							    <div class="accordion-heading">
+							      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{{entity.id}}">
+							        {{ entity.orders.count }} Elementos
+							      </a>
+							    </div>
+							    <div id="collapse{{entity.id}}" class="accordion-body collapse">
+							      <div class="accordion-inner">
+							        {% for order in entity.orders %}
+							        	{{ order.item.product.name }}<br>
+							        {% endfor %}
+							      </div>
+							    </div>
+							</div>
+		            	
+		            </td>
+		            <td><a href="{{ path('shop_show', { 'id': entity.shop.id }) }}">{{ entity.shop }}</a> </td>
+		            <td><button class="btn btn-info btn-mini" onClick="payTransaction($(this),'{{ path('transaction_done') }}', {{ entity.id }})" ><i class="icon-ok icon-white"></i> Pagado</button></td>
+		        </tr>
+	        
+	    	{% endfor %}
+			</tbody>
+		</table>
+		<button class="btn btn-warning" onClick="updateTransactions('{{ path('transaction_updateAmounts') }}')">Forzar actualización</button>
+{% endblock %}
+{% block javascript_code %}
+	$(function() {
+		$("#navigation-transactions").attr('class', 'active');
+		$("#navigation-transactions .accordion-body").attr('class', 'in')
+	});
+
+	//Ajax for mark as paid
+    function payTransaction(el,path, id){
+    	if(confirm("¿Estas seguro?")) {
+	         dataContent = {id: id};
+	         var parent = el.closest('tr'); 
+	         $.ajax({
+	 	        type: "POST",
+	 	        url: path,
+	 	        data: dataContent ,
+	 	        dataType: "json",
+	 	       	beforeSend: function() {
+	               parent.animate({'backgroundColor':'#fb6c6c'},300);
+	           	},
+	           	success: function() {
+	               parent.slideUp(300,function() {
+	                   parent.remove();
+	               });
+	           	}
+	           	
+	 		}); 
+	 	}
+ 	};
+
+	//Ajax for update all pendent transactions
+    function updateTransactions(path){
+    	if(confirm("¿Estas seguro?")) {
+	         $.ajax({
+	 	        type: "POST",
+	 	        url: path,
+	 	        dataType: "json",
+	           	success: function() {
+	               msg = "Todos los pagos pendientes están actualizados";
+	               $('#main_headbar').append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>'+msg+'</div>');
+	               }
+	           	});
+	           	
+	 		} 
+	 };
+ 	
+ 		
+{% endblock %}
+

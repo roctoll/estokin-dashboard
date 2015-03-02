@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Shop
+END
+edit.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Shop/edit.html.twig
+END
+index.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Shop/index.html.twig
+END
+new.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Resources/views/Shop/new.html.twig
+END
+show.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Resources/views/Shop/show.html.twig
+END
+profile.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Resources/views/Shop/profile.html.twig
+END

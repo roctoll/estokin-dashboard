@@ -1,0 +1,118 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-1.7.1.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.confirm.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.color.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+
+		<h1>Gestiona tus productos localmente</h1>
+		<h2>En breves serán revisados por el equipo de Estokin</h2>
+
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+		<h2>Productos sin revisar<div id="search" Style="float: right; width:300px; padding-right:12px;"></div></h2>
+	</div>
+	
+	<div id = "content_box">
+
+			
+	    	<table class="data"><br>
+
+	    	<tr>
+	            <th>Producto</th>
+	            <th>Referencia</th>
+	            <th>Atributos</th>
+	            <th>Categoria</th>
+	            <th>Tienda</th>
+	            <th>Precio</th>
+	            <th>Fecha creacion</th>
+	            <th>Acciones</th>
+	    	</tr>
+	    	{% for entity in entities %}    
+
+		        <tr class="t_content {{ loop.index is odd ? '':'alt' }}">
+		            <td>
+		            	<a href="{{ path('item_show', { 'id': entity.id }) }}">
+		            		{{ entity.product.bigname }}			            		
+		            	</a>
+		            </td>
+		            <td>{{ entity.reference }}</td>
+		            <td>({% for a in entity.attr %}
+		            			{{ a.attrset.name }} {{ a.value }}
+		            			{{ loop.last ? '' : ',' }}
+		            		{% endfor %})
+		            </td>
+		            <td>{{ entity.product.category }}</td>
+		            <td>{{ entity.shop }}</td>
+		            <td>{{ entity.product.price }} &#128;</td>
+		            <td>{% if entity.dateadd %}{{ entity.dateadd|date('Y-m-d') }}{% endif%}</td>
+		            <td>
+		            	<a href="{{ path('product_edit', { 'id': entity.product.id }) }}"><img class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-edit.png') }}" alt="Edit"></a>
+		            	<a class="delete" href="#" id="{{ entity.id }}"><img class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" alt="Delete"></a>
+		            </td>
+		        </tr>
+	        
+	    	{% endfor %}
+		</table>
+		<a href="{{ path('item_new') }}">
+			<div class="subtable">Producto nuevo</div>
+		</a>
+	</div>
+{% endblock %}
+{% block javascript_code %}
+	<script type="text/javascript">
+	$(function() {
+		$("#nav1").attr('class', 'selected');
+		$("#nav11").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(0)').show();	
+	});
+
+	//Search feature
+	var api;
+	$(document).ready(function() {	  
+	  api = new $.Search('#search', {
+	    list: 'tbody tr.t_content'
+	  });	  
+	});
+
+    //Ajax for delete
+    $(".delete").click(function(e){
+        e.preventDefault();
+         dataContent = {action: "delete",
+ 		          	    item: this.id};
+ 	     var parent = $(this).closest('tr');
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "/app_dev.php/item/"+dataContent['item']+"/delete",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	       	beforeSend: function() {
+               parent.animate({'backgroundColor':'#fb6c6c'},300);
+           	},
+           	success: function() {
+               parent.slideUp(300,function() {
+                   parent.remove();
+               });
+           	}
+ 		}); 
+ 	});
+ 	//confirmation of delete
+    $('.delete').confirm({
+        msg:'seguro?',
+        timeout:3000
+    });
+	</script>
+{% endblock %}

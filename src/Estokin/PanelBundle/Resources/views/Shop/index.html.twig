@@ -1,0 +1,96 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+	
+{% endblock %}
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("shop") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Tiendas
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-clipboard-2"></i>
+			Lista
+		</li>
+	</ul>
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+<h4 class="title">Tiendas</h4>
+
+<div class="squiggly-border"></div>
+
+<table id="stable" class="table table-striped table-bordered table-radmin tablesorter">
+    <thead>
+        <tr>
+{#          <th>Id</th>#}
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Isactive</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+{#          <td><a href="{{ path('shop_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+            <td style="background-color:{{ entity.state == 'red' ? '#FFBDBD' : entity.state }};"><a href="{{ path('shop_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+            <td><a href="{{ path('shop_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.isActive }}</td>
+            <td><a href="{{ path('shop_edit', { 'id': entity.id }) }}"><button id={{ entity.id }} class="edit_but btn btn-mini btn-info" title="Editar item">Editar</button></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+		<a href="{{ path('shop_new') }}">
+			<button class="btn btn-info">Añadir tienda</button>
+		</a>
+
+{% endblock %}
+{% block javascript_code %}
+
+		//Toggle menu 
+		$(function() {
+			$("#navigation-admin").attr('class', 'active');
+			$("#navigation-admin .accordion-body").attr('class', 'in')
+		});
+
+		//sort table
+		$(document).ready(function() 
+	    { 
+	        $("#stable").tablesorter(); 
+	    }); 
+
+		//Search feature
+		var api;
+		$(document).ready(function() {		  
+		  api = new $.Search('#search', {
+		    list: 'tbody tr.t_content'
+		  });
+		});
+
+{% endblock %}
+	

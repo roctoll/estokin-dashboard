@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Symfony/Bundle/AsseticBundle/Resources/config
+END
+templating_twig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Symfony/Bundle/AsseticBundle/Resources/config/templating_twig.xml
+END
+assetic.xml
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Symfony/Bundle/AsseticBundle/Resources/config/assetic.xml
+END
+controller.xml
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Symfony/Bundle/AsseticBundle/Resources/config/controller.xml
+END
+templating_php.xml
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Symfony/Bundle/AsseticBundle/Resources/config/templating_php.xml
+END
+asset_writer.xml
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Symfony/Bundle/AsseticBundle/Resources/config/asset_writer.xml
+END

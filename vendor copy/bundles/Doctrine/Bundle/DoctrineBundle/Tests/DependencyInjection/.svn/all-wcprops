@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection
+END
+XMLSchemaTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/XMLSchemaTest.php
+END
+TestStringFunction.php
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/TestStringFunction.php
+END
+TestType.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/TestType.php
+END
+XmlDoctrineExtensionTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/XmlDoctrineExtensionTest.php
+END
+YamlDoctrineExtensionTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/YamlDoctrineExtensionTest.php
+END
+TestNumericFunction.php
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/TestNumericFunction.php
+END
+AbstractDoctrineExtensionTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/AbstractDoctrineExtensionTest.php
+END
+TestDatetimeFunction.php
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/TestDatetimeFunction.php
+END

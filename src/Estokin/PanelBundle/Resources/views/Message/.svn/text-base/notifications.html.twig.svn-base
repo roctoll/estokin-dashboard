@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<h1>Avisos</h1>
+	<h2>Notificaciones a tener en cuenta</h2>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+<div id = "content_header">
+		<h2>Notificaciones</h2>
+	</div>
+	<div id = "content_box">
+
+	   	<table class="data inbox">
+        {% for entity in entities_new %} 
+		        <tr class="no_read">
+		            <td>
+		            	<img style ="vertical-align: middle;" src="{{ asset('bundles/estokinpanel/images/icon-calendar.png') }}"></img>
+		            </td>
+		            <td>{% if entity.dateadd %}{{ entity.dateadd|date('d-M Y') }}{% endif%}</td>
+		            <td>{{ entity.content }}</td>
+		            <td><input id="{{ entity.id }}" type="image" class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" onclick="del('{{ path('message_delete', { 'id': entity.id }) }}')"></input></td>
+		            </tr>
+    	{% endfor %}
+    	{% for entity in entities_old %} 
+		        <tr>
+		            <td>
+		            	<img style ="vertical-align: middle;" src="{{ asset('bundles/estokinpanel/images/icon-calendar.png') }}"></img>
+		            </td>
+		            <td>{% if entity.dateadd %}{{ entity.dateadd|date('d-M Y') }}{% endif%}</td>
+		            <td>{{ entity.content }}</td>
+		            <td><input id="{{ entity.id }}" type="image" class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" onclick="del('{{ path('message_delete', { 'id': entity.id }) }}')"></input></td>
+		        </tr>
+    	{% endfor %}
+    	</table>
+	</div>
+</div>
+	
+
+{% endblock %}
+{% block javascript_code %}
+<script>
+	$(function() {
+		$("#nav5").attr('class', 'selected');	
+	});
+
+function del(p) {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', p);
+    form.style.display = 'hidden';
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
+
+{% endblock %}

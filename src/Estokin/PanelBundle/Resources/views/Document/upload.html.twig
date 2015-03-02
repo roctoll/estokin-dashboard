@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("shop") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Tus productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-pencil"></i>
+			Imágenes
+		</li>
+	</ul>
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+		
+			{% if errors is defined%}
+				<div class="formee-msg-error">
+			    	Se han encontrado errores.
+			        <ul>
+			        	{% for er in errors %}
+			        		<li>error {{ er }}</li>
+			        	{% endfor %}
+			        </ul>
+			    </div>
+			{% endif %}
+		
+		<form action="#" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
+		
+		    <input type="submit" value="Upload Document" />
+		</form>
+
+		    	<div class="span1">
+			    	<a href="{{ path('shop') }}"><button class="btn">Atrás</button></a>
+		    	</div>
+
+{% endblock %}
+{% block javascript_code %}
+		//Toggle menu 
+		$(function() {
+			$("#navigation-admin").attr('class', 'active');
+			$("#navigation-admin .accordion-body").attr('class', 'in')
+		});
+{% endblock %}

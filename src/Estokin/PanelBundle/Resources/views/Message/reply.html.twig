@@ -1,0 +1,97 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-comments-2"></i>
+				Assistencia
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-pencil"></i>
+			Nuevo tickets
+		</li>
+	</ul>
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="title">Mensaje nuevo</h4>
+	<div class="squiggly-border"></div>
+	
+	{% if errors is defined%}
+		<div class="formee-msg-error">
+	    	Can you fix please?
+	        <ul>
+	        	{% for er in errors %}
+	        		<li>error {{ er }}</li>
+	        	{% endfor %}
+	        </ul>
+	    </div>
+	{% endif %}
+
+	<form action="{{ path('message_create') }}" method="post" class ="formee" {{ form_enctype(form) }}>
+	    {% if not user.isShop() %}			
+			<div class="grid-6-12">
+	    		<label>Remitente</label>
+    			<div>{{ form_widget(form.shop) }}</div>
+			</div>
+			<div class="grid-3-12">
+	    		<label>Tipo</label>
+    			<div>{{ form_widget(form.type) }}</div>
+			</div>
+		<div class="grid-2-12"></div>
+		{% endif %}
+    	<div class="grid-1-12">
+	    	<label>Prioridad</label>
+    		<div>{{ form_widget(form.priority) }}</div>
+	    	{{ form_errors(form.priority) }}
+    	</div>
+	    
+	    <div class="grid-6-12">
+	    	<label>Asunto</label>
+    		<div>{{ form_widget(form.subject) }}</div>
+	    	{{ form_errors(form.subject) }}
+		</div>
+
+
+		<div class="grid-12-12">
+	    	<label>Mensaje</label>
+    		<div>{{ form_widget(form.content) }}</div>
+	    	{{ form_errors(form.content) }}
+    	</div>
+	    <div class="grid-9-12">
+			<input type="submit"></input>
+		</div>
+	</form>
+
+{% endblock %}
+{% block javascript_code %}
+		
+		$(function() {
+			$("#navigation-asis").attr('class', 'active');
+			$("#navigation-asis .accordion-body").attr('class', 'in')
+		});
+
+{% endblock %}

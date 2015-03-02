@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/HeaderEncoder
+END
+Base64HeaderEncoder.php
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/HeaderEncoder/Base64HeaderEncoder.php
+END
+QpHeaderEncoder.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/HeaderEncoder/QpHeaderEncoder.php
+END

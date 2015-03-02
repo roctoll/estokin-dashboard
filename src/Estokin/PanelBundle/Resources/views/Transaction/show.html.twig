@@ -1,0 +1,106 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-briefcase"></i>
+				Caja
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-cube-2"></i>
+			Detalle
+		</li>
+	</ul>
+	
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{% if entity.state == 'STATE_PENDENT' %}
+		<h4 class="title">Tu saldo actual {{ app.user.getRoles()[0] == 'ROLE_ADMIN' ? '('~entity.shop~')' : '' }}</h4>
+	{% else %}
+		<h4 class="title">Detalle del pago realizado {{ app.user.getRoles()[0] == 'ROLE_ADMIN' ? '('~entity.shop~')' : '' }}</h4>
+	{% endif %}
+	<div class="squiggly-border"></div>
+	
+	
+
+	<div class="row-fluid">
+	<div class="span5">
+
+		<h4 class="lead text-info">Periodo {{ entity.dateadd|date('d/m/Y') }} - {{"now"|date("d/m/Y") }}</h4>
+		<h1 class="{{ entity.amount >= 0 ? 'greencash' : 'redcash' }}">{{ entity.amount >= 0 ? '+' : '' }} {{ entity.amount }} &#128;</h1>
+		
+		<table class="table table-bordered">
+			{% for order in entity.orders %}
+				<tr>
+					<td>{{ order.getTotalAmount() >= 0 ? '+' : '-' }} {{ order.getTotalAmount() }}&#128;</td>
+					<td><a href="{{ path('order_show', { 'id': order.id }) }}"><strong>Pedido ({{ order.item.product.bigname }})</strong></a></td>
+				</tr>
+			{% endfor %}
+			
+			{% for entry in entity.entries %}
+				<tr>
+					{% if entry.value >= 0 %}
+						<td>+ {{ entry.value }} &#128;</td>
+					{% else %}
+						<td class="redcash">- {{ (entry.value * -1) }} &#128;</td>
+					{% endif %}
+					
+					<td><strong>{{ entry.concept }}</strong></td>	
+				</tr>
+			{% endfor %}			
+			
+		</table>
+	</div>
+	</div>
+			
+	{% if app.user.getRoles()[0] == 'ROLE_ADMIN' and entity.state == 'STATE_PENDENT'%}
+	<h4 class="title">Añadir entrada</h4>
+	<div class="squiggly-border"></div>
+	<form action="{{ path('transaction_addentry') }}" method="post">
+	<div class="row-fluid">
+		<div class="span3">
+			<label>Concepto</label>
+			<input type="text" name="concept"></input>
+		</div>
+		<div class="span3">
+			<label>Valor</label>
+			<input type="number" name="value"></input>
+		</div>
+		<input type="hidden" name="id" value="{{ entity.id }}"></input>
+		<div class="span2">
+			<label>&nbsp;</label>
+			<button type="submit" class="btn btn-info"><i class="icon-plus icon-white"></i> Añadir</button>
+		</div>
+	</div>
+	</form>
+	{% endif %}
+		
+{% endblock %}
+
+{% block javascript_code %}
+		
+	$(function() {
+		$("#navigation-transactions").attr('class', 'active');
+		$("#navigation-transactions .accordion-body").attr('class', 'in')
+	});
+		
+{% endblock %}
+	

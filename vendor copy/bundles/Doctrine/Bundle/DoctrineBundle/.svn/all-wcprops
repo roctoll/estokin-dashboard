@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/LICENSE
+END
+.travis.yml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/.travis.yml
+END
+ConnectionFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/ConnectionFactory.php
+END
+DoctrineBundle.php
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/DoctrineBundle.php
+END
+composer.json
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/composer.json
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/README.md
+END
+Registry.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Registry.php
+END
+phpunit.xml.dist
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/phpunit.xml.dist
+END

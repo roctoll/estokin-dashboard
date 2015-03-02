@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle
+END
+Configuration.php
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/Configuration.php
+END
+routing.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/routing.php
+END
+routing.yml
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/routing.yml
+END
+messages.fr.xliff
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/messages.fr.xliff
+END
+DefaultController.php
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/DefaultController.php
+END
+services.xml
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/services.xml
+END
+index.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/index.html.twig
+END
+services.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/services.php
+END
+services.yml
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/services.yml
+END
+DefaultControllerTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/DefaultControllerTest.php
+END
+Extension.php
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/Extension.php
+END
+Bundle.php
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/Bundle.php
+END
+routing.xml
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/GeneratorBundle/Resources/skeleton/bundle/routing.xml
+END

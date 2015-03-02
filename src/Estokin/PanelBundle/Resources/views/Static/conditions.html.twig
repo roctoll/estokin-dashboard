@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			Condiciones de uso
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+<div class="span9">
+	<h4 class="title">Condiciones de uso</h4>
+	<div class="squiggly-border"></div>
+	<p>Estokin actúa únicamente como intermediario de una transacción, haciendo que las ofertas de un pequeño comercio sean más visibles y por tanto lleguen a un mayor público.</p>
+
+	<p><b>1.- Registro.</b> La tienda colaboradora será dotada de un nombre de usuario y contraseña para que pueda añadir y gestionar sus productos con total libertad desde este panel de control. Podrá hacerlo desde cualquier dispositivo conectado a Internet mediante la dirección:</p> 
+	
+	<a href="www.estokin.com/app"><p><i>www.estokin.com/app</i></p></a>
+	
+	<p><b>2.- Exclusividad.</b> Todo producto que se haya añadido al panel de control y mientras permanezca en éste debe estar totalmente disponible para su venta online en el portal web www.esrider.com. En caso de que el producto se venda en la tienda física o simplemente se desee retirar de la plataforma, la tienda deberá indicarlo utilizando la herramienta “Retirar producto” del mismo panel. </p>
+	
+	<p><b>3.- Precio.</b> El precio de cada producto siempre es fijado por la tienda colaboradora. No obstante, se recomienda que estos precios sean muy bajos, cercanos al precio de coste y con un 50% o 60% de descuento sobre el precio de venta al público recomendado (PVPR). Cuánto más bajo sea el precio, más posibilidades tendrá de venderse y recuperar el coste del producto. El precio deberá indicarse con IVA incluido y sin gastos de transporte.</p>
+	
+	<p><b>4.- Empaquetado.</b> Cuando uno de los productos de la tienda colaboradora se haya vendido en la web, ésta será informada del producto vendido mediante una notificación en el panel de control o también vía e-mail o teléfono. Entonces, la tienda deberá preparar el producto/s con su embalaje original o caja correspondiente, dejándolo listo para su recogida en la misma tienda. La tienda deberá adjuntar la etiqueta que le será proporcionada con los datos de envío al cliente final. Por último, la tienda deberá realizar la preparación del paquete en un plazo no superior a 24h. En caso de necesitar más tiempo o circunstancias sobrevenidas y no pudiera responder en el plazo señalado, deberá ponerse en contacto y comunicarlo a Estokin.</p>
+	
+	<p><b>5.- Pago.</b> En garantía del buen fin de las transacciones llevadas a cabo, Estokin retendrá el pago de la transacciones efectuadas por la tienda colaboradora hasta la confirmación de entrega de todos los productos y el no desistimiento por parte del usuario que haya efectuado la compra. Así mismo, con el fin de evitar el cobro de comisiones bancarias por cada operación, en la semana se realizará un único pago del total de ventas efectuadas. La tienda colaboradora podrá solicitar en cualquier momento el pago pendiente.</p>
+	
+	<p><b>6.- Garantia y devoluciones.</b> La tienda colaboradora será la responsable de atender el ejercicio de garantías por producto defectuoso en los plazos y formas recogidas en la normativa de Consumidores y Usuarios. Estokin facilitará la comunicación entre el comprador y la tienda colaboradora. 
+	En el caso que el producto recibido no se adecue al producto publicado por la tienda colaboradora, o haya llegado dañado a consecuencia del proceso de transporte, se podrá proceder a su devolución en el plazo máximo de siete (7) días.</p>
+	
+	<p><b>7.- Resolución del acuerdo.</b> El acuerdo de colaboración podrá ser resuelto por las causas: <br>
+	a) Por incumplimiento de cualquiera de las cláusulas del acuerdo.<br>
+	b) Por mutuo acuerdo de las partes.</p>
+
+</div>
+</div>	
+
+{% endblock %}
+{% block javascript_code %}
+	$(function() {
+		$("#navigation-support").attr('class', 'active');
+	});
+{% endblock %}

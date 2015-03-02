@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Factory/Resource
+END
+CoalescingDirectoryResource.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Factory/Resource/CoalescingDirectoryResource.php
+END
+FileResource.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Factory/Resource/FileResource.php
+END
+DirectoryResource.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Factory/Resource/DirectoryResource.php
+END
+ResourceInterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Factory/Resource/ResourceInterface.php
+END
+IteratorResourceInterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/assetic/src/Assetic/Factory/Resource/IteratorResourceInterface.php
+END

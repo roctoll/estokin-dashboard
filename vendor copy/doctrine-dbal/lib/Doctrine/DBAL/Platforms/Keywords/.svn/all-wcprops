@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords
+END
+SQLiteKeywords.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/SQLiteKeywords.php
+END
+KeywordList.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/KeywordList.php
+END
+OracleKeywords.php
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/OracleKeywords.php
+END
+MySQLKeywords.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/MySQLKeywords.php
+END
+DB2Keywords.php
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/DB2Keywords.php
+END
+PostgreSQLKeywords.php
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/PostgreSQLKeywords.php
+END
+ReservedKeywordsValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/ReservedKeywordsValidator.php
+END
+MsSQLKeywords.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine-dbal/lib/Doctrine/DBAL/Platforms/Keywords/MsSQLKeywords.php
+END

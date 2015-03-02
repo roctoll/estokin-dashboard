@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime
+END
+MimeEntity.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/MimeEntity.php
+END
+HeaderFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/HeaderFactory.php
+END
+CharsetObserver.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/CharsetObserver.php
+END
+Attachment.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/Attachment.php
+END
+ContentEncoder.php
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/ContentEncoder.php
+END
+SimpleHeaderSet.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/SimpleHeaderSet.php
+END
+EmbeddedFile.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/EmbeddedFile.php
+END
+ParameterizedHeader.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/ParameterizedHeader.php
+END
+Grammar.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/Grammar.php
+END
+Message.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/Message.php
+END
+MimePart.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/MimePart.php
+END
+EncodingObserver.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/EncodingObserver.php
+END
+SimpleMimeEntity.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/SimpleMimeEntity.php
+END
+SimpleHeaderFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/SimpleHeaderFactory.php
+END
+Header.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/Header.php
+END
+HeaderEncoder.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/HeaderEncoder.php
+END
+HeaderSet.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/HeaderSet.php
+END
+SimpleMessage.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/swiftmailer/lib/classes/Swift/Mime/SimpleMessage.php
+END

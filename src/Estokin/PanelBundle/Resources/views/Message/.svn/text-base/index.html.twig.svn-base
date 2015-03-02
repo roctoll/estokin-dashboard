@@ -1,0 +1,95 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<h1>Mensajes</h1>
+	<h2>Contacto con el administrador</h2>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+<div id = "content_header">
+		<h2>Bandeja de entrada</h2>
+	</div>
+	<div id = "content_box">
+
+		<table class="message_toolbar">
+        <tr>
+			<th><a href="{{ path('message_new') }}"><img src="{{ asset('bundles/estokinpanel/images/icon-compose.png') }}" title="Nuevo mensaje"></img></a></th>
+			<th><a href="{{ path('message') }}"><img src="{{ asset('bundles/estokinpanel/images/icon-refresh.png') }}"></img></a></th>
+			<th><a href="{{ path('message_conv') }}"><img src="{{ asset('bundles/estokinpanel/images/icon-conversation.png') }}"></img></a></th>
+        </tr>
+        <tr>
+        	<th><p>Nuevo</p></th>
+        	<th><p>Actualizar</p></th>
+        	<th><p>Vista</p></th>
+        </tr>
+        </table>
+		<br>
+	   	<table class="data inbox">
+		<h3>&rarr; Entrada</h3>
+        {% for entity in entities_a %} 
+		        <tr {{ entity.isread ? '' : 'class="no_read"' }}>
+		            <td style="width:40px;">
+		            	{% set pathd = path('message_delete', { 'id': entity.id }) %}
+				        <a href="{{ path('message_new', { 'id': entity.id }) }}"><img class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-reply.png') }}" alt="Edit"></a>
+			            <input id="{{ entity.id }}" type="image" class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" onclick="del('{{ pathd }}')"></input>
+		            </td>
+		            <td>{{ entity.admin() ? 'Admin' : entity.shop.name }} ({{ entity.priority }})</td>
+		            <td><a href="{{ path('message_show', { 'id': entity.id }) }}">{{ entity.subject }}</a></td>
+		            <td style="text-align:right;">{% if entity.dateadd %}{{ entity.dateadd|date('d-M-Y (H:i)') }}{% endif%}</td>
+		        </tr>
+    	{% endfor %}
+    	</table>
+    	<br><br>
+    	<table class="data inbox">
+    	<h3>&larr; Salida</h3>
+    	{% for entity in entities_u %}
+		        <tr {{ entity.isread ? '' : 'class="no_read"' }}>
+		            <td style="width:40px;">
+		            	{% set pathd = path('message_delete', { 'id': entity.id }) %}
+				        <a href="{{ path('message_new', { 'id': entity.id }) }}"><img class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-reply.png') }}" alt="Edit"></a>
+			            <input id="{{ entity.id }}" type="image" class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" onclick="del('{{ pathd }}')"></input>
+		            </td>
+		            <td>{{ entity.admin() ? 'Admin' : entity.shop.name }} ({{ entity.priority }})</td>
+		            <td><a href="{{ path('message_show', { 'id': entity.id }) }}">{{ entity.subject }}</a></td>
+		            <td style="text-align:right;">{% if entity.dateadd %}{{ entity.dateadd|date('d-M-Y (H:i)') }}{% endif%}</td>
+		        </tr>
+		{% endfor %}
+		</table>
+</div>
+	
+
+{% endblock %}
+{% block javascript_code %}
+<script>
+	$(function() {
+		$("#nav2").attr('class', 'selected');
+		$("#nav21").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(1)').show();	
+	});
+
+function del(p) {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', p);
+    form.style.display = 'hidden';
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
+
+{% endblock %}

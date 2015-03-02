@@ -1,0 +1,109 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-cube"></i>
+				Pedidos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-bus"></i>
+			Pendientes
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	
+	<h4 class="title">Pedidos pendientes</h4>
+	<div class="squiggly-border"></div>
+	<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button>Estos son los productos que ya se han vendido y tienes que preparar para su recogida.</div>
+
+	    <table id="stable" class="table table-striped table-bordered table-radmin tablesorter">
+			<thead>
+	    	<tr>
+	            <th>Cantidad</th>
+	            <th>Producto</th>
+	            <th>Atributos</th>
+	            <th>Tu referencia</th>
+	            <th>Precio</th>
+	            <th>Total</th>
+	            <th>Fecha venta</th>
+	    	</tr>
+			</thead>
+			<tbody>
+	    	{% for entity in entities %}    
+
+		        <tr>
+		            <td>{{ entity.quantity }} </td>
+		            <td class="t_content1"><a href="{{ path('order_show', { 'id': entity.id }) }}">{{ entity.item.product.bigname }}</a></td>
+		            <td class="t_content3">({% for a in entity.item.attr %}
+			            			{{ a.attrset.name }} {{ a.value }}
+			            			{{ loop.last ? '' : ',' }}
+			            		{% endfor %})
+		            </td>
+		            <td class="t_content2">{{ entity.item.shopreference }}</td>
+		            <td>{{ entity.item.price * entity.quantity }} &#128;</td>
+		            <td class="t_content4">{{ entity.item.price }} &#128;</td>
+		            <td>{% if entity.datesold %}{{ entity.datesold|date('d-m-Y') }}{% endif%}</td>
+		        </tr>
+	        
+	    	{% endfor %}
+			</tbody>
+		</table>
+{% endblock %}
+{% block javascript_code %}
+	$(function() {
+		$("#navigation-orders").attr('class', 'active');
+		$("#navigation-orders .accordion-body").attr('class', 'in')
+	});
+	
+	
+	//sort table
+	$(document).ready(function() 
+    { 
+        $("#stable").tablesorter(); 
+    }); 
+
+	//Search feature
+	var api;
+	var listclass = '.t_content1';
+	$(document).ready(function() {	  
+	  api = new $.Search('#search', {
+	    list: listclass,
+	    table: true
+	  });	  
+	});
+	
+	$('#field-select').change(function() {
+		listclass = "."+this.value;
+		  $('#search form').remove();	  
+		  api = new $.Search('#search', {
+		    list: listclass,
+		    table: true
+		  });	  
+	});
+	
+{% endblock %}
+

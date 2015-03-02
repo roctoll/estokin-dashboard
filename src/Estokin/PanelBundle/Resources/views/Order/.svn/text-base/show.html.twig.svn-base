@@ -1,0 +1,80 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<h1>Detalle del pedido</h1>
+		<h2>Consulta la información del pedido</h2>
+		
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div id = "content_header">
+		<h2>Pedido</h2>
+	</div>
+	
+	<div id = "content_box">
+		<h2>[{{ entity.shop.name }} - {{ entity.id }}]</h2>
+		<div class="grid-7-12">
+			<table class="data">
+		    <tbody>
+		        <tr>
+		            <th>Producto</th>
+		            <td>{{ entity.item.product.bigname }}</td>
+		        </tr>
+		        <tr>
+		            <th>Categoría</th>
+		            <td>{{ entity.item.product.category }}</td>
+		        </tr>
+		    	<tr>
+		            <th>Id</th>
+		            <td>{{ entity.id }}</td>
+		        </tr>
+		        {%  if 'ROLE_ADMIN' in app.user.getRoles() %}
+		        <tr>
+		            <th>Ps_id</th>
+		            <td>{{ entity.item.PSid }}</td>
+		        </tr>
+		        {% endif %}
+		        <tr>
+		            <th>Reference</th>
+		            <td>{{ entity.item.reference }}</td>
+		        </tr>
+		        <tr>
+		            <th>Unidades</th>
+		            <td>{{ entity.quantity }}</td>
+		        </tr>
+		        {% for attr in entity.item.attr %}
+		        <tr>
+		            <th>{{ attr.attrSet }}</th>
+		            <td>{{ attr }}</td>
+		        </tr>
+		        {% endfor %}
+		        <tr>
+		            <th>Fecha creación</th>
+		            <td>{{ entity.datesold|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        {% if entity.state != 'STATE_SOLD' %}
+		        <tr>
+		            <th>Última modificación</th>
+		            <td>{{ entity.state }}</td>
+		        </tr>
+		        <tr>
+		            <th>Fecha última modificación</th>
+		            <td>{{ entity.dateupd|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        {% endif %}
+		
+		    </tbody>
+			</table>
+		</div>
+		<br>
+		<div class="grid-11-12"><a href="{{ path('order_pending') }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-back.png') }}"></img></a></div>
+	    <div class="clear"></div>
+	</div>
+{% endblock %}

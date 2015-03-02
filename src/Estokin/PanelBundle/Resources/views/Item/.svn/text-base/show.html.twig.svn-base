@@ -1,0 +1,99 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<h1>Detalle de itemo</h1>
+		<h2>Consulta la información del itemo</h2>
+		
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div id = "content_header">
+		<h2>Item</h2>
+	</div>
+	
+	<div id = "content_box">
+	
+	<div class="grid-7-12">
+		<table class="data">
+	    <tbody>
+	        <tr>
+	            <th>Producto</th>
+	            <td>{{ entity.product.bigname }}</td>
+	        </tr>
+	        <tr>
+	            <th>Categoría</th>
+	            <td>{{ entity.product.category }}</td>
+	        </tr>
+	        <tr>
+	            <th>Referencia</th>
+	            <td>{{ entity.reference }}</td>
+	        </tr>
+	        <tr>
+	            <th>Stock</th>
+	            <td>{{ entity.stock }}</td>
+	        </tr>
+	        {% for attr in entity.attr %}
+	        <tr>
+	            <th>{{ attr.attrSet }}</th>
+	            <td>{{ attr }}</td>
+	        </tr>
+	        {% endfor %}
+	        <tr>
+	            <th>Fecha de creación</th>
+	            <td>{{ entity.dateadd|date('Y-m-d H:i:s') }}</td>
+	        </tr>
+	        <tr>
+	            <th>Fecha última modificación</th>
+	            <td>{{ entity.dateupd|date('Y-m-d H:i:s') }}</td>
+	        </tr>
+	        {%  if 'ROLE_ADMIN' in app.user.getRoles() %}
+	    	<tr>
+	            <th>Id</th>
+	            <td>{{ entity.id }}</td>
+	        </tr>
+	        <tr>
+	            <th>Ps_id</th>
+	            <td>{{ entity.PSid }}</td>
+	        </tr>
+		        {% if entity.psid %}
+		        <tr>
+		        	<th>Prestashop link</th>
+		        	<td><a href="{{ pslink }}">Link</a></td>
+		        </tr>
+		        {% endif %}
+	        {% endif %}
+	    </tbody>
+		</table>
+	</div>
+	<br>
+	<div class="grid-11-12"><a href="{{ path('item') }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-back.png') }}"></img></a></div>
+    <div class="grid-1-12">
+    	{% if entity.product.state == 'STATE_RAW' %}
+			<table>
+		        <tr>
+{# 					<th><a href="{{ path('item_edit', { 'id': entity.id }) }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-edit.png') }}"></img></a></th>#}
+{# 					<th>&nbsp;</th>#}
+					<th>
+						<form action="{{ path('item_delete', { 'id': entity.id }) }}" method="post">
+			            {{ form_widget(delete_form) }}
+			            <input type="image" class="sel" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" alt="Submit button"></input>
+			        	</form>
+					</th>
+		        </tr>
+	    	</table>
+	    {% endif %}
+{# 	    <form action="{{ path('item_delete', { 'id': entity.id }) }}" method="post">#}
+{# 	   		{{ form_widget(delete_form) }}#}
+{# 			<input type="image" class="sel" src="{{ asset('bundles/estokinpanel/images/icon-delete.png') }}" alt="Submit button"></input>#}
+{# 		</form>#}
+    </div>
+    <div class="clear"></div>
+</div>
+{% endblock %}

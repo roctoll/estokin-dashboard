@@ -1,0 +1,100 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-cart"></i>
+			Detalle producto
+		</li>
+	</ul>
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<h4 class="title">Detalle producto</h4>
+	
+	<div class="squiggly-border"></div>
+
+	<div class="row">
+	<div class="span6">
+	<table id="stable" class="table table-striped table-bordered table-radmin tablesorter">
+	    <tbody>
+	        <tr>
+	            <th>Nombre</th>
+	            <td>{{ entity.name }}</td>
+	        </tr>
+	        <tr>
+	            <th>Código EAN/UPC</th>
+	            <td>{{ entity.code }}</td>
+	        </tr>
+	        <tr>
+	            <th>Estado</th>
+	            <td>{{ entity.state }}</td>
+	        </tr>
+	        <tr>
+	            <th>Descrición</th>
+	            <td>{{ entity.description }}</td>
+	        </tr>	
+	        <tr>
+	            <th>Id Prestashop</th>
+	            <td>{{ entity.PSid }}</td>
+	        </tr>	
+	        <tr>
+	            <th>Fecha creación</th>
+	            <td>{{ entity.dateadd|date('Y-m-d H:i:s') }}</td>
+	        </tr>
+	        <tr>
+	            <th>Fecha última modificación</th>
+	            <td>{{ entity.dateupd|date('Y-m-d H:i:s') }}</td>
+	        </tr>
+	    </tbody>
+	</table>
+	</div>
+	
+	<div class="span6">
+		<img src="{{ entity.image }}"</img>
+	</div>
+	</div>
+	<br>
+	<div class="row-fluid">
+		
+
+    	{% if entity.state == 'STATE_RAW' %}
+			<table>
+		        <tr>
+		        	<th><a href="{{ path('item_todolist') }}"><button class="btn btn"><i class="radmin-icon radmin-arrow-left"></i> Atrás</button></a></th>
+					<th>&nbsp;</th>
+					<th><a href="{{ path('product_edit', { 'id': entity.id }) }}"><button class="btn btn-info btn-icon"><i class="icon-edit icon-white"></i> Editar</button></a></th>
+					<th>&nbsp;</th>
+					<th>
+						<form action="{{ path('product_delete', { 'id': entity.id }) }}" method="post">
+			            {{ form_widget(delete_form) }}
+			            <button type="submit" class="btn btn-icon btn-danger"><i class="icon-trash icon-white"></i> Eliminar</button>
+			        	</form>
+					</th>
+		        </tr>
+	    	</table>
+	    {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<h1>New product form</h1>
+	<h2>Wich is the new product?</h2>
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+			<h2>Producto nuevo</h2>
+	</div>
+
+	<div id="content_box">
+		
+		{% if errors is defined%}
+			<div class="formee-msg-error">
+		    	Can you fix please?
+		        <ul>
+		        	{% for er in errors %}
+		        		<li>error {{ er }}</li>
+		        	{% endfor %}
+		        </ul>
+		    </div>
+		{% endif %}
+		
+		<form action="{{ path('product_create') }}" method="post" class="formee" {{ form_enctype(form) }}>
+
+				<div class="grid-4-12">
+			    	<label>Producto</label>
+		    		<div>{{ form_widget(form.name) }}</div>
+			    	{{ form_errors(form.name) }}
+				</div>
+				<div class="grid-4-12">
+					&nbsp;
+				</div>
+				<div class="grid-4-12">
+			    	<label>Tienda</label>
+		    		<div>{{ form_widget(form.shop) }}</div>
+			    	{{ form_errors(form.shop) }}
+	    		</div>
+				<div class="grid-12-12">
+			    	<label>Código EAN/UPC</label>
+		    		<div class="small">{{ form_widget(form.code) }}</div>
+			    	{{ form_errors(form.code) }}
+	    		</div>
+	    		<div class="grid-4-12">
+			    	<label>Categoría</label>
+		    		{{ form_widget(form.category) }}
+			    	{{ form_errors(form.category) }}
+	    		</div>
+	    		<div class="grid-4-12">
+	    		<br>
+	    		<a class="grid-6-12" href="{{ path('category_new') }}"><p class="note">[New]</p></a>
+	    		</div>
+	    		
+	    		<div class="grid-12-12">
+			    	<label>Descripción</label>
+		    		{{ form_widget(form.description) }}
+			    	{{ form_errors(form.description) }}
+		    	</div>	
+	
+			    <div class="grid-7-12">
+			    	<label>Precio</label>
+		    		<div class="small">{{ form_widget(form.price) }}</div>
+			    	{{ form_errors(form.price) }}
+		    	</div>
+		    	
+			    <div class="grid-7-12">
+			    	{{ form_label(form.stock) }}
+		    		<div class="small">{{ form_widget(form.stock) }}</div>
+			    	{{ form_errors(form.stock) }}
+	    		</div>
+
+	    		<div class="grid-7-12">
+			    	{{ form_label(form.state) }}
+		    		<div class="small">{{ form_widget(form.state) }}</div>
+			    	{{ form_errors(form.state) }}
+	    		</div>
+
+	    		<div class="grid-12-12">
+				</div>
+				<div class="grid-12-12">
+		        	<input type="submit"></input>
+		    	</div>
+		</form>
+
+	</div>
+{% endblock %}
+{%  block javascript_code %}
+<script type="text/javascript">
+	function addTagForm() {
+	    // Get the div that holds the collection of tags
+	    var collectionHolder = $('#task_tags');
+	    
+	    // Get the data-prototype we explained earlier
+	    var prototype = collectionHolder.attr('data-prototype');
+	    
+	    // Replace '$$name$$' in the prototype's HTML to
+	    // instead be a number based on the current collection's length.
+	    form = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().length);
+	    	
+	    // Display the form in the page
+	    collectionHolder.append(form);
+	}
+	// Add the link to add tags
+	$('.record_action').append('<li><a href="#" class="add_tag_link">Add a tag</a></li>');
+	
+	// When the link is clicked we add the field to input another tag
+	$('a.jslink').click(function(event){
+	    addTagForm();
+	});
+</script>
+{% endblock %}

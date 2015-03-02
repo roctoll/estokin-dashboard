@@ -1,0 +1,109 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-1.7.1.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+		{{ parent() }}
+		<h1>Pedidos pendientes</h1>
+		<h2>En breves serán recogidos</h2>
+
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+		<h2>Pedidos pendientes<div id="search" Style="float: right; width:300px; padding-right:12px;"></div></h2>
+	</div>
+	
+	<div id = "content_box">
+
+	    	    <table class="data">
+			
+	    	<tr>
+	            <th>Producto</th>
+	            <th>Código EAN/UPC</th>
+	            <th>Atributos</th>
+	            <th>Tienda</th>
+	            <th>Cantidad</th>
+	            <th>Precio</th>
+	            <th>Total</th>
+	            <th>Fecha venta</th>
+	            <th>Estado</th>
+	            <th>Acciones</th>
+	    	</tr>
+
+	    	{% for entity in entities %}    
+
+		        <tr class="t_content {{ loop.index is odd ? '':'alt' }}">
+		            <td><a href="{{ path('item_show', { 'id': entity.item.id }) }}">{{ entity.item.product.bigname }}</a></td>
+		            <td>{{ entity.item.product.code }}</td>
+		            <td>({% for a in entity.item.attr %}
+		            			{{ a.attrset.name }} {{ a.value }}
+		            			{{ loop.last ? '' : ',' }}
+		            		{% endfor %})
+		            </td>
+		            <td>{{ entity.shop }}</td>
+		            <td>{{ entity.quantity }} </td>
+		            <td>{{ entity.item.product.price }} &#128;</td>
+		            <td>{{ entity.item.product.price * entity.quantity }} &#128;</td>
+		            <td>{% if entity.datesold %}{{ entity.datesold|date('d-m-Y') }}{% endif%}</td>
+		            <td><img src="{{ asset('bundles/estokinpanel/images/icon-sold.png') }}"></td>
+		        	<td>
+		            	<a id="{{ entity.id }}" class="send" href="#"><img src="{{ asset('bundles/estokinpanel/images/icon-sent.png') }}" title="envio producto" alt="envio">&nbsp;</a>
+		            </td>
+		        </tr>
+	        
+	    	{% endfor %}
+		</table>
+	</div>
+{% endblock %}
+{% block javascript_code %}
+	<script type="text/javascript">
+	$(function() {
+		$("#nav1").attr('class', 'selected');
+		$("#nav13").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(0)').show();	
+	});
+
+	//Search feature
+	var api;
+	$(document).ready(function() {	  
+	  api = new $.Search('#search', {
+	    list: 'tbody tr.t_content'
+	  });
+	  
+	});
+
+    //Ajax for send
+    $(".send").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "send",
+ 		          	   order: this.id};
+         var parent = $(this).closest('tr');
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('order_send') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+	            $("#is"+data.id).attr("src", "/bundles/estokinpanel/images/icon-sent.png");
+ 	        	msg = "El pedido -"+data.order+"- se ha actualizado al estado "+data.state;
+ 	        	$('#main_headbar').append('<div class="flash-good">'+msg+'</div>');
+ 	        	parent.slideUp(300,function() {
+                    parent.remove();
+                });
+ 	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+	</script>
+{% endblock %}
+

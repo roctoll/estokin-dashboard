@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+{% block headbar %}
+	<h1>Temas de ayuda</h1>
+	<h2>Tienes alguna duda?</h2>
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+			<h2>Ayuda</h2>
+	</div>
+
+	<div id="content_box" onload="initialize()">
+		<div id="map_canvas" style="width:100%; height:100%"></div>
+	</div>
+
+{% endblock %}
+{% block javascript_code %}
+<script>
+		$(function() {
+		$("#nav4").attr('class', 'selected');
+		$("#nav41").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(3)').show();	
+	});
+</script>
+{% endblock %}

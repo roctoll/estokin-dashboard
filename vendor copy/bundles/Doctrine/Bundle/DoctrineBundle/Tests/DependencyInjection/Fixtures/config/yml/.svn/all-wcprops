@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml
+END
+dbal_service_multiple_connections.yml
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/dbal_service_multiple_connections.yml
+END
+orm_functions.yml
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_functions.yml
+END
+orm_single_em_dql_functions.yml
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_single_em_dql_functions.yml
+END
+dbal_logging.yml
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/dbal_logging.yml
+END
+orm_imports.yml
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_imports.yml
+END
+orm_service_single_entity_manager.yml
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_service_single_entity_manager.yml
+END
+orm_service_simple_single_entity_manager.yml
+K 25
+svn:wc:ra_dav:version-url
+V 179
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_service_simple_single_entity_manager.yml
+END
+orm_imports_import.yml
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_imports_import.yml
+END
+orm_single_em_bundle_mappings.yml
+K 25
+svn:wc:ra_dav:version-url
+V 168
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_single_em_bundle_mappings.yml
+END
+orm_hydration_mode.yml
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_hydration_mode.yml
+END
+orm_service_multiple_entity_managers.yml
+K 25
+svn:wc:ra_dav:version-url
+V 175
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_service_multiple_entity_managers.yml
+END
+dbal_types.yml
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/dbal_types.yml
+END
+dbal_service_single_connection.yml
+K 25
+svn:wc:ra_dav:version-url
+V 169
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/dbal_service_single_connection.yml
+END
+orm_multiple_em_bundle_mappings.yml
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Doctrine/Bundle/DoctrineBundle/Tests/DependencyInjection/Fixtures/config/yml/orm_multiple_em_bundle_mappings.yml
+END

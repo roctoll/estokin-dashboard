@@ -1,0 +1,152 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />		
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-cube"></i>
+				Pedidos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-bus"></i>
+			Pendientes
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<h4 class="title">Pedidos pendientes</h4>
+	<div class="squiggly-border"></div>
+	<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">×</button>Puedes filtrar los productos dinámicamente para encontrar el que buscas. Elige el campo y escrive lo que quieras.</div>
+	<div class="row">
+		<small class="span3">Filtrar resultados</small>
+		<small class="span2">Campo a filtrar</small>
+	</div>
+	<div class="row">
+		<div id="search" class="span3"></div>
+		<div class="span2">
+			<select id="field-select">
+				<option value="t_content1">Producto</option>
+				<option value="t_content2">Código EAN/UPC</option>
+				<option value="t_content3">Atributos</option>
+				<option value="t_content4">Precio</option>
+			</select>
+		</div>
+	</div><br>
+	    <table id="stable" class="table table-striped table-bordered table-radmin tablesorter">
+			<thead>
+	    	<tr>
+	            <th>Producto</th>
+	            <th>Código EAN/UPC</th>
+	            <th>Atributos</th>
+	            <th>Tienda</th>
+	            <th>Cantidad</th>
+	            <th>Precio</th>
+	            <th>Total</th>
+	            <th>Fecha venta</th>
+	            <th>Acciones</th>
+	    	</tr>
+	    	</thead>
+	    	
+	    	<tbody>
+	    	{% for entity in entities %}    
+
+		        <tr>
+		            <td class="t_content1"><a href="{{ path('item_show', { 'id': entity.item.id }) }}">{{ entity.item.product.bigname }}</a></td>
+		            <td class="t_content2">{{ entity.item.product.code }}</td>
+		            <td class="t_content3">({% for a in entity.item.attr %}
+	            			{{ a.attrset.name }} {{ a.value }}
+	            			{{ loop.last ? '' : ',' }}
+	            		{% endfor %})
+		            </td>
+		            <td><a href="{{ path('shop_show', {'id': entity.shop.id }) }}">{{ entity.shop }}</a></td>
+		            <td>{{ entity.quantity }} </td>
+		            <td class="t_content4">{{ entity.item.price }} &#128;</td>
+		            <td>{{ entity.item.price * entity.quantity }} &#128;</td>
+		            <td>{% if entity.datesold %}{{ entity.datesold|date('d-m-Y') }}{% endif%}</td>
+		        	<td>
+		            	<a id="{{ entity.id }}" class="send" href="#"><button class="btn btn-mini btn-info"><i class="icon-check icon-white"></i> Recoger</button></a>
+		            </td>
+		        </tr>
+	        
+	    	{% endfor %}
+	    	</tbody>		
+	    </table>
+	</div>
+{% endblock %}
+{% block javascript_code %}
+	$(function() {
+		$("#navigation-orders").attr('class', 'active');
+		$("#navigation-orders .accordion-body").attr('class', 'in')
+	});
+	
+	//sort table
+	$(document).ready(function() 
+    { 
+        $("#stable").tablesorter(); 
+    }); 
+
+
+	//Search feature
+	var api;
+	var listclass = '.t_content1';
+	$(document).ready(function() {	  
+	  api = new $.Search('#search', {
+	    list: listclass,
+	    table: true
+	  });	  
+	});
+	$('#field-select').change(function() {
+		listclass = "."+this.value;
+		  $('#search form').remove();	  
+		  api = new $.Search('#search', {
+		    list: listclass,
+		    table: true
+		  });	  
+	});
+
+    //Ajax for send
+    $(".send").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "send",
+ 		          	   order: this.id};
+         var parent = $(this).closest('tr');
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('order_send') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+	            $("#is"+data.id).attr("src", "/bundles/estokinpanel/images/icon-sent.png");
+ 	        	msg = "El pedido -"+data.order+"- se ha actualizado al estado "+data.state;
+ 	        	$('#main_headbar').append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">×</button>'+msg+'</div>');
+ 	        	parent.slideUp(300,function() {
+                    parent.remove();
+                });
+ 	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+{% endblock %}
+

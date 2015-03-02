@@ -1,0 +1,6 @@
+_welcome:
+    pattern:  /
+    defaults: { _controller: EstokinPanelBundle:Item:index }
+
+_main:
+    resource: routing.yml

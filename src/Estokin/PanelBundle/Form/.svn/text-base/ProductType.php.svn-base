@@ -1,0 +1,67 @@
+<?php
+
+namespace Estokin\PanelBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
+use Estokin\PanelBundle\Entity\Tag;
+
+class ProductType extends AbstractType
+{
+    public function buildForm(FormBuilder $builder, array $options)
+    {
+        $builder
+            ->add('name')
+//             ->add('shop', 'entity', array(
+// 				'class' => 'EstokinPanelBundle:Shop',
+// 				))
+			->add('brand', 'entity', array(
+					'class' => 'EstokinPanelBundle:Brand',
+				))
+            ->add('code')
+            ->add('category')
+            ->add('price')
+            ->add('pvp')
+            ->add('description')
+        	->add('state', 'choice', array(
+        			'choices' => array(
+        					'STATE_RAW'		=> 'STATE_RAW',
+        					'STATE_VALID' 	=> 'STATE_VALID',
+        					'STATE_UNAV' 	=> 'STATE_UNAV',
+        					'STATE_ONLINE' 	=> 'STATE_ONLINE',
+        					'STATE_BLOCK' 	=> 'STATE_BLOCK',
+        					'STATE_SOLD' 	=> 'STATE_SOLD',
+        					'STATE_SENT' 	=> 'STATE_SENT',
+        					'STATE_DONE' 	=> 'STATE_DONE',
+        			),
+        	));
+    }
+
+    public function getName()
+    {
+        return 'estokin_panelbundle_producttype';
+    }
+    //@TODO CSRF token de Deu
+    /**
+     * Returns the default options for this type.
+     * 
+     * Every form needs to know the name of the class that holds the underlying
+     * data. Usually, this is just guessed based off of the object passed to 
+     * the second argument to createForm. Later, when you begin embedding 
+     * forms, this will no longer be sufficient. So, while not always 
+     * necessary, it's generally a good idea to explicitly specify the 
+     * data_class option by add the following to your form type class.
+     *  
+     * @param array $options
+     * 
+     * @return array The default options
+     */
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+        		'data_class' => 'Estokin\PanelBundle\Entity\Product',
+        		'csrf_protection' => false,
+        );
+    }
+}
+

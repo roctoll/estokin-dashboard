@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Estokin</title>
+
+        	<link href="{{ asset('layout.css') }}" type="text/css" rel="stylesheet" />
+
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    
+    <body>
+    	   
+    	<div id="main" style="width:100%">
+	    		<div id = "main_headbar">
+	    			<div id="main_logo"><a href="http://www.estokin.com"><img src="{{ asset('bundles/estokinpanel/images/logo.png') }}"></a></div>
+	    		</div>
+	        	<div id = "content">
+	        		<div style="padding-top: 100px;"></div>
+	        		<div style="padding: 0 100px 0 100px;">
+		        	<h1 style="font-size: 76px; font-family: calibri, helvetica, sans; color:#43ab9a;">Oops!</h1>
+		        	<h1 style="font-size: 56px; font-family: calibri, helvetica, sans">Parece que esta no es la página que estás buscando...</h1>
+    				<h2 style="font-size: 36px; font-family: calibri, helvetica, sans">Quizás deberías volver al <a style="text-decoration: none; color:#43ab9a;" href="/">Inicio</a></h2>
+	        		</div>
+	        	</div>
+	        	<div id = "main_footbar">
+	        	</div>
+    	</div
+
+    </body>
+
+</html>

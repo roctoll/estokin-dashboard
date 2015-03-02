@@ -1,0 +1,262 @@
+<?php
+
+namespace Estokin\PanelBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Estokin\PanelBundle\Entity\Shop;
+use Estokin\PanelBundle\Entity\Transaction;
+use Estokin\PanelBundle\Form\ShopType;
+
+/**
+ * Shop controller.
+ *
+ * @Route("/shop")
+ */
+class ShopController extends Controller
+{
+    /**
+     * Lists all Shop entities.
+     *
+     * @Route("/", name="shop")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entities = $em->getRepository('EstokinPanelBundle:Shop')->findAll();
+
+        return array('entities' => $entities);
+    }
+
+    /**
+     * Finds and displays a Shop entity.
+     *
+     * @Route("/{id}/show", name="shop_show")
+     * @Template()
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('EstokinPanelBundle:Shop')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Shop entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),        );
+    }
+    /**
+     * Finds and displays a Shop entity.
+     *
+     * @Route("/profile", name="shop_profile")
+     * @Template()
+     */
+    public function profileAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$user = $this->get("security.context")->getToken()->getUser();
+
+    	if(!$user->isShop()) return $this->redirect($this->generateUrl('user_show', array('id' => $user->getId())));
+    	    
+    	if (!$user) {
+    		throw $this->createNotFoundException('Unable to find Shop entity.');
+    	}
+    
+    	$editForm = $this->createForm(new ShopType(), $user);
+    	$deleteForm = $this->createDeleteForm($user->getId());
+    	
+    	return $this->render('EstokinPanelBundle:Shop:profile.html.twig', array(
+    			'entity' => $user, 
+    			'delete_form' => $deleteForm->createView(),
+    			'form' => $editForm->createView()
+    			));
+    }
+
+    /**
+     * Displays a form to create a new Shop entity.
+     *
+     * @Route("/new", name="shop_new")
+     * @Template()
+     */
+    public function newAction()
+    {
+        $entity = new Shop();
+        $form   = $this->createForm(new ShopType(), $entity);
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView()
+        );
+    }
+
+    /**
+     * Creates a new Shop entity.
+     *
+     * @Route("/create", name="shop_create")
+     * @Method("post")
+     * @Template("EstokinPanelBundle:Shop:new.html.twig")
+     */
+    public function createAction()
+    {
+        $entity  = new Shop();
+        $request = $this->getRequest();
+        $form    = $this->createForm(new ShopType(), $entity);
+        $form->bindRequest($request);
+
+        // encode the password
+        $factory = $this->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($entity);
+        $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+        $entity->setPassword($password);
+        
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($entity);
+
+        	$transaction = new Transaction();
+			$transaction->setShop($entity);
+			$em->persist($transaction);
+			
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('shop_show', array('id' => $entity->getId())));
+            
+        }
+
+        $errors = array();
+        foreach($form->getErrors() as $error)
+        {	
+             $errors[] = strtr($error->getMessageTemplate(), $error->getMessageParameters());
+        }
+        	
+        return array(
+        	'errors' => $errors,
+            'entity' => $entity,
+            'form'   => $form->createView()
+        );
+    }
+
+    /**
+     * Displays a form to edit an existing Shop entity.
+     *
+     * @Route("/{id}/edit", name="shop_edit")
+     * @Template()
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $entity = $em->getRepository('EstokinPanelBundle:Shop')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Shop entity.');
+        }
+
+        $editForm = $this->createForm(new ShopType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Edits an existing Shop entity.
+     *
+     * @Route("/update/{id}", name="shop_update")
+     * @Method("post")
+     * @Template("EstokinPanelBundle:Shop:edit.html.twig")
+     */
+    public function updateAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get("security.context")->getToken()->getUser();
+
+        if($user->isShop() && $user->getId() != $id){
+            $arr = $this->get('session')->getFlashes();
+            $arr['bad'][] = "Usted no tiene permiso para modificar los datos de esta tienda.";
+            $this->get('session')->setFlashes($arr);
+        	
+        	return $this->redirect($this->generateUrl('shop_profile'));
+        }
+        
+        $entity = $em->getRepository('EstokinPanelBundle:Shop')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Shop entity.');
+        }
+
+        $editForm   = $this->createForm(new ShopType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        $request = $this->getRequest();
+
+        $editForm->bindRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+            
+            $arr = $this->get('session')->getFlashes();
+            $arr['good'][] = "Los datos han sido actualizados satisfactoriamente.";
+            $this->get('session')->setFlashes($arr);
+
+            
+            if($user->isShop()) return $this->redirect($this->generateUrl('shop_profile'));
+            return $this->redirect($this->generateUrl('shop_edit', array('id' => $id)));
+        }
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Deletes a Shop entity.
+     *
+     * @Route("/{id}/delete", name="shop_delete")
+     * @Method("post")
+     */
+    public function deleteAction($id)
+    {
+        $form = $this->createDeleteForm($id);
+        $request = $this->getRequest();
+
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $entity = $em->getRepository('EstokinPanelBundle:Shop')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Shop entity.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('shop'));
+    }
+
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder(array('id' => $id))
+            ->add('id', 'hidden')
+            ->getForm()
+        ;
+    }
+}

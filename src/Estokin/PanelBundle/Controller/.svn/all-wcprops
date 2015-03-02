@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Controller
+END
+AttrSetController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Controller/AttrSetController.php
+END
+ShopController.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Controller/ShopController.php
+END
+AttrController.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Controller/AttrController.php
+END
+TagController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Controller/TagController.php
+END
+OrderController.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Controller/OrderController.php
+END
+FeatureController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Controller/FeatureController.php
+END
+CategoryController.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Controller/CategoryController.php
+END
+UserController.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Controller/UserController.php
+END
+ItemController.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Controller/ItemController.php
+END
+ProductController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Controller/ProductController.php
+END
+BasicController.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/Estokin/EstokinPanel/svn/!svn/ver/5/trunk/src/Estokin/PanelBundle/Controller/BasicController.php
+END
+DefaultController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Controller/DefaultController.php
+END
+MessageController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Controller/MessageController.php
+END

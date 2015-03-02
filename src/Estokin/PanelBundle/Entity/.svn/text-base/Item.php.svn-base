@@ -1,0 +1,388 @@
+<?php
+
+namespace Estokin\PanelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Estokin\PanelBundle\Entity\Item
+ *
+ * @ORM\Table
+ * @ORM\Entity(repositoryClass="Estokin\PanelBundle\Repository\ItemRepository")
+ */
+class Item
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer $PS_id
+     *
+     * @ORM\Column(name="PS_id", type="integer", nullable="true")
+     */
+    private $PS_id;
+        
+    /**
+     * @var string $reference
+     *
+     * @ORM\Column(name="reference", type="string", length=255)
+     */
+    private $reference;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="items")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    protected $product;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop", inversedBy="items")
+     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id")
+     */
+    protected $shop;    
+    
+    /**
+     * @var integer $stock
+     *
+     * @ORM\Column(name="stock", type="integer")
+     */
+    private $stock;    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="item")
+     */
+    protected $orders;
+
+    /**
+     * @var array $feature
+     *
+     * @ORM\ManyToMany(targetEntity="Feature", inversedBy="item")
+     * @ORM\JoinTable(
+     *    name="item_feature",
+     *    joinColumns={@ORM\JoinColumn(name="item_id", referencedColumnName="id")},
+     *    inverseJoinColumns={@ORM\JoinColumn(name="feature_id", referencedColumnName="id")}
+     * )
+     */
+    private $feature;
+
+    /**
+     * @var array $attr
+     *
+     * @ORM\ManyToMany(targetEntity="Attr", inversedBy="item")
+     * @ORM\JoinTable(
+     *    name="item_attr",
+     *    joinColumns={@ORM\JoinColumn(name="item_id", referencedColumnName="id")},
+     *    inverseJoinColumns={@ORM\JoinColumn(name="attr_id", referencedColumnName="id")}
+     * )
+     */
+    private $attr;
+        
+    /**
+     * @var date $date_add
+     *
+     * @ORM\Column(name="date_add", type="datetime")
+     */
+    private $date_add;
+    
+    /**
+     * @var date $date_upd
+     *
+     * @ORM\Column(name="date_upd", type="datetime")
+     */
+    private $date_upd;
+    
+    /**
+     * @var date $date_sold
+     *
+     * @ORM\Column(name="date_sold", type="datetime", nullable=true)
+     */
+    private $date_sold;
+    
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+    	$this->setDateAdd(new \DateTime());
+    	$this->setDateUpd(new \DateTime('now'));
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    
+    /**
+     * Set PS_id
+     *
+     * @param string $PS_id
+     */
+    public function setPSId($PS_id)
+    {
+    	$this->PS_id = $PS_id;
+    }
+    /**
+     * Get PS_id
+     *
+     * @return integer
+     */
+    public function getPSId()
+    {
+    	return $this->PS_id;
+    }
+    
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     */
+    public function setReference($reference)
+    {
+    	$this->reference = $reference;
+    }
+    
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+    	return $this->reference;
+    }
+
+    
+    /**
+     * Set product
+     *
+     * @param Estokin\PanelBundle\Product $product
+     */
+    public function setProduct ($product)
+    {
+    	$this->product = $product;
+    }
+    
+    /**
+     * Get product
+     *
+     * @return Estokin\PanelBundle\Product
+     */
+    public function getProduct()
+    {
+    	return $this->product;
+    }
+    
+    /**
+     * Set stock
+     *
+     * @param integer $stock
+     */
+    public function setStock($stock)
+    {
+    	$this->stock = $stock;
+    }
+    
+    /**
+     * Get stock
+     *
+     * @return integer
+     */
+    public function getStock()
+    {
+    	return $this->stock;
+    }
+    
+    /**
+     * Set shop
+     *
+     * @param Estokin\PanelBundle\Shop $shop
+     */
+    public function setShop ($shop)
+    {
+    	$this->shop = $shop;
+    }
+    
+    /**
+     * Get shop
+     *
+     * @return Estokin\PanelBundle\Shop
+     */
+    public function getShop()
+    {
+    	return $this->shop;
+    }
+    
+    /**
+     * Add orders
+     *
+     * @param Estokin\PanelBundle\Order $orders
+     */
+    public function addOrders($orders)
+    {
+    	$this->prodcuts[] = $orders;
+    }
+    
+    /**
+     * Get orders
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+    	return $this->orders;
+    }
+    
+    
+    /**
+     * Set feature
+     *
+     * @param Estokin\PanelBundle\Feature $feature
+     */
+    public function setFeature($feature)
+    {
+        $this->feature = $feature;
+    }
+
+    /**
+     * Get feature
+     *
+     * @return Estokin\PanelBundle\Feature 
+     */
+    public function getFeature()
+    {
+        return $this->feature;
+    }
+
+    /**
+     * Add attr
+     *
+     * @param Estokin\PanelBundle\Attr $attr
+     */
+    public function addAttr($attr)
+    {
+        $this->attr[] = $attr;
+    }
+
+    /**
+     * Get attr
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getAttr()
+    {
+        return $this->attr;
+    }
+    
+    /**
+     * Set date_add
+     *
+     * @param date $dateAdd
+     */
+    public function setDateAdd($dateAdd)
+    {
+    	$this->date_add = $dateAdd;
+    }
+    
+    /**
+     * Get date_add
+     *
+     * @return date
+     */
+    public function getDateAdd()
+    {
+    	return $this->date_add;
+    }
+    
+    /**
+     * Set date_upd
+     *
+     * @param date $dateUpd
+     */
+    public function setDateUpd($dateUpd)
+    {
+    	$this->date_upd = $dateUpd;
+    }
+    
+    /**
+     * Get date_upd
+     *
+     * @return date
+     */
+    public function getDateUpd()
+    {
+    	return $this->date_upd;
+    }
+    
+    /**
+     * Set date_sold
+     *
+     * @param date $dateSold
+     */
+    public function setDateSold($dateSold)
+    {
+    	$this->date_sold = $dateSold;
+    }
+    
+    /**
+     * Get date_sold
+     *
+     * @return date
+     */
+    public function getDateSold()
+    {
+    	return $this->date_sold;
+    }
+    
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+    	$prod = $this->getProduct();
+    	return $prod->getBrand().$prod->getName();
+    }
+    
+    public function uploadItem($id){
+
+    	$this->setPSId($id);
+    	$this->date_upd = new \DateTime();
+    	return true;
+    }
+    
+    /**
+     * Sell Item
+     *
+     * @return boolean
+     */
+    public function sellItem($quantity){
+    	//if there is no stock, return false
+    	if($this->stock < $quantity) return false;
+    	//else, subtract 1 from stock
+    	$this->stock = $this->stock - $quantity;
+    	//if now stock is empty, change state to "valid" in order not to see in "online table"
+    	if($this->stock < 1){
+    		//$this->state = "STATE_VALID";
+    	}
+    	return true;    
+    }
+    
+    public function __toString(){
+    	return $this->reference;
+    }
+
+}

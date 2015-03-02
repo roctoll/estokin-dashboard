@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools
+END
+EntityRepositoryGenerator.php
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/EntityRepositoryGenerator.php
+END
+SchemaTool.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/SchemaTool.php
+END
+Setup.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/Setup.php
+END
+DisconnectedClassMetadataFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/DisconnectedClassMetadataFactory.php
+END
+EntityGenerator.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/EntityGenerator.php
+END
+SchemaValidator.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/SchemaValidator.php
+END
+ToolEvents.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/ToolEvents.php
+END
+ToolsException.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/ToolsException.php
+END
+ConvertDoctrine1Schema.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Tools/ConvertDoctrine1Schema.php
+END

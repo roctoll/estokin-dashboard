@@ -1,0 +1,309 @@
+<?php
+
+namespace Estokin\PanelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Estokin\PanelBundle\Entity\Message
+ *
+ * @ORM\Entity(repositoryClass="Estokin\PanelBundle\Repository\MessageRepository")
+ */
+class Message
+{
+	
+	/**
+	 * Message types.
+	 */
+	const
+		TICKET = 0,
+		NOTIFICATION = 1;
+	
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var string $type
+     *
+     * @ORM\Column(name="type", type="string", length=32)
+     */
+    private $type;
+    
+    /**
+     * @var text $subject
+     *
+     * @ORM\Column(name="subject", type="text")
+     */
+    private $subject;
+
+    /**
+     * @var text $content
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
+     * @var integer $priority
+     *
+     * @ORM\Column(name="priority", type="integer")
+     */
+    private $priority;
+
+    /**
+     * @var date $date_add
+     *
+     * @ORM\Column(name="date_add", type="datetime")
+     */
+    private $date_add;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Shop", inversedBy="messages")
+     * @ORM\JoinColumn(name="shop_id", referencedColumnName="id")
+     */
+    private $shop;
+    
+    /**
+     * @var boolean $admin
+     * 0 -> destinatario Admin
+     * 1 -> destinatario Tienda
+     *
+     * @ORM\Column(name="admin", type="boolean")
+     */    
+    private $admin;
+
+
+    /**
+     * @var boolean $is_read
+     *
+     * @ORM\Column(name="is_read", type="boolean")
+     */
+    private $is_read;
+
+    
+//     /**
+//      * Constructor.
+//      */
+//     public function __construct()
+//     {
+//     	$this->setIsRead(false);
+//     	$this->setDateAdd(new \DateTime('now'));
+//     }
+    
+    /**
+     * Constructor alt.
+     */
+    public function __construct($type)
+    {
+    	$this->setIsRead(false);
+    	$this->setDateAdd(new \DateTime('now'));
+    	switch ($type){
+    		case 'NOTIFICATION':
+    			$this->type = 'NOTIFICATION';
+    			$this->setAdmin(true);
+    			break;
+    		case 'TICKET':
+    			$this->type = 'TICKET';
+    			break;
+    		default:
+    			$this->type = 'unknown';
+    			break;
+    	}
+    	
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set subject
+     *
+     * @param text $subject
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+    }
+
+    /**
+     * Get subject
+     *
+     * @return text 
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Set content
+     *
+     * @param text $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * Get content
+     *
+     * @return text 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+    
+    /**
+     * Set type
+     *
+     * @param string $type
+     */
+    public function setType($type)
+    {
+    	$this->type = $type;
+    }
+    
+    /**
+     * Get type
+     *
+     * @return text
+     */
+    public function getType()
+    {
+    	return $this->type;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * Set date_add
+     *
+     * @param date $dateAdd
+     */
+    public function setDateAdd($dateAdd)
+    {
+        $this->date_add = $dateAdd;
+    }
+
+    /**
+     * Get date_add
+     *
+     * @return date 
+     */
+    public function getDateAdd()
+    {
+        return $this->date_add;
+    }
+
+    /**
+     * Set shop
+     *
+     * @param Estokin\PanelBundle\Shop $shop
+     */
+    public function setShop ($shop)
+    {
+        $this->shop = $shop;
+    }
+
+    /**
+     * Get shop
+     *
+     * @return Estokin\PanelBundle\Shop 
+     */
+    public function getShop()
+    {
+        return $this->shop;
+    }
+
+//     /**
+//      * Set parent
+//      *
+//      * @param object $parent
+//      */
+//     public function setParent($parent)
+//     {
+//         $this->parent = $parent;
+//     }
+
+//     /**
+//      * Get parent
+//      *
+//      * @return object 
+//      */
+//     public function getParent()
+//     {
+//         return $this->parent;
+//     }
+
+    /**
+     * Set is_read
+     *
+     * @param boolean $isRead
+     */
+    public function setIsRead($isRead)
+    {
+        $this->is_read = $isRead;
+    }
+
+    /**
+     * Get is_read
+     *
+     * @return boolean 
+     */
+    public function getIsRead()
+    {
+        return $this->is_read;
+    }
+    /**
+     * Set admin
+     *
+     * @param boolean $admin
+     */
+    public function setAdmin($admin)
+    {
+    	$this->admin = $admin;
+    }
+    
+    /**
+     * Get admin
+     *
+     * @return boolean
+     */
+    public function getAdmin()
+    {
+    	return $this->admin;
+    }
+}

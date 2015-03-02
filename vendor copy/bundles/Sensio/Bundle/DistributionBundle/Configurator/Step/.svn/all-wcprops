@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Configurator/Step
+END
+DoctrineStep.php
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Configurator/Step/DoctrineStep.php
+END
+SecretStep.php
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Configurator/Step/SecretStep.php
+END
+StepInterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/bundles/Sensio/Bundle/DistributionBundle/Configurator/Step/StepInterface.php
+END

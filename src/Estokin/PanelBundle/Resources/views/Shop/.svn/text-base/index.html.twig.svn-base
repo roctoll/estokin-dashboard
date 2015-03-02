@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<h1>Tiendas</h1>
+		<h2>&rarr; Lista</h2>
+{% endblock %}
+
+{% block body %}
+
+	<div id = "content_header">
+			<h2>Tiendas</h2>
+	</div>
+	
+	<div id = "content_box">
+
+<table class="data">
+    <thead>
+        <tr>
+{#             <th>Id</th>#}
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Isactive</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr style="background-color:{{ entity.state == 'red' ? '#FFBDBD' : entity.state }};">
+{#             <td><a href="{{ path('shop_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+            <td><a href="{{ path('shop_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+            <td><a href="{{ path('shop_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.isActive }}</td>
+            <td>
+		    	<a href="{{ path('shop_edit', { 'id': entity.id }) }}"><img class="icon-table" src="{{ asset('bundles/estokinpanel/images/icon-edit.png') }}" alt="Edit"></a>
+		    </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+		<a href="{{ path('shop_new') }}">
+			<div class="subtable">Nueva tienda</div>
+		</a>
+
+{% endblock %}
+{% block javascript_code %}
+	<script type="text/javascript">
+	$(function() {
+		$("#nav6").attr('class', 'selected');
+		$("#nav61").attr('class', 'current');
+		$('div.sidebar_nav:eq(0) > div:eq(4)').show();	
+	});
+	</script>
+{% endblock %}
+	

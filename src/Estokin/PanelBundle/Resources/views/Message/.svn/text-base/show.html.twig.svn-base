@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}	
+	<script language="javascript" type="text/javascript" src="{{ asset('bundles/estokinpanel/js/formee.js') }}"></script>
+{% endblock %}
+
+{% block headbar %}
+	<h1>New product form</h1>
+	<h2>Wich is the new product?</h2>
+{% endblock %}
+
+{% block body %}
+
+<div id = "content_header">
+		<h2>Mensaje</h2>
+	</div>
+	<div id = "content_box">
+	
+		<p class="note">
+			Asunto: <strong>{{ entity.subject }}</strong> <br><br>
+			Usuario: {{ entity.shop }} <br><br>
+		 	Fecha: {{ entity.dateadd|date('d-m-Y, H:i:s') }} <br>
+		</p>
+    
+	<pre class="mail">{{ entity.content }}</pre>
+	<table class="message_toolbar">
+        <tr>
+			<th><a href="{{ path('message_new') }}"><img class="sel" src="{{ asset('bundles/estokinpanel/images/icon-reply.png') }}"></img></a></th>
+			<th>
+				<form action="{{ path('message_delete', { 'id': entity.id }) }}" method="post">
+	            {{ form_widget(delete_form) }}
+	            <input type="image" class="sel" src="{{ asset('bundles/estokinpanel/images/icon-deletemail.png') }}" alt="Submit button"></input>
+	        	</form>
+			</th>
+        </tr>
+    </table>
+    <div class="clear"></div>
+
+{% endblock %}

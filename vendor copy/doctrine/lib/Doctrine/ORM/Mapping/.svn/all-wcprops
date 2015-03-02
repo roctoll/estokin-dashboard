@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Mapping
+END
+ClassMetadata.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Mapping/ClassMetadata.php
+END
+MappingException.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Mapping/MappingException.php
+END
+ClassMetadataFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Mapping/ClassMetadataFactory.php
+END
+ClassMetadataInfo.php
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/vendor/doctrine/lib/Doctrine/ORM/Mapping/ClassMetadataInfo.php
+END

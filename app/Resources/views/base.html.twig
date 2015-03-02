@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<meta name="description" content="Estokin app">
+		<meta name="author" content="Estokin - Roc Toll">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Estokin{% endblock %}</title>
+        {% block javascripts %}
+<!--         	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
+       		<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery-1.7.1.js') }}"></script> 
+       		<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/bootstrap.min.js') }}"></script> 
+       		<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tablesorter.min.js') }}"></script> 
+<!--        		<script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
+<!-- 			<script type="text/javascript">google.load('jquery', '1.5');</script> -->
+			<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.gritter.min.js') }}"></script>
+        {% endblock %}
+        {% block stylesheets %}
+        	<link href="{{ asset('bundles/estokinpanel/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+        	<link href="{{ asset('bundles/estokinpanel/css/bootstrap-responsive.css') }}" type="text/css" rel="stylesheet" />
+        	<link href="{{ asset('bundles/estokinpanel/css/layout.css') }}" type="text/css" rel="stylesheet" />
+        	<link href="{{ asset('bundles/estokinpanel/css/layout-responsive.css') }}" type="text/css" rel="stylesheet" />
+        	<link href="{{ asset('bundles/estokinpanel/css/icon-style.css') }}" type="text/css" rel="stylesheet" />
+        	<link href="{{ asset('bundles/estokinpanel/css/gritter.css') }}" type="text/css" rel="stylesheet"/>
+        {% endblock %}
+        
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+        <script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-37093148-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();		
+		</script>
+    </head>
+    
+    <body>
+    
+    <div class="navbar navbar-inverse navbar-static-top">
+		<div class="navbar-inner black-gradient">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="{{ path('item') }}">
+					<img src="{{ asset('bundles/estokinpanel/img/logo.png') }}">
+					<small><i>&#946;eta</i></small>
+				</a>
+				<div class="nav-collapse collapse nav-middle">
+						<div class="btn-group pull-right">
+						  <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+						    <i class="radmin-icon radmin-user-2"></i> {{ app.user.getUserName()|upper }} ({{ app.user.getRoles()[0]=='ROLE_USER' ? 'Tienda' : 'Administrador' }})
+						    <span class="caret"></span>
+						  </a>
+						  <ul class="dropdown-menu user-settings">
+						  	<li><a href="{{ path('shop_profile') }}"><i class="radmin-icon radmin-user"></i> Mi cuenta</a></li>
+						    <li class="user-settings-last"><a href="{{ path('logout') }}"><i class="radmin-icon radmin-redo"></i> Logout</a></li>
+						  </ul>
+						</div>
+				</div>
+				
+				<div class="live-info visible-desktop">&raquo; Estamos en fase beta, así que no dudes en informarnos de cualquier error, problema, opinión, etc.. ¡gracias!</div>
+				
+			</div>
+		</div>
+	</div>
+    
+    <div class="row-fluid hidden-tablet hidden-phone">
+    	<div class="headbar span12">
+	    	<ul class ="top-nav-boxes">
+	    		<div class="span2">
+					<li>
+						<div class="notifications-wrapper" id="not_wrapper" style="display: none;">
+							<div class="notifications"> <strong class="notifications_not"></strong>
+							</div>
+						</div>
+						<a href="{{ path('notifications') }}">
+							<i class="radmin-bell"></i>
+							<span>Avisos</span>
+						</a>
+					</li>
+	    		</div>
+	    		<div class="span4">
+			    	<li>
+						<a href="{{ path('item_new') }}">
+							<i class="radmin-plus-2"></i>
+							<span>Añadir producto</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('item_list') }}">
+							<i class="radmin-remove"></i>
+							<span>Retirar producto</span>
+						</a>
+					</li>
+	    		</div>
+	    		<div class="span4">
+					<li>
+						<a href="{{ path('item_list') }}">
+							<i class="radmin-cart"></i>
+							<span>Tus productos</span>
+						</a>
+					</li>
+					<li>
+						<div class="notifications-wrapper" id="pendents_wrapper" style="display: none;">
+							<div class="notifications"> <strong class="pendents_not"></strong>
+							</div>
+						</div>
+						<a href="{{ path('order_pending') }}">
+							<i class="radmin-bus"></i>
+							<span>Pedidos pendientes</span>
+						</a>
+					</li>
+	    		</div>
+{# 			<li>#}
+{# 				<a href="{{ path('message_new') }}">#}
+{# 					<i class="radmin-pencil"></i>#}
+{# 					<span>Nuevo mensaje</span>#}
+{# 				</a>#}
+{# 			</li>#}
+			</ul>
+		</div>
+    </div>
+    
+    <div class="container-fluid main-container">
+    	<div class = "sidebar-nav">
+		  		<ul class = "nav nav-stacked left-menu">
+				{% block nav %}
+					<li id="navigation-home">
+						<a href="{{ path('item') }}">
+							<span class="box">
+									<i class="radmin-icon radmin-home"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Inicio</span>
+						</a>
+					</li>
+					<li class="accordion" id="navigation-products">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#navigation-products" href="#collapse1">
+							<span class="box">
+								<i class="radmin-icon radmin-basket"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Productos</span>
+						</a>
+						<div id="collapse1" class="accordion-body collapse">
+							<ul class="nav nav-stacked submenu">
+								<li>
+									<a href="{{ path('item_new') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-plus-2"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Añadir producto</span>
+									</a>
+								</li>
+								<li>
+									<a href="{{ path('item_uploadfile_page') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-upload"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Enviar fichero</span>
+									</a>
+								</li>
+								{% if app.user.getRoles()[0] == 'ROLE_ADMIN' %}
+									<li>
+										<a href="{{ path('item_todolist') }}">
+											<span class="box">
+												<i class="radmin-icon radmin-clipboard-2"></i>
+											</span>
+											<span class="hidden-tablet hidden-phone">Pendientes</span>
+										</a>
+									</li>
+									<li>
+										<a href="{{ path('product') }}">
+											<span class="box">
+												<i class="radmin-icon radmin-clipboard"></i>
+											</span>
+											<span class="hidden-tablet hidden-phone">Todas</span>
+										</a>
+									</li>
+								{% endif %}
+								<li class="submenu-last">
+									<a href="{{ path('item_list') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-cart"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Tus productos</span>
+										<span class="label pull-right hidden-tablet hidden-phone items_not">0</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					
+					<li class="accordion" id="navigation-orders">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#navigation-orders" href="#collapse2">
+							<span class="box">
+								<i class="radmin-icon radmin-cube"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Pedidos</span>
+						</a>
+						<div id="collapse2" class="accordion-body collapse">
+							<ul class="nav nav-stacked submenu">
+								<li>
+									<a href="{{ path('order_pending') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-bus"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Pendientes</span>
+										<span class="label pull-right hidden-tablet hidden-phone pendents_not">0</span>
+									</a>
+								</li>
+								<li class="submenu-last">
+									<a href="{{ path('order_history') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-box"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Historial</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					
+					<li class="accordion" id="navigation-transactions">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#navigation-orders" href="#collapse7">
+							<span class="box">
+								<i class="radmin-icon radmin-briefcase"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Finanzas</span>
+						</a>
+						<div id="collapse7" class="accordion-body collapse">
+							<ul class="nav nav-stacked submenu">
+								{% if app.user.getRoles()[0] == 'ROLE_ADMIN' %}
+									<li class="">
+										<a href="{{ path('transaction_new') }}">
+											<span class="box">
+												<i class="radmin-icon radmin-plus"></i>
+											</span>
+											<span class="hidden-tablet hidden-phone">Nuevo</span>
+										</a>
+									</li>
+								{% endif %}
+								<li>
+									<a href="{{ path('transaction_pending') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-cloud"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Cobros pendientes</span>
+									</a>
+								</li>
+								<li class="submenu-last">
+									<a href="{{ path('transaction_history') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-box"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Historial de pagos</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+										
+					{% if app.user.getRoles()[0] == 'ROLE_ADMIN' %}
+						
+					<li class="accordion" id="navigation-admin">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#navigation-admin" href="#collapse6">
+							<span class="box">
+								<i class="radmin-icon radmin-locked"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Administración</span>
+						</a>
+						<div id="collapse6" class="accordion-body collapse">
+							<ul class="nav nav-stacked submenu">
+								<li>
+									<a href="{{ path('shop') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-bars"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Tiendas</span>
+									</a>
+								</li>
+								<li class="submenu-last">
+									<a href="{{ path('user') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-user"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Usuarios</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					{% endif %}
+					<br>
+					<li class="accordion less" id="navigation-asis">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#navigation-asis" href="#collapse3">
+							<span class="box">
+								<i class="radmin-icon radmin-help"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Ayuda</span>
+						</a>
+						<div id="collapse3" class="accordion-body collapse">
+							<ul class="nav nav-stacked submenu">
+								<li>
+									<a href="{{ path('message_new') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-comments-2"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Nueva consulta</span>
+									</a>
+								</li>
+								<li class="submenu">
+									<a href="{{ path('message') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-clipboard-2"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Mis consultas</span>
+									</a>
+								</li>
+								<li class="submenu-last">
+									<a href="{{ path('faq') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-help"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Preguntas frecuentes</span>
+									</a>
+								</li>
+								{% if app.user.getRoles()[0] == 'ROLE_ADMIN' %}
+									<li class="submenu-last">
+										<a href="{{ path('notifications_all') }}">
+											<span class="box">
+												<i class="radmin-icon radmin-attachment"></i>
+											</span>
+											<span class="hidden-tablet hidden-phone">Todas</span>
+										</a>
+									</li>
+								{% endif %}
+							</ul>
+						</div>
+					</li>
+					
+					<li id="navigation-notifications" class="less">
+						<a href="{{ path('notifications') }}">
+							<span class="box">
+									<i class="radmin-icon radmin-bell"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Avisos</span>
+						</a>
+					</li>					
+
+					<li class="accordion less" id="navigation-account">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#navigation-account" href="#collapse4">
+							<span class="box">
+								<i class="radmin-icon radmin-user-2"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">Mi cuenta</span>
+						</a>
+						<div id="collapse4" class="accordion-body collapse">
+							<ul class="nav nav-stacked submenu">
+{#
+								<li>
+									<a href="{{ path('order_stadistics', { 'num': 10 }) }}">
+										<span class="box">
+											<i class="radmin-icon radmin-bars"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Estadísticas</span>
+									</a>
+								</li>
+#}
+								<li class="submenu">
+									<a href="{{ path('shop_profile') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-user"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Perfil</span>
+									</a>
+								</li>
+								<li class="submenu-last">
+									<a href="{{ path('change_password') }}">
+										<span class="box">
+											<i class="radmin-icon radmin-key"></i>
+										</span>
+										<span class="hidden-tablet hidden-phone">Cambiar contraseña</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+{#
+										
+					<li id="navigation-support" class="less">
+						<a href="{{ path('faq') }}">
+							<span class="box">
+									<i class="radmin-icon radmin-support"></i>
+							</span>
+							<span class="hidden-tablet hidden-phone">FAQ</span>
+						</a>
+					</li>
+#}
+					
+				{% endblock %}
+				</ul>
+
+    	</div>
+    
+    	<div class="container-fluid content-wrapper">
+    	
+	    		<div id = "main_headbar">
+	    			
+					{% block headbar %}
+
+	    			{% endblock %}
+	    			
+	    			{% if app.session.getFlashes() %}
+	    				<div class="flashes">
+		    			{% if app.session.hasFlash('bad') %}
+			    			{% for flash in app.session.getFlashes()['bad'] %}
+		 						    <div class="alert alert-error">
+		 						    <button type="button" class="close" data-dismiss="alert">×</button>
+		 						        {{ flash }}
+		 						    </div>
+		 					{% endfor %}
+	 					{% endif %}
+	 					{% if app.session.hasFlash('good') %}
+		 					{% for flash in app.session.getFlashes()['good'] %}
+		 						    <div class="alert alert-success">
+		 						    <button type="button" class="close" data-dismiss="alert">×</button>
+		 						        {{ flash }}
+		 						    </div>
+		 					{% endfor %}
+	 					{% endif %}
+	    				</div>
+ 					{% endif %} 
+	    		</div>
+		        {% block body %}{% endblock %}
+
+    	</div>
+    </div>
+    	
+    <footer class="black-gradient">
+		<a class="brand pull-right" href="http://www.estokin.com">
+			<img src="{{ asset('bundles/estokinpanel/img/logo.png') }}">
+		</a>
+		<div>
+			<p>
+				© 2013 Estokin, S.L. Todos los derechos reservados. <a href="{{ path('conditions') }}">Condiciones de uso.</a>
+			</p>
+		</div>
+	</footer>	
+    	
+    	<script type="text/javascript">
+    	
+    	$(function(){
+	         $.ajax({
+	 	        type: "POST",
+	 	        url: "{{ path('layout_data') }}",
+	 	        dataType: "json",
+	 	        success: function(data) {
+					if(data.notifications > 0){
+				 	        $('.notifications_not').html(data.notifications); 
+							$('#not_wrapper').attr('style', 'display:block');
+						}
+					if(data.items > 0){
+						$('.items_not').html(data.items);
+					}
+					if(data.orders > 0){
+						$('.pendents_not').html(data.orders);
+						$('#pendents_wrapper').attr('style', 'display:block');
+					}
+					if(data.msg == 1){
+						$.gritter.add({
+							// (string | mandatory) the heading of the notification
+							title: 'Mensajes nuevos',
+							// (string | mandatory) the text inside the notification
+							text: '<a href="{{ path('message') }}">Tienes '+data.msg+' mensaje nuevo </a>',
+							image: '{{ asset('bundles/estokinpanel/img/gritter/envelope.png') }}',
+							sticky: true
+						});
+					}
+					else if(data.msg > 1){
+						$.gritter.add({
+							// (string | mandatory) the heading of the notification
+							title: 'Mensajes nuevos',
+							// (string | mandatory) the text inside the notification
+							text: '<a href="{{ path('message') }}">Tienes '+data.msg+' mensajes nuevos </a>',
+							image: '{{ asset('bundles/estokinpanel/img/gritter/envelope.png') }}'
+						});
+					}		        }
+	 		}); 
+	         return false;       	 
+	 	});
+	 	
+    	{% block javascript_code %}{% endblock %}
+    	</script>
+    </body>
+
+</html>

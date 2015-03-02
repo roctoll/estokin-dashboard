@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Message
+END
+edit.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Message/edit.html.twig
+END
+notifications-all.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/Estokin/EstokinPanel/svn/!svn/ver/3/trunk/src/Estokin/PanelBundle/Resources/views/Message/notifications-all.html.twig
+END
+show.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Message/show.html.twig
+END
+new.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Message/new.html.twig
+END
+index.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Message/index.html.twig
+END
+conversation.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Message/conversation.html.twig
+END
+notifications.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/Estokin/EstokinPanel/svn/!svn/ver/2/trunk/src/Estokin/PanelBundle/Resources/views/Message/notifications.html.twig
+END

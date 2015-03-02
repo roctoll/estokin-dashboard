@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("shop") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Tus productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-pencil"></i>
+			Imágenes
+		</li>
+	</ul>
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+		
+	<ul>
+	{% for doc in docs %}
+		<li><a href="{{ path('document_show', { 'id' : doc.id }) }}">{{ doc.name }}</a></li>
+	{% endfor %}
+	</ul>
+
+{% endblock %}
+{% block javascript_code %}
+		//Toggle menu 
+		$(function() {
+			$("#navigation-admin").attr('class', 'active');
+			$("#navigation-admin .accordion-body").attr('class', 'in')
+		});
+{% endblock %}

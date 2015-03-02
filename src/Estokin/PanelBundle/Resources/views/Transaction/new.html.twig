@@ -1,0 +1,81 @@
+{% extends '::base.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/jquery.tools.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/estokinpanel/js/Search.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+
+		<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-cube"></i>
+				Pagos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-cube-2"></i>
+			Nuevo
+		</li>
+	</ul>
+	
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<h4 class="title">Nuevo pago</h4>
+	<div class="squiggly-border"></div>
+	<form action="{{ path('transaction_create') }}" method="post" {{ form_enctype(form) }}>
+	
+	<div span="row-fluid">
+		<div class="span6">
+			<strong>Tienda</strong>
+			<div class="row-fluid">{{ form_widget(form.shop, { 'attr': {'class': 'span6'} }) }}</div>
+			<strong>Observaciones</strong>
+			<div class="row-fluid">{{ form_widget(form.comment, { 'attr': {'class': 'span12', 'style': 'height: 111px'} }) }}</div>
+		</div>
+		
+		<div class="span6">
+			<strong>Pedidos</strong>
+			<div class="row-fluid">{{ form_widget(form.orders, { 'attr': {'class': 'span12', 'size': '10'} }) }}</div>
+		</div>
+	</div>
+	{{ form_rest(form) }}				
+    <div class="span12"><button class="btn btn-info" type="submit">Crear</button></div>
+
+	</form>
+		
+{% endblock %}
+
+{% block javascript_code %}
+
+		$(function() {
+			$("#navigation-transactions").attr('class', 'active');
+			$("#navigation-transactions .accordion-body").attr('class', 'in')
+		});
+
+		//Search feature
+		var api;
+		var listclass = $('#estokin_panelbundle_itemtype_order option');
+		$(document).ready(function() {	  
+		  api = new $.Search('#search', {
+		    list: listclass,
+		  });	  
+		});
+		
+{% endblock %}

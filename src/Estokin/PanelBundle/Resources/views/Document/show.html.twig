@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("shop") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Tus productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-pencil"></i>
+			Imágenes
+		</li>
+	</ul>
+		{{ parent() }}
+{% endblock %}
+
+{% block body %}
+		
+	{{ doc.name }} 
+	<form action="{{ path('document_delete', { 'id': doc.id }) }}" method="post">
+          {{ form_widget(dform) }}
+          <button type="submit">Delete</button>
+    </form>
+{% endblock %}
+{% block javascript_code %}
+		//Toggle menu 
+		$(function() {
+			$("#navigation-admin").attr('class', 'active');
+			$("#navigation-admin .accordion-body").attr('class', 'in')
+		});
+{% endblock %}

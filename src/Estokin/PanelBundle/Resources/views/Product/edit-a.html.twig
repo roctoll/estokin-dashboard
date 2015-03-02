@@ -1,0 +1,101 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}	
+	<link href="{{ asset('bundles/estokinpanel/css/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/estokinpanel/css/formee-structure.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block headbar %}
+	<ul class="breadcrumb">
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-home"></i>
+				Inicio
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li>
+			<a href={{ path("item") }}>
+				<i class="radmin-icon radmin-basket"></i>
+				Productos
+			</a>
+			<span class="divider">/</span>
+		</li>
+		<li class="active">
+			<i class="radmin-icon radmin-pencil"></i>
+			Edición
+		</li>
+	</ul>
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<h4>Edición del Producto</h4>
+	<div class="squiggly-border"></div>
+		
+	<div class="row">
+		<div class="span8">
+			<form class="" action="{{ path('product_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+			    
+				{{ form_widget(edit_form) }}
+			    <br>
+			    <button type="submit" class="btn btn-success">Actualizar</button>
+			    <a href=""><button class="btn">Atrás</button></a>
+			</form>
+		</div>
+		<div class="span4">
+			<img src="{{ entity.image }}"></img>
+		</div>
+
+	</div>
+
+{% endblock %}
+{% block javascript_code %}
+{#
+<script>
+	    //Ajax for validate
+    $(".validate").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "validate",
+ 		          	   product: {{ entity.id }}};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('product_validate') }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+ 	        	if(data.success == true) alert("{{ entity.name }}"+": ha sido validado con éxito" );
+ 	        	else alert("{{ entity.name }}"+": NO ha sido validado" );
+ 	        	location.reload();
+	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+    //Ajax for upload
+    $(".upload").live("click",function(e){
+        e.preventDefault();
+         dataContent = {action: "upload",
+ 		          	   product: {{ entity.id }}};
+         $.ajax({
+ 	        type: "POST",
+ 	        url: "{{ path('product_upload', { 'id': entity.id }) }}",
+ 	        data: dataContent ,
+ 	        dataType: "json",
+ 	        success: function(data) { 
+	            if(data.success == true){
+	            	alert("{{ entity.name }}"+": ha sido subido con éxito" );
+	            	$(location).attr('href','{{ path('item_stock') }}');
+	            }
+	            else{
+	            	alert("{{ entity.name }}"+": no ha podido ser subido" );
+	            	$(location).attr('href','{{ path('item_local') }}');
+	           } 
+	        }
+ 		}); 
+ 		return false;        	 
+ 	    });
+</script>
+#}
+{% endblock %}
